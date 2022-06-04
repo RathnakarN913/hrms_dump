@@ -1,0 +1,29 @@
+[14-Feb-2022 12:20:43 Asia/Kolkata] PHP Warning:  Uncaught ErrorException: require(/home2/emunicipal/telangana.emunicipal.in/vendor/composer/../../app/Helper/Helpers.php): failed to open stream: No such file or directory in /home2/emunicipal/telangana.emunicipal.in/vendor/composer/autoload_real.php:71
+Stack trace:
+#0 /home2/emunicipal/telangana.emunicipal.in/vendor/composer/autoload_real.php(71): Composer\Util\ErrorHandler::handle(2, 'require(/home2/...', '/home2/emunicip...', 71, Array)
+#1 /home2/emunicipal/telangana.emunicipal.in/vendor/composer/autoload_real.php(71): require()
+#2 /home2/emunicipal/telangana.emunicipal.in/vendor/composer/autoload_real.php(61): composerRequireb7a117b494eeec8ccec1f730a466603c('2e63b8599f9ae98...', '/home2/emunicip...')
+#3 /home2/emunicipal/telangana.emunicipal.in/vendor/autoload.php(7): ComposerAutoloaderInitb7a117b494eeec8ccec1f730a466603c::getLoader()
+#4 /home2/emunicipal/telangana.emunicipal.in/vendor/laravel/framework/src/Illuminate/Foundation/ComposerScripts.php(43): require_once('/home2/emunicip...')
+#5 phar:///opt/cpa in /home2/emunicipal/telangana.emunicipal.in/vendor/composer/autoload_real.php on line 71
+[14-Feb-2022 12:20:43 Asia/Kolkata] PHP Fatal error:  composerRequireb7a117b494eeec8ccec1f730a466603c(): Failed opening required '/home2/emunicipal/telangana.emunicipal.in/vendor/composer/../../app/Helper/Helpers.php' (include_path='.:/opt/alt/php73/usr/share/pear') in /home2/emunicipal/telangana.emunicipal.in/vendor/composer/autoload_real.php on line 71
+[14-Feb-2022 06:53:26 UTC] PHP Warning:  require(/home2/emunicipal/telangana.emunicipal.in/vendor/composer/../../app/Helper/Helpers.php): Failed to open stream: No such file or directory in /home2/emunicipal/telangana.emunicipal.in/vendor/composer/autoload_real.php on line 71
+[14-Feb-2022 06:53:26 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/emunicipal/telangana.emunicipal.in/vendor/composer/../../app/Helper/Helpers.php' (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/emunicipal/telangana.emunicipal.in/vendor/composer/autoload_real.php:71
+Stack trace:
+#0 /home2/emunicipal/telangana.emunicipal.in/vendor/composer/autoload_real.php(61): composerRequireb7a117b494eeec8ccec1f730a466603c('2e63b8599f9ae98...', '/home2/emunicip...')
+#1 /home2/emunicipal/telangana.emunicipal.in/vendor/autoload.php(7): ComposerAutoloaderInitb7a117b494eeec8ccec1f730a466603c::getLoader()
+#2 /home2/emunicipal/telangana.emunicipal.in/artisan(18): require('/home2/emunicip...')
+#3 {main}
+  thrown in /home2/emunicipal/telangana.emunicipal.in/vendor/composer/autoload_real.php on line 71
+[14-Feb-2022 12:25:40 Asia/Kolkata] PHP Warning:  Uncaught ErrorException: require(/home2/emunicipal/telangana.emunicipal.in/vendor/composer/../../app/Helper/Helpers.php): failed to open stream: No such file or directory in /home2/emunicipal/telangana.emunicipal.in/vendor/composer/autoload_real.php:71
+Stack trace:
+#0 /home2/emunicipal/telangana.emunicipal.in/vendor/composer/autoload_real.php(71): Composer\Util\ErrorHandler::handle(2, 'require(/home2/...', '/home2/emunicip...', 71, Array)
+#1 /home2/emunicipal/telangana.emunicipal.in/vendor/composer/autoload_real.php(71): require()
+#2 /home2/emunicipal/telangana.emunicipal.in/vendor/composer/autoload_real.php(61): composerRequireb7a117b494eeec8ccec1f730a466603c('2e63b8599f9ae98...', '/home2/emunicip...')
+#3 /home2/emunicipal/telangana.emunicipal.in/vendor/autoload.php(7): ComposerAutoloaderInitb7a117b494eeec8ccec1f730a466603c::getLoader()
+#4 /home2/emunicipal/telangana.emunicipal.in/vendor/laravel/framework/src/Illuminate/Foundation/ComposerScripts.php(43): require_once('/home2/emunicip...')
+#5 phar:///opt/cpa in /home2/emunicipal/telangana.emunicipal.in/vendor/composer/autoload_real.php on line 71
+[14-Feb-2022 12:25:40 Asia/Kolkata] PHP Fatal error:  composerRequireb7a117b494eeec8ccec1f730a466603c(): Failed opening required '/home2/emunicipal/telangana.emunicipal.in/vendor/composer/../../app/Helper/Helpers.php' (include_path='.:/opt/alt/php73/usr/share/pear') in /home2/emunicipal/telangana.emunicipal.in/vendor/composer/autoload_real.php on line 71
+[02-Jun-2022 09:31:58 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\hrms\AddEmployeeController::removefamily() in /home2/emunicipal/telangana.emunicipal.in/hrms/app/Http/Controllers/hrms/AddEmployeeController.php on line 2063
+[02-Jun-2022 09:32:01 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\hrms\AddEmployeeController::removefamily() in /home2/emunicipal/telangana.emunicipal.in/hrms/app/Http/Controllers/hrms/AddEmployeeController.php on line 2063
+[02-Jun-2022 09:32:13 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\hrms\AddEmployeeController::removefamily() in /home2/emunicipal/telangana.emunicipal.in/hrms/app/Http/Controllers/hrms/AddEmployeeController.php on line 2063
