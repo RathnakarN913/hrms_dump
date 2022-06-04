@@ -194,8 +194,4 @@ Route::get('rcs', function() {
 
 Route::get('create_logins',[LoginController::class,'create_logins']);
 
-Route::get('assetroute', function() {
-    dd(asset('asset'));
-
-})->name('rcs');
 
