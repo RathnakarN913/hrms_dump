@@ -27,11 +27,11 @@
         font-weight: 600;
 }
 .t-head {
-    position:sticky; 
+    position:sticky;
     top: 0;
     padding: 10px 10px !important;
     vertical-align: middle;
-    
+
 }
 .t-body th {
     padding: 10px 10px !important;
@@ -65,13 +65,13 @@ td input.form-control {
                 {{session()->get('msg')}}
                 </div>
             @endif
-           
+
            @if($errors->any())
-             
+
             <div class="alert alert-success alert-dismissible">
                 {{$errors->first()}}
                 </div>
-                
+
         @endif
        <!--end top header-->
 
@@ -79,11 +79,11 @@ td input.form-control {
 
        <!--start content-->
               <main class="page-content">
-                       
+
                     <div class="card ">
                         <div class="card-body">
                       <div class="bg-white">
-                          
+
                         <div class="table-content">
                                 <div class="row align-items-center mt-3 mb-3 ">
                                     <div class="col-md-6">
@@ -94,13 +94,13 @@ td input.form-control {
                             </div>
                         <!--<div class="mb-4"><h4><b>  </b></h4></div>-->
                         <!--     <input id="myInput" type="text" placeholder="Search.." class="form-control mb-3" style="width:20%">-->
-                         
+
                           <form name="frm" method="get" id="myform" action="{{ url('/headofficeinsert') }}">
                             @csrf
-                            
+
                           <div class="table-responsive thead-scroll">
                               <table class="table table-bordered table-striped width_50 " id="example1">
-                              
+
                             <thead class="t-head text-center">
                               <tr class="table-primary">
                                 <th rowspan="2" width="5%" talign="top">S.No</th>
@@ -114,19 +114,19 @@ td input.form-control {
                                   @endforeach
                             </tr>
                             </thead>
-                            
+
                             <tbody class="text-center" id="search_content">
-                                <?php $sum=0; $i = 1;?> 
+                                <?php $sum=0; $i = 1;?>
                                 @foreach(@$headoffice as $val)
                                 @php
-                                
+
                                 @endphp
                                   <tr>
                                   <td>{{$i++}}</td>
                                     <td>{{@$val->description}}</td>
                                     @foreach($emp_type as $type)
                                         <td>
-                                            <input type="text" @if($type->employee_type_desc == 'HR') @if(!$val->hr) readonly @endif @endif @if($type->employee_type_desc == 'Non HR') @if(!$val->non_hr) readonly @endif @endif @if($type->employee_type_desc == 'Government') @if(!$val->govt) readonly @endif @endif name="post[]" id="post{{$val->id}}{{$type->employee_type_id}}" value="{{$post1[$val->id][$type->employee_type_id]}}" class="form-control post" style="height: 33px; text-align: center;" maxlength="5" onkeyup="javascript: this.value=this.value.match(/\d*/);">
+                                            <input type="text" @if($type->employee_type_desc == 'Government') @if(!$val->govt) readonly @endif @endif @if($val->govt) @if($type->employee_type_desc == 'Government') @else readonly @endif @endif name="post[]" id="post{{$val->id}}{{$type->employee_type_id}}" value="{{$post1[$val->id][$type->employee_type_id]}}" class="form-control post" style="height: 33px; text-align: center;" maxlength="5" onkeyup="javascript: this.value=this.value.match(/\d*/);">
                                             <p class="error_div" style="display:none;color:red;" id="error{{@$val->id}}{{$type->employee_type_id}}"></p>
                                             <input type="hidden" name="emp_level[]" id="emp{{@$val->id}}{{$type->employee_type_id}}" value="{{@$type->employee_type_id}}">
                                             <input type="hidden" name="desi_id[]" id="desi{{@$val->id}}{{$type->employee_type_id}}" value="{{@$val->id}}">
@@ -135,14 +135,14 @@ td input.form-control {
                                     <td class="input-group-sm" style="text-align: -webkit-center;">
                                         <input type="text" name="" class="form-control post" value="{{$post[$val->id]}}" style="height: 33px; text-align: center;" maxlength="5" onkeyup="javascript: this.value=this.value.match(/\d*/);" readonly>
                                     </td>
-                                     
-                                   
+
+
                                         <?php $sum=$sum+@$val->post_sanctioned; ?>
                                   </tr>
-                                   
+
                                 @endforeach
-                                
-                              
+
+
                             </tbody>
                             <tfoot>
                                 <tr class="total-bg t-body">
@@ -153,20 +153,20 @@ td input.form-control {
                                     <th>{{$total}}</th>
                                 </tr>
                             </tfoot>
-                               
+
                           </table></div>
-                          
-                          
+
+
                           <div class="row mt-2">
                             <div class="col-md-12 text-center mb-2">
-                          <button class="btn btn-submit" type="submit" name="save">Save</button> 
+                          <button class="btn btn-submit" type="submit" name="save">Save</button>
                           <!--<input class="btn btn-submit" type="submit" name="save" value="Save">-->
                         </div>
-                        
+
                         </div>
                         </form>
                       </div>
-                      
+
                       </div>
   <!--end wrapper   --></div>
                     </div>
@@ -178,7 +178,7 @@ td input.form-control {
        <!--Start Back To Top Button-->
          <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
        <!--End Back To Top Button-->
-       
+
        <script>
               $('#myform').submit(function (e) {
                 var form = this;
@@ -198,7 +198,7 @@ td input.form-control {
             num = num.join("");
             var desid = $('#desi'+num).val();
             var emp = $('#emp'+num).val();
-            
+
             var _token = '<?php echo csrf_token()  ?>';
             $.ajax({
                 url:"get_post_count",
@@ -208,7 +208,7 @@ td input.form-control {
                     desid:desid,
                     emp:emp,
                 },
-                
+
                 success:function(result){
                     if(post < result){
                         $('#error'+num).html(result +' posts are alredy assigned <br> please enter value greter than '+ result);
@@ -226,16 +226,16 @@ td input.form-control {
                         $('#post'+num).val(post);
                     }
                 },
-                
-                
+
+
             });
         });
     });
-        
+
    function mydiv(){
        $('.error_div').fadeOut();
    }
-</script>    
+</script>
 
 <script>
     $(document).ready(function() {
@@ -249,11 +249,11 @@ td input.form-control {
 </script>
 
 
- 
+
   <!-- Bootstrap bundle JS -->
    @include('headers.footer')
-   
-   
+
+
   <!--  <script>-->
   <!--    $(document).ready(function(){-->
   <!--        $('#example1').DataTable({-->
@@ -261,12 +261,12 @@ td input.form-control {
   <!--              dom: 'Bfrtip',-->
   <!--              footerCallback: function (row, data, start, end, display) {-->
   <!--              var api = this.api();-->
-     
+
                 // Remove the formatting to get integer data for summation
   <!--              var intVal = function (i) {-->
   <!--                  return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;-->
   <!--              };-->
-                
+
                 // Total over this page
   <!--              for(let i=2;i<6;i++){-->
   <!--                  pageTotal = api-->
@@ -275,7 +275,7 @@ td input.form-control {
   <!--                  .reduce(function (a, b) {-->
   <!--                      return intVal(a) + intVal(b);-->
   <!--                  }, 0);-->
-     
+
                 // Update footer
   <!--              $(api.column(i).footer()).html(pageTotal);-->
   <!--              }-->

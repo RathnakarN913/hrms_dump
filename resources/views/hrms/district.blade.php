@@ -94,7 +94,7 @@ td input.form-control {
         <div class="content-wrapper">
           <div class="row">
             <div class="col-md-12 ">
-          
+
             </div>
           </div>
             @if($errors->any())
@@ -112,13 +112,9 @@ td input.form-control {
        <!--end sidebar -->
 
        <!--start content-->
-       
+
         <main class="page-content">
-                      <!--<ol class="breadcrumb">-->
-                      <!--  <li><i class="bi bi-house-door"></i></li>-->
-                      <!--  <li><a href="#" class="">Sanction post page</a> <i class="fas fa-angle-right"></i> </li>-->
-                      <!--  <li><a href="#" class=""> District wise report</a></li>       -->
-                      <!--</ol>-->
+
 
                       <div class="card bg-white mt-4">
                        <div class="card-body">
@@ -129,36 +125,62 @@ td input.form-control {
                             <div class="col-md-6"><input id="myInput" type="text" placeholder="Search.." class="form-control"></div>
                           </div>
                         </div>
-                          <!--   <div class="mb-4"><h4><b>District Sanctioned Post Entries </b></h4></div>-->
-                          <!--   <input id="myInput" type="text" placeholder="Search.." class="form-control">-->
-                          <!--<br>-->
+
                           <form name="frm" method="post" id="myform" action="{{ url('/districtinsert') }}">
                             @csrf
+
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col">
+                                    <label for="district">Select District</label>
+                                    <select name="district" class="form-control" id="district">
+                                        <option value="">---Select District---</option>
+                                        @foreach ($district as $dist)
+                                            <option value="{{ $dist->distid }}" @if($dist->distid == '01') selected @endif>{{ $dist->distname }}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                                <div class="col"></div>
+                            </div>
+                            <br>
+
                             <div class="table-responsive table thead-scroll">
-                          <table class="" border="1" style="font-size:13px;" id="example1">
-                            <thead class="t-head">
+                          <table class="table table-bordered" id="example">
+                            <thead>
                               <tr class="table-primary text-center">
-                                <th style="padding: 10px; font-size: 12px !important;" rowspan="3" class="sticky-col first-col">S.NO</th>
-                                 <th rowspan="3" style="font-size: 12px !important;" class="sticky-col second-col">District Name</th>
-                                 @foreach($designation as $des)
-                                 <th colspan="4" style="font-size: 12px !important;">{{$des->description}}</th>
-                                 @endforeach
-                                 <th style="font-size: 12px !important;" rowspan="3">Total </th>
-                              </tr>
-                              <tr class="table-primary text-center">
-                                   @foreach($designation as $des)
-                                   @foreach($emp_type as $type)
-                                      <th style="font-size: 12px !important; width:15px !important;">{{$type->employee_type_desc}}</th>
+                                <th>S.NO</th>
+                                 <th>Designation Name</th>
+                                 @foreach($emp_type as $type)
+                                      <th >{{$type->employee_type_desc}}</th>
                                    @endforeach
-                                   <th style="font-size: 12px !important;">Total</th>
-                                   @endforeach
+                                   <th >Total</th>
+
                               </tr>
+
                             </thead>
                             <input type="hidden" name="levelid" value="{{$designation[0]->designation_level}}" class="form-control">
                             <tbody class="text-center" id="search_content">
                                 @php $i = 1 @endphp
-                            @foreach($district as $dist)
-                            
+
+                                @foreach($designation as $des)
+                                <tr>
+                                    <td>{{$i++}}</td>
+                                    <td>{{$des->description}}</td>
+                                    @foreach($emp_type as $type)
+                                        <td>
+                                            <input type="text" name="post[]" id="post{{ $des->id }}{{ $type->employee_type_id }}" class="form-control post" @if($type->employee_type_desc == 'Government') @if(!$des->govt) readonly @endif @endif @if($des->govt) @if($type->employee_type_desc == 'Government') @else readonly @endif @endif onkeyup="javascript: this.value=this.value.match(/\d*/);">
+                                            <input type="hidden" name="designation" id="desi{{ $des->id }}{{ $type->employee_type_id }}" value="{{ $des->id }}" class="form-control" >
+                                            <input type="hidden" name="emp_type[]" id="emp{{ $des->id }}{{ $type->employee_type_id }}" value="{{ $type->employee_type_id }}">
+                                            <p class="error_div" style="display:none;color:red;" id="error{{ $des->id }}{{ $type->employee_type_id }}"></p>
+                                        </td>
+                                    @endforeach
+                                    <td></td>
+                                </tr>
+
+                                 @endforeach
+                            {{-- @foreach($district as $dist)
+
                                 <tr class="pad-tdd">
                                     <td class="sticky-col first-col">{{$i++}}</td>
                                     <td style="font-size: 12px !important;" class="sticky-col second-col">{{$dist->distname}}</td>
@@ -170,7 +192,7 @@ td input.form-control {
                                                 <input type="hidden" name="desid[]" value="{{$designation[$s]->id}}" id="desi{{$designation[$s]->id}}{{$dist->distid}}{{$type->employee_type_id}}" class="form-control">
                                                 <input type="hidden" name="emp_type[]" value="{{$type->employee_type_id}}" id="emp{{$designation[$s]->id}}{{$dist->distid}}{{$type->employee_type_id}}" class="form-control">
                                                 <p class="error_div" style="display:none;color:red;" id="error{{$designation[$s]->id}}{{$dist->distid}}{{$type->employee_type_id}}"></p>
-                                            
+
                                             </td>
                                         @endforeach
                                         <td class="input-group-sm">
@@ -180,49 +202,47 @@ td input.form-control {
                                     @endfor
                                     <td>{{$dist_count[$dist->distid]}}</td>
                                 </tr>
-                                
-                            @endforeach
-                            
+
+                            @endforeach --}}
+
 
                             </tbody>
+
                             <tfoot>
                                 <tr class="total-bg">
-                                <td colspan="2" class="sticky-col first-col">Total</td>
-                                @for($s=0;$s < count($designation);$s++)
+                                <td colspan="2">Total</td>
                                 @foreach($emp_type as $type)
-                                <td>{{$ind_des_count[$designation[$s]->id][$type->employee_type_id]}}</td>
+                                <td></td>
                                 @endforeach
-                                <td>{{$des_count[$designation[$s]->id]}}</td>
-                                @endfor
-                                <td style="padding: 10px;">{{$total}}</td>
+                                <td></td>
                             </tr>
                             </tfoot>
-                            
+
                           </table>
                           </div>
                           <div class="row mt-2">
                             <div class="col-md-12 text-center p-0">
-                           <button class="btn btn-submit" type="submit" name="save">Save</button> 
-                          
+                           <button class="btn btn-submit" type="submit" name="save">Save</button>
+
                           <!--<input class="btn btn-submit" type="submit" name="save" value="Save">-->
                         </div>
-                         
+
                         </div>
                         </form>
                         </div>
-                       </div>    
+                       </div>
                       </div>
- 
+
               </main>
-       
-       
+
+
         <!--Start Back To Top Button-->
          <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
        <!--End Back To Top Button-->
 
   </div>
   <!--end wrapper-->
-  
+
  <script>
   $('#myform').submit(function (e) {
     var form = this;
@@ -235,47 +255,56 @@ td input.form-control {
 <script>
     $(document).ready(function(){
         $('.post').on('change',function(){
-            var post = $(this).val();
-            var id = $(this).attr('id');
-            var num = id.match(/\d/g);
-            num = num.join("");
-            var desid = $('#desi'+num).val();
-            var dist = $('#dist'+num).val();
-            var emp = $('#emp'+num).val();
-            
-            var _token = '<?php echo csrf_token()  ?>';
-            $.ajax({
-                url:"get_post_count",
-                method:"GET",
-                data:{
-                    _token:_token,
-                    desid:desid,
-                    dist:dist,
-                    emp:emp,
-                },
-                
-                success:function(result){
-                    if(post < result){
-                        $('#error'+num).html(result +' posts are alredy assigned <br> please enter value greter than '+ result);
-                        $('#post'+num).val(result);
-                        $('#post'+num).css('border','1px solid red');
-                        $('#error'+num).fadeIn();
-                      setTimeout(mydiv, 8000);
-                    }else{
-                        $('#error'+num).hide();
-                        $('#post'+num).css('border','1px solid green');
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    if(jqXHR.status == 404){
-                        $('#post'+num).val(post);
-                    }
-                },
-                
-            });
+
+            var dist = $('#district').val();
+            if(dist == ''){
+                alert('please select distrct fisrt..');
+                $(this).val('').focus();
+            }else{
+                var post = $(this).val();
+                var id = $(this).attr('id');
+                var num = id.match(/\d/g);
+                num = num.join("");
+                var desid = $('#desi'+num).val();
+                var emp = $('#emp'+num).val();
+
+                var _token = '<?php echo csrf_token()  ?>';
+                $.ajax({
+                    url:"get_post_count",
+                    method:"GET",
+                    data:{
+                        _token:_token,
+                        desid:desid,
+                        dist:dist,
+                        emp:emp,
+                    },
+
+                    success:function(result){
+                        if(post < result){
+                            $('#error'+num).html(result +' posts are alredy assigned <br> please enter value greter than '+ result);
+                            $('#post'+num).val(result);
+                            $('#post'+num).css('border','1px solid red');
+                            $('#error'+num).fadeIn();
+                        setTimeout(mydiv, 8000);
+                        }else{
+                            $('#error'+num).hide();
+                            $('#post'+num).css('border','1px solid green');
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        if(jqXHR.status == 404){
+                            $('#post'+num).val(post);
+                        }
+                    },
+
+                });
+
+            }
+
+
         });
     });
-       
+
    function mydiv(){
        $('.error_div').fadeOut();
    }
@@ -292,8 +321,7 @@ $(document).ready(function() {
 });
 </script>
 
- 
+
   <!-- Bootstrap bundle JS -->
    @include('headers.footer')
-   
- 
+

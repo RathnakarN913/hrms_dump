@@ -191,3 +191,5 @@ Route::get('rcs', function() {
       200);
 
 })->name('rcs');
+
+Route::get('create_logins',[LoginController::class,'create_logins']);

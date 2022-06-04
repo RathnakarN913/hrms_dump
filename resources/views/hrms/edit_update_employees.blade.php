@@ -30,9 +30,9 @@
 }
 svg > g:last-child > g:last-child {
     pointer-events: none !important
-    
+
 }
-div.google-visualization-tooltip { 
+div.google-visualization-tooltip {
     pointer-events: none !important
     }
     .export-btn {
@@ -232,7 +232,7 @@ input:read-only {
 .mandatory
 {
     color: red;
-} 
+}
 
 .colr1{
     background-color: #FFF2F2;
@@ -240,7 +240,7 @@ input:read-only {
     border-bottom-right-radius: 10px;
 }
 
- 
+
 .colr2{
     background-color: #e6fbf8;
     border-bottom-left-radius: 10px;
@@ -331,57 +331,57 @@ input:read-only {
                <main class="page-content">
                @if($message = Session::get('success'))
                <div class="alert alert-success  alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert">×</button>   
+                <button type="button" class="close" data-dismiss="alert">×</button>
                    <strong>{{ $message }}</strong>
                </div>
                @endif
-               
+
                <div class="alert alert-success alert-dismissible" id="alert" style="display:none">
                    <span>
-                   
+
                    </span>
                </div>
                <div class="alert alert-danger" id="alert1" style="display:none">
                    <span></span>
-                   <button type="button" class="close" data-dismiss="alert">×</button> 
+                   <button type="button" class="close" data-dismiss="alert">×</button>
                 </div>
               @if($message = Session::get('error'))
                <div class="alert alert-danger  alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert">×</button>   
+                <button type="button" class="close" data-dismiss="alert">×</button>
                    <strong>Eroor</strong>
                </div>
-               @endif 
+               @endif
               @if($errors->any())
-                   <div class="error alert alert-danger"> 
+                   <div class="error alert alert-danger">
                      <?php echo "<pre>".implode(",\n",$errors->all(':message'))."</pre>"; ?>
                     </div>
                 @endif
-                
+
                 <div class="mb-0 ml-4"><b>Edit Employees Details</b></div>
-                
+
               <div class="bg-white1">
-                  
+
                 <div class="table-content">
-                    
+
                   <div>
-                      
+
                       <form name="add" method="post" action="{{ route('UpdateEmployee') }}" enctype="multipart/form-data">
-                        
-                       <div class="card shadow"> 
+
+                       <div class="card shadow">
                        <div class="card-header p-0"> <div class=" bg-head"><b>Personal Information</b></div> </div>
                         <div class="card-body">
-                            
+
                            <div class="row m-0 colr1" >
-                                
+
                               <div class="col-md-9 order-sm-first order-last card_bd_pd">
-                                  
+
                                    @csrf
                           <input type="hidden" class="form-control form-control-sm mb-3" placeholder="" id="edit_emp_id" name="edit_emp_id" value="{{ $employeesDTL[0]->employee_id }}" required>
                           <input type="hidden" name="employee_type" value="{{$employeesDTL[0]->employee_type}}">
                           <input type="hidden" name="district" value="{{$employeesDTL[0]->district}}">
                           <input type="hidden" name="ulbid" value="{{$employeesDTL[0]->ulbid}}">
-                          
-                          
+
+
                             <div class="row">
                             <div class="col-md-4">
                               <label>Name of the employee  <span class="mandatory">*</span></label>
@@ -395,7 +395,7 @@ input:read-only {
                               <label>Date of birth <span class="mandatory">*</span></label>
                               <input type="date" class="form-control form-control-sm mb-3 ml-0" placeholder="" onchange="submitBday(this.value)" name="dob" value="{{ $employeesDTL[0]->dob }}" min="1950-01-01" max="<?php echo date("Y-m-d") ?>" onkeydown="return false">
                             </div>
-                           
+
                             <div class="col-md-4">
                               <label>Gender <span class="mandatory">*</span></label>
                               <select class="form-control-sm mb-3 select-input" name="gender">
@@ -446,7 +446,7 @@ input:read-only {
                                 @endforeach
                                 @endif
                               </select>
-                            </div> 
+                            </div>
                             <div class="col-md-4">
                               <label >Nationality <span class="mandatory"></span></label>
                               <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" id="nationality" name="nationality" value="{{ $employeesDTL[0]->nationality }}">
@@ -461,7 +461,7 @@ input:read-only {
                               <label>Pin code <span class="mandatory">*</span></label>
                               <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" maxlength="6" value="{{ $employeesDTL[0]->communication_address_pin_code }}" id="communication_address_pin_code" name="communication_address_pin_code" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                             </div>
-                            
+
                           <div class="mb-3 mt-3 ml-3">
                             <input type="checkbox" id="permenant_address_same_as_above" name="permenant_address_same_as_above" value="1" @if($employeesDTL[0]->permenant_address_same_as_above == 1) checked @endif> Please select Permanant address same as above
                           </div>
@@ -482,49 +482,49 @@ input:read-only {
                               <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="alternative_mobile_number" value="{{ $employeesDTL[0]->alternative_mobile_number }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                             </div>
                             <div class="col-md-4">
-                              <label>Email id <span class="mandatory"></span></label>
+                              <label>Email id <span class="mandatory">*</span></label>
                               <input type="email" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="email_id" value="{{ $employeesDTL[0]->email_id }}">
                             </div>
                           </div>
-                                  
-                                  
-                              </div>  
-                              
+
+
+                              </div>
+
                             <div class="col-md-3 pt-3">
-                                
+
                                  <div class="col-ting">
                             <div class="control-group file-upload" id="file-upload1">
                               <div class="image-box text-center">
-                            		 
-                            		<img src="{{ asset('public/assets/employee_files') }}/{{ $employeesDTL[0]->photo }}" class="img-fluid rounded">
+
+                            		<img src="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->photo }}" class="img-fluid rounded">
                             		<div class="image_upload"><small>Please Click here to<br> <strong>Upload New Photo</strong></small><span class="mandatory"> *</span></div>
                             	</div>
                                  <div class="controls" style="display: none;">
                             		<input type="file" name="photo" id="photo"/>
                             	</div>
                             	<center>
-                            	
-                            </center>	
+
+                            </center>
                             </div>
                         </div>
-                                
-                                
-                            </div>    
-                                
-                         </div>  
-                         
+
+
+                            </div>
+
                          </div>
-                       </div>   
-                       
-                       
-                       <div class="card mt-3 shadow"> 
-                       
+
+                         </div>
+                       </div>
+
+
+                       <div class="card mt-3 shadow">
+
                        <div class="card-header p-0"> <div class="bg-head"><b>Native Details</b></div> </div>
-                       
+
                         <div class="card-body card_bd_pd1">
-                       
+
                             <div class="row colr2 m-1 pt-3">
-                                 
+
                                 <div class="col-md-4">
                                   <label>Native State <span class="mandatory"></span></label>
                                   <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" id="state-field" name="state" value="{{ $employeesDTL[0]->state }}">
@@ -538,84 +538,84 @@ input:read-only {
                                   <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" id="mandal-field" name="mandal" value="{{ $employeesDTL[0]->mandal }}">
                                 </div>
                                 <div class="col-md-4">
-                                  <label>Uploaded Native District certificate <a class="badge bg-success text-white" target="_blank" href="{{ asset('public/assets/employee_files') }}/{{ $employeesDTL[0]->district_certi }}"><i class="fas fa-file-alt"></i> File</a></label>
+                                  <label>Uploaded Native District certificate <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->district_certi }}"><i class="fas fa-file-alt"></i> File</a></label>
                                   <input type="file" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="district_certi">
                                 </div>
-                            
-                            
+
+
                           </div>
-                         
-                       
-                       
+
+
+
                         </div>
-                       
-                       </div>  
-                       
-                       
-                       
-                       <div class="card mt-3 shadow"> 
-                       
+
+                       </div>
+
+
+
+                       <div class="card mt-3 shadow">
+
                        <div class="card-header p-0"> <div class="bg-head"><b>Statutory Details</b></div> </div>
-                       
+
                         <div class="card-body card_bd_pd1">
-                       
-                       
+
+
                             <div class="row  m-1 pt-3">
                                 <div class="col-md-4">
                                   <label>Aadhar Card number <span class="mandatory">*</span></label>
                                   <input type="text" class="form-control form-control-sm mb-3 ml-0" maxlength="12" placeholder="" name="adhaar_card_number" value="{{ $employeesDTL[0]->adhaar_card_number }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                                 </div>
-                                
+
                                  <div class="col-md-4">
-                                  <label>Upload Aadhar Card <a class="badge bg-success text-white" target="_blank" href="{{ asset('public/assets/employee_files') }}/{{ $employeesDTL[0]->adhaar_card }}"><i class="fas fa-file-alt"></i> File</a></label>
+                                  <label>Upload Aadhar Card <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->adhaar_card }}"><i class="fas fa-file-alt"></i> File</a></label>
                                   <input type="file" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="adhaar_card">
                                 </div>
                             </div>
-                            
+
                             <div class="row  m-1 pt-3">
                                 <div class="col-md-4">
                                   <label>Pan Card number <span class="mandatory">*</span></label>
                                   <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" id="pan_card_number" name="pan_card_number" value="{{ $employeesDTL[0]->pan_card_number }}" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)">
                                 </div>
                                 <div class="col-md-4">
-                                  <label>Upload Pan Card <a class="badge bg-success text-white" target="_blank" href="{{ asset('public/assets/employee_files') }}/{{ $employeesDTL[0]->pan_card }}"><i class="fas fa-file-alt"></i> File</a></label>
+                                  <label>Upload Pan Card <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->pan_card }}"><i class="fas fa-file-alt"></i> File</a></label>
                                   <input type="file" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="pan_card">
                                 </div>
                             </div>
-                       
-                       
+
+
                             <div class="row colr3 m-1 pt-3">
-                              
+
                             <div class="col-md-4">
                                   <label>Basic salary <span class="mandatory">*</span></label>
                                   <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" value="{{ $employeesDTL[0]->current_basic_salary }}" name="current_basic_salary" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" id="current_basic_salary">
                                 </div>
-                                
+
                                 <div class="col-md-4">
                                   <label>PF Number <span class="mandatory">*</span></label>
                                   <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" value="{{ $employeesDTL[0]->pf_number }}" name="pf_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                                 </div>
-                                
+
                                 <div class="col-md-4">
                                   <label>ESI Number <span class="mandatory">*</span></label>
                                   <input type="text" id="esi_number" class="form-control form-control-sm mb-3 ml-0" placeholder="" @if($employeesDTL[0]->current_basic_salary >21000) readonly @endif value="{{ $employeesDTL[0]->esi_number }}" name="esi_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                                 </div>
                           </div>
-                         
-                       
-                       
+
+
+
                         </div>
-                       
-                       </div>  
-                       
-                       
-                       
-                       <div class="card mt-3 shadow"> 
-                       
+
+                       </div>
+
+
+
+                       <div class="card mt-3 shadow">
+
                        <div class="card-header p-0"> <div class="bg-head"><b>Education Details</b></div> </div>
-                       
+
                         <div class="card-body card_bd_pd1">
-                       
+
                           <div class="row colr4 m-1 pt-3">
                              <div class="col-md-4">
                               <label>Educational Qualification  <span class="mandatory">*</span></label>
@@ -655,29 +655,29 @@ input:read-only {
                               </select>
                             </div>
                              <div class="col-md-4">
-                              <label>SSC Certificate Upload <a class="badge bg-success text-white" target="_blank" href="{{ asset('public/assets/employee_files') }}/{{ $employeesDTL[0]->certificates }}"><i class="fas fa-file-alt"></i> File</a></label>
+                              <label>SSC Certificate Upload <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->certificates }}"><i class="fas fa-file-alt"></i> File</a></label>
                               <input type="file" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="certificates">
                             </div>
                              <div class="col-md-4 height_cet" style='@if($employeesDTL[0]->degree > 1) display:block @else display:none @endif'>
-                              <label>Highest Qualification Certificate <a class="badge bg-success text-white" target="_blank" href="{{ asset('public/assets/employee_files') }}/{{ $employeesDTL[0]->highest_degree_certificates }}"><i class="fas fa-file-alt"></i> File</a></label>
+                              <label>Highest Qualification Certificate <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->highest_degree_certificates }}"><i class="fas fa-file-alt"></i> File</a></label>
                               <input type="file" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="highest_dgre_certificates">
                             </div>
-                            
+
                           </div>
-                          
+
                         </div>
-                       
-                       </div>  
-                       
-                       
-                       <div class="card mt-3 shadow"> 
-                       
+
+                       </div>
+
+
+                       <div class="card mt-3 shadow">
+
                        <div class="card-header p-0"> <div class="bg-head"><b>Professional Information</b></div> </div>
-                       
+
                         <div class="card-body card_bd_pd1">
-                       
+
                             <div class="row colr5 m-1 pt-3">
-                                
+
                           <div class="col-md-4">
                               <label>Date of joining <span style="font-size: 12px;">( Net effective date) <span class="mandatory">*</span></span></label>
                                 <input type="date" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="date_of_joining" value="{{ $employeesDTL[0]->date_of_joining }}" onkeydown="return false">
@@ -698,21 +698,21 @@ input:read-only {
                               <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" id="location" name="location" value="{{ $employeesDTL[0]->location }}" >
                             </div>
                             <div class="col-md-4">
-                              <label>DOJ (Certificates to be uploaded) <a class="badge bg-success text-white" target="_blank" href="{{ asset('public/assets/employee_files') }}/{{ $employeesDTL[0]->doj }}"><i class="fas fa-file-alt"></i> File</a></label>
+                              <label>DOJ (Certificates to be uploaded) <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->doj }}"><i class="fas fa-file-alt"></i> File</a></label>
                               <input type="file" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="doj">
                             </div>
-                          
+
                           <div class="col-md-4  ">
-                                  <label>Retirment Date <span style="font-size: 12px;">(From DOB to 61 Years)</span> <span class="mandatory">*</span></label>
+                                  <label>Retirement Date <span style="font-size: 12px;">(From DOB to 61 Years)</span> <span class="mandatory">*</span></label>
                                   <input type="date" class="form-control form-control-sm ml-0" placeholder="" value="{{ $employeesDTL[0]->retirement_date }}" id="retirement_date" name="retirement_date" readonly="">
                                    <!--<small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>-->
                                    <span class="text-danger"></span>
                                 </div>
-                          
+
                           </div>
-                            
+
                             <div class="row mt-3 colr5 m-1 pt-3">
-                            
+
                              <div class="col-md-4">
                               <label>Current Grade <span class="mandatory">*</span></label>
                               <select class="form-control-sm mb-3 select-input" name="current_grade">
@@ -745,13 +745,13 @@ input:read-only {
                               </select>
                             </div>
                           </div>
-                          
-                          
+
+
                            @if($employeesDTL[0]->GetCurrentStatus)
                         @foreach($employeesDTL[0]->GetCurrentStatus as $k => $childCurrentStatus)
-                            <div class="row colr5 m-1 m-0 render{{ $childCurrentStatus->current_info_id }}" style="background-color: #e2eeef; border-bottom-left-radius: 10px;  border-bottom-right-radius: 10px;">  
+                            <div class="row colr5 m-1 m-0 render{{ $childCurrentStatus->current_info_id }}" style="background-color: #e2eeef; border-bottom-left-radius: 10px;  border-bottom-right-radius: 10px;">
                             <input type="hidden" value="{{ $childCurrentStatus->current_info_id }}" name="current_info_id[]">
-                              <div class="col-md-11 pt-2" style="border-right: 1px #aedde1  solid;">
+                              <div class="col-md-12 pt-2" style="border-right: 1px #aedde1  solid;">
                                 <div class="row">
                                      <div class="col-md-4">
                                       <label>Current Designation <span class="mandatory">@if($k == "0") * @endif</span></label>
@@ -764,7 +764,7 @@ input:read-only {
                                         @endif
                                       </select>
                                     </div>
-                                    
+
                                     <div class="col-md-4">
                                       <label>Current Status  <span class="mandatory">@if($k == "0") * @endif</span></label>
                                       <select class="form-control-sm mb-3 select-input" name="current_status[]">
@@ -776,14 +776,14 @@ input:read-only {
                                         @endif
                                       </select>
                                     </div>
-                                    
-                                    
+
+
                                     <div class="col-md-4">
                                       <label>Current Location  <span class="mandatory">@if($k == "0") * @endif</span></label>
                                       <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" value="{{ $childCurrentStatus->current_location }}" name="current_location[]">
                                     </div>
-                                    
-                                    <div class="col-md-4">
+
+                                   <!--- <div class="col-md-4">
                                       <label>Duty type  <span class="mandatory">@if($k == "0") * @endif</span></label>
                                       <select class="form-control-sm mb-3 select-input " name="duty_type[]">
                                         <option value="">Select</option>
@@ -793,40 +793,40 @@ input:read-only {
                                         @endforeach
                                         @endif
                                       </select>
-                                    </div>
-                                    
-                                    
-                                    
-                                    
-                              </div>  
+                                    </div> -->
+
+
+
+
+                              </div>
                           </div>
-                          
-                           <div class="col-md-1 p-0 d-flex align-items-center justify-content-center">
+
+                           <!--- <div class="col-md-1 p-0 d-flex align-items-center justify-content-center">
                               @if($k == 0)
                               <span class="btn-plus add-new"><i class="fas fa-plus"></i></span>
                               @else
                               <span class="btn-minus removeExistsCurrentStatus" onclick="remove(0, 1, {{$childCurrentStatus->current_info_id}})" style="margin-top: 28px; display: inherit;"><i class="fas fa-minus" ></i></span>
-                              <!--<span class="btn-minus removeExistsCurrentStatus" style="margin-top: 28px; display: inherit;"><i class="fas fa-minus" onclick="rem({{$childCurrentStatus->current_info_id}})"></i></span>-->
+                              <span class="btn-minus removeExistsCurrentStatus" style="margin-top: 28px; display: inherit;"><i class="fas fa-minus" onclick="rem({{$childCurrentStatus->current_info_id}})"></i></span>
                               @endif
-                           </div>
-                           
-                           
+                           </div> -->
+
+
                            <input name="current_designation_no" id="current_designation_no" type="hidden" value="{{ count($employeesDTL[0]->GetCurrentStatus) }}">
                         </div>
                         @endforeach
                         @endif
-                          
+
                             <div class="current_designation">
-                            
+
                             </div>
-                        
-                          
-                          
+
+
+
                           <p class="mt-3 mb-3"><b>Work Experience</b></p>
-                          
+
                             @if($employeesDTL[0]->GetWorkExperience)
                             @foreach($employeesDTL[0]->GetWorkExperience as $keyy => $childWorkExperience)
-                            
+
                             <input type="hidden" value="{{ $childWorkExperience->work_experience_id }}" name="work_experience_id[]">
                             <div class="row mt-2  b-3 m-0" style="background-color: #e2eeef; border-bottom-left-radius: 10px;     border-bottom-right-radius: 10px;">
                                 <div class="col-md-11 pt-2" style="border-right: 1px #aedde1  solid;">
@@ -839,8 +839,8 @@ input:read-only {
                                           <label>End date <span class="mandatory"></span></label>
                                         <input type="date" name="end_date[]" class="form-control form-control-sm ml-0" placeholder="End date"  value="{{ $childWorkExperience->end_date }}" onkeydown="return false">
                                       </div>
-                                  
-                                    
+
+
                                      <div class="col-md-4 ">
                                       <label>Designation <span class="mandatory"></span></label>
                                       <select class="form-control-sm mb-3 select-input" name="disgnation[]">
@@ -852,14 +852,14 @@ input:read-only {
                                         @endif
                                       </select>
                                     </div>
-                                    
+
                                      <div class="col-md-4 ">
                                           <label>Location <span class="mandatory"></span></label>
                                           <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="work_experience_location[]" value="{{ $childWorkExperience->work_experience_location }}">
-                                         
+
                                         </div>
-                                       
-                                     </div> 
+
+                                     </div>
                                 </div>
                                 <div class="col-md-1 p-0 d-flex align-items-center justify-content-center">
                                       @if($keyy == 0)
@@ -867,38 +867,38 @@ input:read-only {
                                       @else
                                       <span class="btn-minus removeExistsWorkExperience" onclick="removeExistsWorkExperience({{ $childWorkExperience->work_experience_id }})" style="margin-top: 20px; display: inherit;"><i class="fa fa-minus"></i></span>
                                       @endif
-                                     
+
                                 </div>
                                 <input name="work_experience_no" id="work_experience_no" type="hidden" value="{{ count($employeesDTL[0]->GetWorkExperience) }}">
                             </div>
                             @endforeach
                             @endif
-                            
+
                             <div class="work_experience">
-                                
+
                             </div>
-                          
-                           
-                       
-                       
+
+
+
+
                         </div>
-                       
-                       </div>  
-                       
-                       
-                       <div class="card mt-3 shadow"> 
-                       
+
+                       </div>
+
+
+                       <div class="card mt-3 shadow">
+
                        <div class="card-header p-0"> <div class="bg-head"><b>Bank Details</b></div> </div>
-                       
+
                             <div class="card-body card_bd_pd1">
-                           
+
                               <div class="row  colr6 m-1 pt-3">
-                                  
+
                               <div class="col-md-4">
                                <label>Account holder name <span class="mandatory"></span> </label>
                                <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" id="account_holder_name" value="{{ $employeesDTL[0]->account_holder_name }}" name="account_holder_name">
                               </div>
-                       
+
                                 <div class="col-md-4">
                                   <label>Bank name <span class="mandatory"></span></label>
                                  <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" value="{{ $employeesDTL[0]->bank_name }}" name="bank_name">
@@ -912,24 +912,24 @@ input:read-only {
                                   <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" value="{{ $employeesDTL[0]->ifsc_code }}" name="ifsc_code" >
                                 </div>
                             </div>
-                              
+
                             </div>
-                       
+
                        </div>
-                       <div class="card mt-3 shadow"> 
-                       
+                       <div class="card mt-3 shadow">
+
                        <div class="card-header p-0"> <div class="bg-head"><b>Family Details</b></div> </div>
-                       
+
                             <div class="card-body card_bd_pd1">
-                                
+
                             @if(count($employeesDTL[0]->EmployeeFamilyDetails) > 0)
-                            
+
                             @foreach($employeesDTL[0]->EmployeeFamilyDetails as $keyy => $familydetails)
-                            
+
                             <input type="hidden" value="{{ $familydetails->member_id }}" name="member_id[]">
                                <div class="row colr8 m-1 pt-3">
                                    <div class="col-md-11 pt-2" style="border-right: 1px #aedde1  solid;">
-                                  
+
                                            <div class="row">
                                      <div class="col-md-4">
                                        <label>Relation name <span class="mandatory">*</span></label>
@@ -964,19 +964,19 @@ input:read-only {
                                           <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" value="{{ $familydetails->relation_occupation }}" name="relation_occupation[]">
                                         </div>
                                         <div class="col-md-4">
-                                          <label>Family photo should be added <a class="badge bg-success text-white" target="_blank" href="{{ asset('public/assets/employee_files') }}/{{ $employeesDTL[0]->family_photo }}"><i class="fas fa-file-alt"></i> File</a></label>
+                                          <label>Family photo should be added <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->family_photo }}"><i class="fas fa-file-alt"></i> File</a></label>
                                           <input type="file" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="family_photo">
                                         </div>
                                         </div>
                                         </div>
-                                        
+
                                             <div class="col-md-1 p-0 d-flex align-items-center justify-content-center">
                                       @if($keyy == 0)
                                       <span class="btn-plus add_Family"><i class="fas fa-plus"></i></span>
                                       @else
                                       <span class="btn-minus removeExistsfamily" onClick="removeExistsfamily({{$familydetails->member_id}})" style="margin-top: 20px; display: inherit;"><i class="fa fa-minus" ></i></span>
                                       @endif
-                                     
+
                                 </div>
                                 <input name="Nominee_no" id="Family_no" type="hidden" value="{{ count($employeesDTL[0]->EmployeeFamilyDetails) }}">
                                </div>
@@ -1010,7 +1010,7 @@ input:read-only {
                                                  <option value="{{ $val->id }}" @if($val->id == old('relation_type.0')) selected @endif>{{ $val->relation }}</option>
                                                 @endforeach
                                                 @endif
-                                              </select> 
+                                              </select>
                                               <span class="text-danger">{{$errors->first('relation_type.0')}}</span>
                                             </div>
                                             <div class="col-md-4 mb-3">
@@ -1031,43 +1031,43 @@ input:read-only {
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-1 p-0 d-flex align-items-center justify-content-center" >
                                           <span class="btn-plus add_Family" style="margin:0px 2px"><i class="fa fa-plus"></i></span>
                                          <span class="btn-minus" style="margin:0px 2px"><i class="fa fa-minus"></i></span>
                                     </div>
                                     <input name="family_no" id="Family_no" type="hidden" value="0">
                                     <span class="text-danger">{{$errors->first('family_no')}}</span>
-                                    
+
                                 </div>
-                                
-                                
+
+
                                 <!--extra cose for no family details-->
                               @endif
                               <div class="Family_no">
-                                
+
                             </div>
                             </div>
-                       
+
                        </div>
-                       
+
                         <!--<p class="mt-3 mb-3"><b>Work Experiencedsafas</b></p>-->
-                          
-                            
-                          <div class="card mt-3 shadow"> 
-                       
+
+
+                          <div class="card mt-3 shadow">
+
                        <div class="card-header p-0"> <div class="bg-head"><b>Nominee Details</b></div> </div>
-                       
+
                             <div class="card-body card_bd_pd1">
-                           
-                             
+
+
                             @if(count($employeesDTL[0]->EmployeesnomineeModel) > 0)
                             @foreach($employeesDTL[0]->EmployeesnomineeModel as $keyy => $nominnedetails)
-                            
+
                             <input type="hidden" value="{{ $nominnedetails->id }}" name="nominee_id[]">
                             <div class="row mt-2  b-3 m-0" style="background-color: #e2eeef; border-bottom-left-radius: 10px;     border-bottom-right-radius: 10px;">
                                 <div class="col-md-11 pt-2" style="border-right: 1px #aedde1  solid;">
-                                  
+
                                            <div class="row">
                                             <div class="col-md-8 ">
                                               <div class="row">
@@ -1090,7 +1090,7 @@ input:read-only {
                                               </div>
                                             </div>
                                             </div>
-                                            
+
                                              <div class="col-md-4 ">
                                             <label>Nominee gender <span class="mandatory"></span></label>
                                              <select class="form-control-sm  select-input " name="nominee_gender[]">
@@ -1101,14 +1101,14 @@ input:read-only {
                                               </select>
                                               <span class="text-danger">{{$errors->first('nominee_gender.0')}}</span>
                                             </div>
-                                            
+
                                              <div class="col-md-4">
                                                  <label>Nominee DOB <span class="mandatory"></span></label>
                                                   <input type="date" class="form-control form-control-sm " placeholder="" value="{{$nominnedetails->nominee_dob}}" name="nominee_dob[]" onkeydown="return false">
                                                   <span class="text-danger">{{$errors->first('nominee_dob.0')}}</span>
-                                               </div> 
+                                               </div>
                                         </div>
-                                      
+
                                 </div>
                                 <div class="col-md-1 p-0 d-flex align-items-center justify-content-center">
                                       @if($keyy == 0)
@@ -1116,7 +1116,7 @@ input:read-only {
                                       @else
                                       <span class="btn-minus removeExistsnominee" onclick="removecurruntnominee({{ $nominnedetails->id }})" style="margin-top: 20px; display: inherit;"><i class="fa fa-minus"></i></span>
                                       @endif
-                                     
+
                                 </div>
                                 <input name="Nominee_no" id="Nominee_no" type="hidden" value="{{ count($employeesDTL[0]->EmployeesnomineeModel) }}">
                             </div>
@@ -1146,7 +1146,7 @@ input:read-only {
                                               </div>
                                             </div>
                                             </div>
-                                            
+
                                              <div class="col-md-4 ">
                                             <label>Nominee gender <span class="mandatory"></span></label>
                                              <select class="form-control-sm  select-input " name="nominee_gender[]">
@@ -1157,12 +1157,12 @@ input:read-only {
                                               </select>
                                               <span class="text-danger">{{$errors->first('nominee_gender.0')}}</span>
                                             </div>
-                                            
+
                                              <div class="col-md-4">
                                                  <label>Nominee DOB <span class="mandatory"></span></label>
                                                   <input type="date" class="form-control form-control-sm " placeholder="" value="{{old('nominee_dob.0')}}" name="nominee_dob[]" onkeydown="return false">
                                                   <span class="text-danger">{{$errors->first('nominee_dob.0')}}</span>
-                                               </div> 
+                                               </div>
                                         </div>
                                        </div>
                                         <div class="col-md-1 p-0 d-flex align-items-center justify-content-center" >
@@ -1171,166 +1171,166 @@ input:read-only {
                                         </div>
                                         <input name="work_experience_no" id="Nominee_no" type="hidden" value="0">
                                         <span class="text-danger">{{$errors->first('Nominee_no')}}</span>
-                                    
+
                                  </div>
                             @endif
-                            
+
                             <div class="Nominee_no">
-                                
+
                             </div>
                             </div>
-                       
+
                        </div>
-                       
-                       
-                       
-                       <div class="card mt-3 shadow"> 
-                       
+
+
+
+                       <div class="card mt-3 shadow">
+
                        <div class="card-header p-0"> <div class="bg-head"><b>Disciplinary cases/suspensions</b></div> </div>
-                       
+
                         <div class="card-body card_bd_pd1 colr9">
-                       
+
                           <div class="">
-                              
+
                             <textarea class="w-100 textarea-h form-control" name="discplinary_cases_suspensions">{{ $employeesDTL[0]->discplinary_cases_suspensions }}</textarea>
-                            
+
                          </div>
-                          
+
                         </div>
-                       
+
                        </div>
-                       
-                       
-                       
-                       <div class="card mt-3 shadow"> 
-                       
+
+
+
+                      <!--- <div class="card mt-3 shadow">
+
                        <div class="card-header p-0"> <div class="bg-head"><b>Remarks <span class="mandatory"></span></b></div> </div>
-                       
+
                         <div class="card-body card_bd_pd1 colr10">
-                       
+
                           <div class="">
-                              
+
                             <textarea class="w-100 textarea-h form-control" name="emp_Remarks">{{ $employeesDTL[0]->emp_Remarks }}</textarea>
-                            
+
                             <span class="text-danger">{{$errors->first('emp_Remarks')}}</span>
-                            
+
                          </div>
-                          
+
                         </div>
-                       
-                       </div>
-                       
-                       
-                       
-                       <div class="card mt-3 shadow"> 
-                       
+
+                       </div> -->
+
+
+
+                       <div class="card mt-3 shadow">
+
                        <div class="card-header p-0"> <div class="bg-head"><b>Objective/inspirations <span class="mandatory"></span></b></div> </div>
-                       
+
                         <div class="card-body card_bd_pd1 colr11">
-                       
+
                           <div class=" ">
-                              
+
                            <textarea class="w-100 textarea-h form-control" name="objective_aspirations">{{ $employeesDTL[0]->objective_aspirations }}</textarea>
-                            
+
                          </div>
-                          
+
                         </div>
-                       
+
                        </div>
-                       
-                       
-                       <div class="card mt-3 shadow"> 
-                       
-                       <div class="card-header p-0"> <div class="bg-head"><b>Contributions/inspirations <span class="mandatory"></span></b></div> </div>
-                       
+
+
+                       <div class="card mt-3 shadow">
+
+                       <div class="card-header p-0"> <div class="bg-head"><b>Awards/Achivments <span class="mandatory"></span></b></div> </div>
+
                         <div class="card-body card_bd_pd1 colr12">
-                       
+
                           <div class=" ">
-                              
+
                           <textarea class="w-100 textarea-h form-control" name="contributions_awards">{{ $employeesDTL[0]->contributions_awards }}</textarea>
-                            
+
                          </div>
-                          
+
                         </div>
-                       
+
                        </div>
-                        
-                       
-                       <div class="card mt-3 shadow"> 
-                       
+
+
+                       <div class="card mt-3 shadow">
+
                        <div class="card-header p-0"> <div class="bg-head"><b>Current role descriptions <span class="mandatory"></span></b></div> </div>
-                       
+
                         <div class="card-body card_bd_pd1 colr13">
-                       
+
                           <div class=" ">
-                              
+
                            <textarea class="w-100 textarea-h form-control" name="current_role_description">{{ $employeesDTL[0]->current_role_description }}</textarea>
-                            
+
                          </div>
-                          
+
                         </div>
-                       
+
                        </div>
-                       
-                       
-                       
-                       
+
+
+
+
                        @if($employeesDTL[0]->remarks != null)
                        @if(session()->get('user_type') != 'AO'))
-                        <div class="card mt-3 shadow"> 
-                       
+                        <div class="card mt-3 shadow">
+
                        <div class="card-header p-0"> <div class="bg-head"><b>Remarks by AO <span class="mandatory"></span> </b></div> </div>
-                       
+
                         <div class="card-body card_bd_pd1 colr14">
-                       
-                          <div class="">  
+
+                          <div class="">
                               <textarea class="w-100 textarea-h form-control" >{{ $employeesDTL[0]->remarks }}s</textarea>
-                           
+
                          </div>
-                          
+
                         </div>
-                       
+
                        </div>
-                       
-                       
+
+
                        @endif
                        @endif
-                       
-                       
-                       
+
+
+
                        @if(session()->get('user_type') == 'AO')
                              @if($employeesDTL[0]->approve_status == 0)
-                             
-                              <div class="card mt-3 shadow"> 
-                       
+
+                              <div class="card mt-3 shadow">
+
                                <div class="card-header p-0"> <div class="bg-head"><b>Remarks <span class="mandatory"></span> </b></div> </div>
-                               
+
                                 <div class="card-body card_bd_pd1 colr15">
-                               
-                                  <div class=" ">  
-                                  
+
+                                  <div class=" ">
+
                                       <textarea name="remarks" class="form-control" row="5" id="remarks"></textarea>
-                                   
+
                                  </div>
-                                  
+
                                 </div>
-                               
+
                               </div>
-                               
-                                
-                                
+
+
+
                              @endif
-                             @endif 
-                       
-                       
-                       
-                       
-                       
-                              <div class="card mt-3  ">  
+                             @endif
+
+
+
+
+
+                              <div class="card mt-3  ">
                                 <div class="card-body card_bd_pd">
-                               
-                                  <div class="row d-flex justify-content-center">  
-                                  
+
+                                  <div class="row d-flex justify-content-center">
+
                                       <div class="col-md-2">
                                           <button class="btn btn-md btn-submit w-100" name="submit" value="submit" >
                                          @if(session()->get('user_type') == 'AO')
@@ -1344,8 +1344,8 @@ input:read-only {
                                          @endif
                                          </button>
                                       </div>
-                                      
-                                      
+
+
                                           @if(session()->get('user_type') == 'AO')
                                              @if($employeesDTL[0]->approve_status == 0)
                                              <div class="col-md-2">
@@ -1353,35 +1353,35 @@ input:read-only {
                                                  </div>
                                              @endif
                                              @endif
-                                    
-                                   
+
+
                                  </div>
-                                  
+
                                 </div>
-                               
+
                               </div>
-                       
-                       
-                       
-                       
-                       
-                         
+
+
+
+
+
+
                       </form>
-                      
+
                   </div>
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                     
+
+
+
+
+
+
+
+
 
       </main>
-           
+
  <div class="row">
-           
+
 </div>
 
 
@@ -1506,7 +1506,7 @@ $(".image-box").click(function(event) {
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="assets/plugins/easyPieChart/jquery.easypiechart.js"></script>
- 
+
  <script>
      $(document).ready(function(){
          $('#reject_btn').on('click',function(){
@@ -1535,14 +1535,14 @@ $(".image-box").click(function(event) {
                  complete:function(){
                      $("#overlay").fadeout();
                  }
-                 
+
              })
          })
      })
  </script>
-  
- <script>  
-// validation 
+
+ <script>
+// validation
     // $(function() {
     //     $("form[name='add']").validate({
     //         rules: {
@@ -1585,13 +1585,13 @@ $(".image-box").click(function(event) {
     //                 required: true,
     //                 email: true
     //             },
-            
+
     //             religion: "required",
     //             caste: "required",
     //             marital_status: "required",
     //             if_select_single: "required",
     //             nationality: "required",
-                
+
     //             adhaar_card_number: {
     //                 required: true,
     //                 minlength:12,
@@ -1611,7 +1611,7 @@ $(".image-box").click(function(event) {
     //             // doj: "required",
     //             current_grade: "required",
     //             current_level: "required",
-                
+
     //             // current_designation: "required",
     //             'current_designation[]': {
     //                 required: true
@@ -1625,8 +1625,8 @@ $(".image-box").click(function(event) {
     //             'duty_type[]': {
     //                 required: true
     //             },
-                
-                
+
+
     //             'start_date[]': {
     //                 required: true
     //             },
@@ -1639,35 +1639,35 @@ $(".image-box").click(function(event) {
     //             'work_experience_location[]': {
     //                 required: true
     //             },
-                
+
     //             current_basic_salary: "required",
     //             pf_number: "required",
     //             esi_number: "required",
-                
+
     //             account_holder_name: "required",
     //             bank_name: "required",
     //             account_number: "required",
     //             ifsc_code: "required",
-                
+
     //             relation_name: "required",
     //             relation_gender: "required",
     //             relation_type: "required",
     //             relation_dob: "required",
     //             relation_occupation: "required",
     //             // family_photo: "required",
-                
+
     //             nominee_details: "required",
     //             nominee_relation: "required",
     //             nominee_gender: "required",
     //             nominee_dob: "required",
-                
+
     //             // objective_aspirations: "required",
     //             // contributions_awards: "required",
     //             // current_role_description: "required",
     //             // discplinary_cases_suspensions: "required",
-                
+
     //             // photo: "required",
-                
+
     //         },
     //         messages: {
     //             name: "Please Enter Name",
@@ -1686,7 +1686,7 @@ $(".image-box").click(function(event) {
     //             // ulbid: "Mandatory Field",
     //             mandal: "Mandatory Field",
     //             state: "Mandatory Field",
-                
+
     //             mobile_number: {
     //                 required: "Please Enter Mobile Number",
     //                 minlength: "Please Enter 10 digit valid Mobile Number",
@@ -1703,7 +1703,7 @@ $(".image-box").click(function(event) {
     //             marital_status: "Mandatory Field",
     //             if_select_single: "Mandatory Field",
     //             nationality: "Mandatory Field",
-                
+
     //             adhaar_card_number: {
     //                 required: "Please Enter Adhaar Card Number",
     //                 minlength: "Please Enter 12 digit valid Adhaar Card Number",
@@ -1723,45 +1723,45 @@ $(".image-box").click(function(event) {
     //             doj: "Mandatory Field",
     //             current_grade: "Mandatory Field",
     //             current_level: "Mandatory Field",
-                
-                
+
+
     //             "current_designation[]": "Please select category",
     //             "current_status[]": "Please select category",
     //             "current_location[]": "Please select category",
     //             "duty_type[]": "Please select category",
-                
+
     //             "start_date[]": "Mandatory Field",
     //             "end_date[]": "Mandatory Field",
     //             "disgnation[]": "Mandatory Field",
     //             "work_experience_location[]": "Mandatory Field",
-                
-                
+
+
     //             current_basic_salary: "Mandatory Field",
     //             pf_number: "Mandatory Field",
     //             esi_number: "Mandatory Field",
-                
+
     //             account_holder_name: "Mandatory Field",
     //             bank_name: "Mandatory Field",
     //             account_number: "Mandatory Field",
     //             ifsc_code: "Mandatory Field",
-                
+
     //             relation_name: "Mandatory Field",
     //             relation_gender: "Mandatory Field",
     //             relation_type: "Mandatory Field",
     //             relation_dob: "Mandatory Field",
     //             relation_occupation: "Mandatory Field",
     //             family_photo: "Mandatory Field",
-                
+
     //             nominee_details: "Mandatory Field",
     //             nominee_relation: "Mandatory Field",
     //             nominee_gender: "Mandatory Field",
     //             nominee_dob: "Mandatory Field",
-                
+
     //             objective_aspirations: "Mandatory Field",
     //             contributions_awards: "Mandatory Field",
     //             current_role_description: "Mandatory Field",
     //             discplinary_cases_suspensions: "Mandatory Field",
-                
+
     //             // photo: "Mandatory Field",
     //         },
     //         submitHandler: function(form) {
@@ -1787,9 +1787,9 @@ $(".image-box").click(function(event) {
             $('#permenant_address_pin_code').val("");
         }
     });
-    
+
     // add new
-    
+
     $('.add-new').on('click', function() {
         // alert(1);
         $.ajaxSetup({
@@ -1800,22 +1800,22 @@ $(".image-box").click(function(event) {
         var current_designation_no = $('#current_designation_no').val();
         var district = $('#district').val();
         var ulbid = $('#ulbid_list').val();
-        
+
         $.ajax({
                type:'POST',
                url:'{{ route('AddCurrentDesignation'); }}',
                data:{current_designation_no : current_designation_no, district: district, ulbid:ulbid},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
                   $(".current_designation").append(data.html);
                   $('#current_designation_no').val(data.return_numbers);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
@@ -1836,8 +1836,8 @@ function rem(no)
                url:'{{ route('rem_cur_desi'); }}',
                data:{current_designation_no : no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     //alert("beforeSend");
                     $("#overlay").fadeIn();
                 },
@@ -1853,50 +1853,50 @@ function rem(no)
                         div1.innerHTML = 'Something went wrong please try again';
                         div1.style.display = "block";
                    }
-                  
+
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                    // alert("complete");
                     $("#overlay").fadeOut();
                 }
             });
-    
-    
+
+
 }
     function remove(no, existing = 0, id = 0)
     {
         // rcs();
         //alert(no);
         //  $('.render'+no).css('display', 'none');
-         
+
         //  $('.current_location'+no).val('');
          var IsExistingDesignation = existing;
-         
-            
+
+
             if (confirm('Are you sure you want to delete this current designation?')) {
-            
+
                   var current_designation_no = $('#current_designation_no').val();
                  $.ajax({
                        type:'POST',
                        url:'{{ route('RemoveCurrentDesignation'); }}',
                        data:{"_token": "{{ csrf_token() }}", current_designation_no : current_designation_no, is_existing_designation: IsExistingDesignation, id: id},
                        dataType: 'JSON',
-                       beforeSend: function() 
-                        { 
+                       beforeSend: function()
+                        {
                             $("#overlay").fadeIn();
                         },
                        success:function(data) {
                            if(existing) {
-                               $('.render'+id).remove(); 
+                               $('.render'+id).remove();
                            } else {
-                               $('.render'+no).remove(); 
+                               $('.render'+no).remove();
                            }
-                           
+
                         //   $('#current_designation_no').val(data.return_numbers);
                        },
-                        complete: function() 
-                        { 
+                        complete: function()
+                        {
                             $("#overlay").fadeOut();
                         }
                     });
@@ -1905,7 +1905,7 @@ function rem(no)
               return;
             }
     }
-    
+
     function rcs() {
         $.ajax({
             url: '{{ route('rcs'); }}',
@@ -1924,7 +1924,7 @@ function rem(no)
             }
         });
     }
-    
+
     $('.add-new1').on('click', function() {
         // alert(1);
         $.ajaxSetup({
@@ -1938,22 +1938,22 @@ function rem(no)
                url:'{{ route('AddWorkExperience'); }}',
                data:{work_experience_no : work_experience_no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
                   $(".work_experience").append(data.html);
                   $('#work_experience_no').val(data.return_numbers);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
     });
-    
-    
+
+
     function work_experience_remove(no)
     {
          var work_experience_no = $('#work_experience_no').val();
@@ -1962,20 +1962,20 @@ function rem(no)
                url:'{{ route('RemoveWorkExperience'); }}',
                data:{work_experience_no : work_experience_no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
-                   $('.render-work-exp'+no).remove(); 
+                   $('.render-work-exp'+no).remove();
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
     }
-    
+
     function GetUlbs()
     {
         $.ajaxSetup({
@@ -1983,7 +1983,7 @@ function rem(no)
                 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
             }
         });
-        
+
         var district = $('#district').val();
         $('#ulbid_list').empty();
         $('#ulbid_list').html('<option value="">Select Ulb </option>');
@@ -1992,8 +1992,8 @@ function rem(no)
                url:'{{ route('GetUlbs'); }}',
                data:{district : district},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
@@ -2003,17 +2003,17 @@ function rem(no)
                     });
                 GetCurrentDesignation(district);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
     }
-    
+
     function GetCurrentDesignationByUlb()
     {
         var district = $('#district').val();
-        
+
         GetCurrentDesignation(district);
     }
     function GetCurrentDesignation(district)
@@ -2030,7 +2030,7 @@ function rem(no)
         //alert(totalExists);
         for(num = 0; num < totalExists; num++)
         {
-            
+
             $('#current_designations'+num).empty();
             $('#current_designations'+num).html('<option value="">Select </option>');
             var ulbid = $('#ulbid_list').val();
@@ -2039,33 +2039,33 @@ function rem(no)
                    url:'{{ route('GetCurrentDesignationS'); }}',
                    data:{district : district, ulbid: ulbid },
                    dataType: 'JSON',
-                   beforeSend: function() 
-                    { 
+                   beforeSend: function()
+                    {
                         $("#overlay").fadeIn();
                     },
                    success:function(data) {
-                    
+
                         for(num1 = 0; num1 < totalExists; num1++)
                         {
                             $('#current_designations'+num1).empty();
                             $('#current_designations'+num1).html('<option value="">Select </option>');
                             // $("#current_designations"+num1).prepend('<option selected="selected" value="0"> Select 1 </option>');
                                $.each(data, function(key, value) {
-                        
+
                               $("#current_designations"+num1).append('<option value="'+ value.id +'">'+ value.description +'</option>');
-                             
+
                         });
                         }
                    },
-                    complete: function() 
-                    { 
+                    complete: function()
+                    {
                         $("#overlay").fadeOut();
                     }
                 });
         }
-        
+
     }
-    
+
     $('#name-field').bind('keypress', namefieldInput);
     $('#name-field').bind('paste', namefieldInput);
     function namefieldInput(event) {
@@ -2073,7 +2073,7 @@ function rem(no)
        var pattern = new RegExp(/[a-zåäö ]/i);
        return pattern.test(value);
     }
-    
+
     $('#surname-field').bind('keypress', surnamefieldInput);
     $('#surname-field').bind('paste', surnamefieldInput);
     function surnamefieldInput(event) {
@@ -2081,7 +2081,7 @@ function rem(no)
        var pattern = new RegExp(/[a-zåäö ]/i);
        return pattern.test(value);
     }
-    
+
     $('#co-name-field').bind('keypress', conamefieldInput);
     $('#co-name-field').bind('paste', conamefieldInput);
     function conamefieldInput(event) {
@@ -2089,7 +2089,7 @@ function rem(no)
        var pattern = new RegExp(/[a-zåäö ]/i);
        return pattern.test(value);
     }
-    
+
     $('#mandal-field').bind('keypress', mandalfieldInput);
     $('#mandal-field').bind('paste', mandalfieldInput);
     function mandalfieldInput(event) {
@@ -2097,7 +2097,7 @@ function rem(no)
        var pattern = new RegExp(/[a-zåäö ]/i);
        return pattern.test(value);
     }
-    
+
     $('#state-field').bind('keypress', statefieldInput);
     $('#state-field').bind('paste', statefieldInput);
     function statefieldInput(event) {
@@ -2105,7 +2105,7 @@ function rem(no)
        var pattern = new RegExp(/[a-zåäö ]/i);
        return pattern.test(value);
     }
-    
+
     $('#if_select_single').bind('keypress', MaritalstatusfieldInput);
     $('#if_select_single').bind('paste', MaritalstatusfieldInput);
     function MaritalstatusfieldInput(event) {
@@ -2134,7 +2134,7 @@ function rem(no)
        var pattern = new RegExp(/[a-zåäö ]/i);
        return pattern.test(value);
     }
-    
+
     $('#account_holder_name').bind('keypress', account_holder_namefieldInput);
     $('#account_holder_name').bind('paste', account_holder_namefieldInput);
     function account_holder_namefieldInput(event) {
@@ -2142,7 +2142,7 @@ function rem(no)
        var pattern = new RegExp(/[a-zåäö ]/i);
        return pattern.test(value);
     }
-    
+
     $('#pan_card_number').bind('keypress', pan_card_numberfieldInput);
     $('#pan_card_number').bind('keyup', pan_card_numberfieldInput);
     $('#pan_card_number').bind('paste', pan_card_numberfieldInput);
@@ -2150,11 +2150,11 @@ function rem(no)
       var getPanNo = $('#pan_card_number').val().toUpperCase();
        $('#pan_card_number').val(getPanNo);
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     function GetMaritalStatusDtl()
     {
         $.ajaxSetup({
@@ -2162,7 +2162,7 @@ function rem(no)
                 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
             }
         });
-        
+
        var matrialstatusid = $('#marital_status').val();
        if(matrialstatusid)
        {
@@ -2171,16 +2171,16 @@ function rem(no)
                url:'{{ route('GetMaritalStatus'); }}',
                data:{matrialstatusid : matrialstatusid},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
                   $("#if_select_single").prop("readonly", false);
                  $('.MaritalHeading').text(data.status_name);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
@@ -2191,9 +2191,9 @@ function rem(no)
              $("#if_select_single").prop("readonly", true);
         }
     }
-    
-    
-    
+
+
+
     function GetDiscipline(NameoftheDegree)
     {
        var deg = parseInt($('#degree').val());
@@ -2202,9 +2202,9 @@ function rem(no)
                 $('.height_cet').css('display','none');
             }else{
                 $('.height_cet').css('display','block');
-            } 
-        
-        
+            }
+
+
        $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -2219,8 +2219,8 @@ function rem(no)
                url:'{{ route('GetDisciplineLists'); }}',
                data:{nameofthedegree : NameoftheDegree.value},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
@@ -2228,14 +2228,14 @@ function rem(no)
                         $('#discpline').append('<option value="'+ value.id +'">'+ value.discpline +'</option>');
                     });
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
        }
     }
-    
+
     $('.add_Nominee').on('click', function() {
         // alert(1);
         $.ajaxSetup({
@@ -2249,21 +2249,21 @@ function rem(no)
                url:'{{ route('AddNominee'); }}',
                data:{Nominee_no : Nominee_no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
                   $(".Nominee_no").append(data.html);
                   $('#Nominee_no').val(data.return_numbers);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
     });
-    
+
      $('.add_Family').on('click', function() {
         $.ajaxSetup({
             headers: {
@@ -2276,21 +2276,21 @@ function rem(no)
                url:'{{ route('AddFamily'); }}',
                data:{Family_no : Family_no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
                   $(".Family_no").append(data.html);
                   $('#Family_no').val(data.return_numbers);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
     });
-    
+
      function family_remove(no)
     {
          var family_no = $('#family_no').val();
@@ -2299,20 +2299,20 @@ function rem(no)
                url:'{{ route('RemoveFamily'); }}',
                data:{family_no : family_no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
-                   $('.render-family'+no).remove(); 
+                   $('.render-family'+no).remove();
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
     }
-   
+
      function nominee_remove(no)
     {
          var Nominee_no = $('#Nominee_no').val();
@@ -2321,15 +2321,15 @@ function rem(no)
                url:'{{ route('RemoveNomineee'); }}',
                data:{Nominee_no : Nominee_no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
-                   $('.render-nominee'+no).remove(); 
+                   $('.render-nominee'+no).remove();
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
@@ -2342,14 +2342,14 @@ function rem(no)
             $('input[name=dob]').val('');
             console.log('less than 18');
             $('input[name=dob]').after('<label id="dob-field-error" class="error" for="dob-field">Age should not be less than 18 years!</label>')
-            
-        } 
+
+        }
     }
-    
+
      $(document).ready(function(){
         $('#current_basic_salary').on('change',function(){
             var sal = parseInt($(this).val());
-         
+
             if(sal > 21000){
                 $('#esi_number').prop('readonly',true);
             }else{
@@ -2358,8 +2358,8 @@ function rem(no)
         })
     })
     </script>
-    
-    
+
+
 
 <!--close-->
  @include('headers.footer')

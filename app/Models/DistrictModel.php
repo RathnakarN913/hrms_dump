@@ -9,7 +9,7 @@ class DistrictModel extends Model
 {
     use HasFactory;
     protected $table ='Districtmst';
-    
+
     public function UlbmstModel()
     {
         return $this->hasMany(UlbmstModel::class,'dist_id','distid');

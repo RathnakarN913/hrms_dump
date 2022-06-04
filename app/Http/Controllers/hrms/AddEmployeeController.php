@@ -48,20 +48,20 @@ class AddEmployeeController extends Controller
     public function index(Request $request)
     {
        $relations = RelationModel::where('status',2)->get();
-       //$designations = DesignationModel::where('designation_level', "1")->get();  
-       $designationsALL = DesignationModel::get(); 
-       
+       //$designations = DesignationModel::where('designation_level', "1")->get();
+       $designationsALL = DesignationModel::get();
+
        if(Session::get('user_type')=='PD'){
-          $districts = DistricstsModel::where('distid',Session::get('distid'))->get(); 
-          $designations = DesignationModel::where('designation_level', "2")->get(); 
-          $ulblist = UlbmstModel::where('distid', Session::get('distid'))->get(); 
+          $districts = DistricstsModel::where('distid',Session::get('distid'))->get();
+          $designations = DesignationModel::where('designation_level', "2")->get();
+          $ulblist = UlbmstModel::where('distid', Session::get('distid'))->get();
          // dd($ulblist);
-          
+
        }else{
-          $districts = DistricstsModel::all();    
-          $designations = DesignationModel::where('designation_level', "1")->get();  
+          $districts = DistricstsModel::all();
+          $designations = DesignationModel::where('designation_level', "1")->get();
        }
-      
+
        $religions = ReligionModel::all();
        $casts = CastModel::all();
        $matrialstatus = MatrialStatusModel::all();
@@ -90,18 +90,18 @@ class AddEmployeeController extends Controller
         $ulbid = $request->ulbid;
         if($district == "" && $ulbid == "")
         {
-            $designations = DesignationModel::where('designation_level', "1")->get();  
+            $designations = DesignationModel::where('designation_level', "1")->get();
         }
         else
         {
            if($ulbid == "")
             {
-              $designations = DesignationModel::where('designation_level', "2")->get();  
+              $designations = DesignationModel::where('designation_level', "2")->get();
             }
             else
             {
-               $designations = DesignationModel::where('designation_level', "3")->get(); 
-            } 
+               $designations = DesignationModel::where('designation_level', "3")->get();
+            }
         }
         $numbers = $get_numbers+1;
 
@@ -157,7 +157,7 @@ class AddEmployeeController extends Controller
         $return_array = array('return_numbers' => $numbers);
         echo json_encode($return_array);
     }
-    
+
     public function RemoveFamily(Request $request)
     {
         $get_numbers = $request->family_no;
@@ -176,7 +176,7 @@ class AddEmployeeController extends Controller
         $return_array = array('html' => $html, 'return_numbers' => $numbers);
         echo json_encode($return_array);
     }
-    
+
     public function AddFamily(Request $request)
     {
         $get_numbers = $request->Family_no;
@@ -201,18 +201,18 @@ class AddEmployeeController extends Controller
         $ulbid = htmlspecialchars($request->ulbid);
         if($district == "" && $ulbid == "")
         {
-            $return_array = DesignationModel::where('designation_level', "1")->get(); 
+            $return_array = DesignationModel::where('designation_level', "1")->get();
         }
         else
         {
            if($ulbid == "")
             {
-              $return_array = DesignationModel::where('designation_level', "2")->get();  
+              $return_array = DesignationModel::where('designation_level', "2")->get();
             }
             else
             {
-               $return_array = DesignationModel::where('designation_level', "3")->get(); 
-            } 
+               $return_array = DesignationModel::where('designation_level', "3")->get();
+            }
         }
 
         echo json_encode($return_array);
@@ -227,7 +227,7 @@ class AddEmployeeController extends Controller
         if(Session::get('user_type')=='PD'){
          $dstreg='required';
          }else{
-          $dstreg='nullable';    
+          $dstreg='nullable';
          }
         $reg=[
          'name'=> 'required|regex:/^[\pL\s\-]+$/u',
@@ -262,7 +262,7 @@ class AddEmployeeController extends Controller
          'pan_card'=>'required|mimes:jpeg,bmp,jpg,png,pdf',
          'degree'=>'required',
          'highest_dgre_certificates'=>'required_if:degree,2,3,4,5',
-         
+
          'year_of_passing'=>'required',
          'university_college'=>'required',
          'certificates'=>'required|mimes:jpeg,bmp,jpg,png,pdf',
@@ -322,7 +322,7 @@ class AddEmployeeController extends Controller
         //  "work_experience_location.*"    => "required",
         //  "work_experience_location.*"  => "required|string|distinct|min:1",
         ];
-         
+
          //dd($reg);
         $this->validate($request,$reg,[
             'current_designation.*.required' => 'The Current Designation Field is Required',
@@ -335,13 +335,13 @@ class AddEmployeeController extends Controller
              "work_experience_location.*.required"    => "The work experience location Field is Required",
              "highest_dgre_certificates.required_if"    => "The highest Qualification  should be uploaded Required",
             ]);
-        
+
         if(session()->get('user_type') != 'AO'){
             $approve_status = 0;
         }else{
             $approve_status = 1;
         }
-        
+
         $name = htmlspecialchars($request->name);
         $surname = htmlspecialchars($request->surname);
         $dob = htmlspecialchars($request->dob);
@@ -359,7 +359,7 @@ class AddEmployeeController extends Controller
 
         $district = htmlspecialchars($request->district);
         $native_district = htmlspecialchars($request->native_district);
-        
+
         if($district)
         {
            $district = htmlspecialchars($request->district);
@@ -390,7 +390,7 @@ class AddEmployeeController extends Controller
         $if_select_single = htmlspecialchars($request->if_select_single);
         $nationality = htmlspecialchars($request->nationality);
         $adhaar_card_number = htmlspecialchars($request->adhaar_card_number);
-       
+
         // adhaarcard
         $adhaar_card_file = time().'_adhaar'.'.'.$request->adhaar_card->getClientOriginalExtension();
         $request->adhaar_card->move(public_path('./assets/employee_files'), $adhaar_card_file);
@@ -406,16 +406,16 @@ class AddEmployeeController extends Controller
         $degree = htmlspecialchars($request->degree);
         $year_of_passing = htmlspecialchars($request->year_of_passing);
         $university_college = htmlspecialchars($request->university_college);
-        
+
 
         $discpline = htmlspecialchars($request->discpline);
         $date_of_joining = htmlspecialchars($request->date_of_joining);
         $retirement_date = htmlspecialchars($request->retirement_date);
-        
+
         $designation = htmlspecialchars($request->designation);
         $location = htmlspecialchars($request->location);
 
-        
+
         $current_grade = htmlspecialchars($request->current_grade);
         $current_level = htmlspecialchars($request->current_level);
 
@@ -428,26 +428,26 @@ class AddEmployeeController extends Controller
         $bank_name = htmlspecialchars($request->bank_name);
         $account_number = htmlspecialchars($request->account_number);
         $ifsc_code = htmlspecialchars($request->ifsc_code);
-        
-        
+
+
         // family details
-        
+
         $relation_name = $request->relation_name;
         $relation_gender = $request->relation_gender;
         $relation_type = $request->relation_type;
         $relation_dob = $request->relation_dob;
         $relation_occupation = $request->relation_occupation;
-        
+
 
         $nominee_details = $request->nominee_details;
         $nominee_relation = $request->nominee_relation;
         $nominee_gender = $request->nominee_gender;
         $nominee_dob = $request->nominee_dob;
-        
+
 
         $objective_aspirations = htmlspecialchars($request->objective_aspirations);
         $emp_remarks = htmlspecialchars($request->emp_Remarks);
-          
+
         $contributions_awards = htmlspecialchars($request->contributions_awards);
         $current_role_description = htmlspecialchars($request->current_role_description);
         $discplinary_cases_suspensions = htmlspecialchars($request->discplinary_cases_suspensions);
@@ -462,18 +462,18 @@ class AddEmployeeController extends Controller
 
         date_default_timezone_set('Asia/Kolkata');
         $currentTime = date('Y-m-d h:i:s');
-        $AddEmployeeModel = new AddEmployeeModel; 
+        $AddEmployeeModel = new AddEmployeeModel;
 
         $AddEmployeeModel->name = $name;
-        
-       
+
+
         if($request->hasFile('photo')){
          // photo
         $photoFileName = time().'_photo'.'.'.$request->photo->getClientOriginalExtension();
         $request->photo->move(public_path('./assets/employee_files'), $photoFileName);
         // photo
         }
-        
+
         if($request->hasFile('district_certi')){
          // photo
         $district_certi = time().'_district_certi'.'.'.$request->district_certi->getClientOriginalExtension();
@@ -502,7 +502,7 @@ class AddEmployeeController extends Controller
         $AddEmployeeModel->mandal = $mandal;
         $AddEmployeeModel->state = $state;
         $AddEmployeeModel->native_district = $native_district;
-        
+
         $AddEmployeeModel->mobile_number = $mobile_number;
         $AddEmployeeModel->alternative_mobile_number = $alternative_mobile_number;
         $AddEmployeeModel->email_id = $email_id;
@@ -529,7 +529,7 @@ class AddEmployeeController extends Controller
         // certificates
         // $highest_dgre_certificates
         if($request->hasFile('highest_dgre_certificates')){
-         
+
         $highest_dgre_certificates = time().'_photo'.'.'.$request->highest_dgre_certificates->getClientOriginalExtension();
         $request->highest_dgre_certificates->move(public_path('./assets/employee_files'), $highest_dgre_certificates);
          $AddEmployeeModel->highest_degree_certificates = $highest_dgre_certificates;
@@ -546,7 +546,7 @@ class AddEmployeeController extends Controller
         $AddEmployeeModel->doj = $doj_file;
         // doj
         }
-        
+
         $AddEmployeeModel->current_grade = $current_grade;
         $AddEmployeeModel->current_level = $current_level;
         $AddEmployeeModel->current_basic_salary = $current_basic_salary;
@@ -561,9 +561,9 @@ class AddEmployeeController extends Controller
         $AddEmployeeModel->relation_type = $relation_type;
         $AddEmployeeModel->relation_dob = $relation_dob;
         $AddEmployeeModel->relation_occupation = $relation_occupation;
-        
-        
-      
+
+
+
         $AddEmployeeModel->objective_aspirations = $objective_aspirations;
         $AddEmployeeModel->emp_remarks = $emp_remarks;
         $AddEmployeeModel->contributions_awards = $contributions_awards;
@@ -575,7 +575,7 @@ class AddEmployeeController extends Controller
         $AddEmployeeModel->save();
         $empID = $AddEmployeeModel->employee_id;
 
-        // current info insert 
+        // current info insert
         $current_designation = $request->current_designation;
         $current_status = $request->current_status;
         $current_location =  $request->current_location;
@@ -596,7 +596,7 @@ class AddEmployeeController extends Controller
             $EmployeesCurrentInfos->duty_type = $duty_type[$i];
             $EmployeesCurrentInfos->save();
         }
-        
+
          for($ik = 0; $ik < count($nominee_details); $ik++){
              if($nominee_details[$ik] != ''){
              $AddnomineeModel = new EmployeesnomineeModel;
@@ -611,12 +611,12 @@ class AddEmployeeController extends Controller
              $AddnomineeModel->save();
             }
         }
-        
+
         // Family Members Insert
-        
+
         //family photo
         if($request->hasFile('family_photo')){
-            $family_photo_file = time().'_family_photo'.'.'.$request->family_photo->getClientOriginalExtension();  
+            $family_photo_file = time().'_family_photo'.'.'.$request->family_photo->getClientOriginalExtension();
             $request->family_photo->move(public_path('./assets/employee_files'), $family_photo_file);
             $AddEmployeeModel->family_photo = $family_photo_file;
         }
@@ -634,7 +634,7 @@ class AddEmployeeController extends Controller
                $FamilyDetails->save();
             }
         }
-        // current info insert 
+        // current info insert
         // work experience insert
         $start_date = $request->start_date;
         $end_date = $request->end_date;
@@ -645,7 +645,7 @@ class AddEmployeeController extends Controller
         for($j = 0; $j < count($start_date); $j++)
         {
             $EmployeesWorkExp = new EmployeesWorkExpModel;
-            
+
             $EmployeesWorkExp->employee_id = $empID;
             $EmployeesWorkExp->start_date = $start_date[$j];
             $EmployeesWorkExp->end_date = $end_date[$j];
@@ -658,10 +658,10 @@ class AddEmployeeController extends Controller
 
         return back()->with('success', 'New Employee Added successfully.');
     }
-    
+
     public function Create_gov(Request $request)
     {
-        
+
         // dd($request);
 //         dd($this->_validate_incoming_designations($request));
 
@@ -686,8 +686,8 @@ class AddEmployeeController extends Controller
          'retirement_date' => 'required',
          'communication_address' => 'required'
         ]);
-        
-        
+
+
         $name = htmlspecialchars($request->name);
         $surname = htmlspecialchars($request->surname);
         $dob = htmlspecialchars($request->dob);
@@ -713,10 +713,10 @@ class AddEmployeeController extends Controller
             $ulbid = "NULL";
         }
 
-        
+
         $mobile_number = htmlspecialchars($request->mobile_number);
         $email_id = htmlspecialchars($request->email_id);
-        
+
         $adhaar_card_number = htmlspecialchars($request->adhaar_card_number);
         // photo
         $photoFileName = time().'_photo'.'.'.$request->photo1->getClientOriginalExtension();
@@ -736,14 +736,14 @@ class AddEmployeeController extends Controller
 
         $date_of_joining = htmlspecialchars($request->date_of_joining);
         $retirement_date = htmlspecialchars($request->retirement_date);
-        
+
         $communication_address = $request->communication_address;
-        
+
         $account_holder_name = htmlspecialchars($request->account_holder_name);
         $bank_name = htmlspecialchars($request->bank_name);
         $account_number = htmlspecialchars($request->account_number);
         $ifsc_code = htmlspecialchars($request->ifsc_code);
-        
+
         //check dist or ulb employee sanctioned posts counts
         if($district != "" && $ulbid != "")
         {
@@ -754,27 +754,27 @@ class AddEmployeeController extends Controller
 
         date_default_timezone_set('Asia/Kolkata');
         $currentTime = date('Y-m-d h:i:s');
-        $AddEmployeeModel = new AddEmployeeModel; 
+        $AddEmployeeModel = new AddEmployeeModel;
 
         $AddEmployeeModel->name = $name;
         $AddEmployeeModel->photo = $photoFileName;
         $AddEmployeeModel->surname = $surname;
         $AddEmployeeModel->dob = $dob;
-        
+
         $AddEmployeeModel->employee_type = $employee_type;
         $AddEmployeeModel->joining_designation = $joining_designation;
-        
+
         $AddEmployeeModel->mobile_number = $mobile_number;
         $AddEmployeeModel->email_id = $email_id;
-        
+
         $AddEmployeeModel->district = $district;
         $AddEmployeeModel->ulbid = $ulbid;
-       
+
         $AddEmployeeModel->adhaar_card_number = $adhaar_card_number;
         $AddEmployeeModel->adhaar_card = $adhaar_card_file;
         $AddEmployeeModel->pan_card_number = $pan_card_number;
         $AddEmployeeModel->pan_card = $pan_card_file;
-        
+
         $AddEmployeeModel->date_of_joining = $date_of_joining;
         $AddEmployeeModel->retirement_date = $retirement_date;
         $AddEmployeeModel->communication_address = $communication_address;
@@ -782,13 +782,13 @@ class AddEmployeeController extends Controller
         $AddEmployeeModel->bank_name = $bank_name;
         $AddEmployeeModel->account_number = $account_number;
         $AddEmployeeModel->ifsc_code = $ifsc_code;
-        
+
         $AddEmployeeModel->status = "Enable";
         $AddEmployeeModel->created_by = "1";
         $AddEmployeeModel->save();
         $empID = $AddEmployeeModel->employee_id;
 
-        // current info insert 
+        // current info insert
         $current_designation = $request->current_designation;
         // $current_status = $request->current_status;
         // $current_location =  $request->current_location;
@@ -801,13 +801,13 @@ class AddEmployeeController extends Controller
         $EmployeesCurrentInfos->current_designation = $current_designation;
         $EmployeesCurrentInfos->duty_type = $duty_type;
         $EmployeesCurrentInfos->save();
-        
+
         return back()->with('success', 'New Employee Added successfully.');
     }
-    
+
     public function Update_gov_Employee(Request $request)
     {
-        
+
         // dd($request);
 //         dd($this->_validate_incoming_designations($request));
 
@@ -832,7 +832,7 @@ class AddEmployeeController extends Controller
          'retirement_date' => 'required',
          'communication_address' => 'required'
         ]);
-        
+
         $emp_id = $request->edit_emp_id;
         $name = htmlspecialchars($request->name);
         $surname = htmlspecialchars($request->surname);
@@ -859,26 +859,26 @@ class AddEmployeeController extends Controller
             $ulbid = "NULL";
         }
 
-        
+
         $mobile_number = htmlspecialchars($request->mobile_number);
         $email_id = htmlspecialchars($request->email_id);
-        
+
         $adhaar_card_number = htmlspecialchars($request->adhaar_card_number);
-       
-        
+
+
         $pan_card_number = htmlspecialchars($request->pan_card_number);
-        
+
 
         $date_of_joining = htmlspecialchars($request->date_of_joining);
         $retirement_date = htmlspecialchars($request->retirement_date);
-        
+
         $communication_address = $request->communication_address;
-        
+
         $account_holder_name = htmlspecialchars($request->account_holder_name);
         $bank_name = htmlspecialchars($request->bank_name);
         $account_number = htmlspecialchars($request->account_number);
         $ifsc_code = htmlspecialchars($request->ifsc_code);
-        
+
         //check dist or ulb employee sanctioned posts counts
         if($district != "" && $ulbid != "")
         {
@@ -890,30 +890,30 @@ class AddEmployeeController extends Controller
         date_default_timezone_set('Asia/Kolkata');
         $currentTime = date('Y-m-d h:i:s');
         $AddEmployeeModel = new AddEmployeeModel;
-        
+
         $AddEmployeeModel =  AddEmployeeModel::find($emp_id);
-        
-        
+
+
         // photo
-        
+
         if($request->hasFile('photo'))
         {
-           $photoFileName = time().'_photo'.'.'.$request->photo->getClientOriginalExtension();  
+           $photoFileName = time().'_photo'.'.'.$request->photo->getClientOriginalExtension();
            $ext = pathinfo($photoFileName, PATHINFO_EXTENSION);
-           
+
            if($ext == 'jpg' || $ext == 'jpeg' || $ext = 'png' || $ext == 'pdf')
            {
                $request->photo->move(public_path('./assets/employee_files'), $photoFileName);
                $AddEmployeeModel->photo = $photoFileName;
            }
-           
+
         }
-        
+
         // adhar photo
-        
+
         if($request->hasFile('adhaar_card'))
         {
-           $adhaar_card_file = time().'_adhaar'.'.'.$request->adhaar_card->getClientOriginalExtension(); 
+           $adhaar_card_file = time().'_adhaar'.'.'.$request->adhaar_card->getClientOriginalExtension();
            $ext = pathinfo($adhaar_card_file, PATHINFO_EXTENSION);
            if($ext == 'jpg' || $ext == 'jpeg' || $ext = 'png' || $ext == 'pdf')
            {
@@ -921,12 +921,12 @@ class AddEmployeeController extends Controller
                $AddEmployeeModel->adhaar_card = $adhaar_card_file;
            }
         }
-        
+
         // pan card photo
-        
+
         if($request->hasFile('pan_card'))
         {
-           $pan_card_file = time().'_pan'.'.'.$request->pan_card->getClientOriginalExtension(); 
+           $pan_card_file = time().'_pan'.'.'.$request->pan_card->getClientOriginalExtension();
            $ext = pathinfo($pan_card_file, PATHINFO_EXTENSION);
            if($ext == 'jpg' || $ext == 'jpeg' || $ext = 'png' || $ext == 'pdf')
            {
@@ -939,19 +939,19 @@ class AddEmployeeController extends Controller
         $AddEmployeeModel->name = $name;
         $AddEmployeeModel->surname = $surname;
         $AddEmployeeModel->dob = $dob;
-        
+
         $AddEmployeeModel->employee_type = $employee_type;
         $AddEmployeeModel->joining_designation = $joining_designation;
-        
+
         $AddEmployeeModel->mobile_number = $mobile_number;
         $AddEmployeeModel->email_id = $email_id;
-        
+
         $AddEmployeeModel->district = $district;
         $AddEmployeeModel->ulbid = $ulbid;
-       
+
         $AddEmployeeModel->adhaar_card_number = $adhaar_card_number;
         $AddEmployeeModel->pan_card_number = $pan_card_number;
-        
+
         $AddEmployeeModel->date_of_joining = $date_of_joining;
         $AddEmployeeModel->retirement_date = $retirement_date;
         $AddEmployeeModel->communication_address = $communication_address;
@@ -959,28 +959,28 @@ class AddEmployeeController extends Controller
         $AddEmployeeModel->bank_name = $bank_name;
         $AddEmployeeModel->account_number = $account_number;
         $AddEmployeeModel->ifsc_code = $ifsc_code;
-        
+
         $AddEmployeeModel->status = "Enable";
         $AddEmployeeModel->created_by = "1";
         $AddEmployeeModel->save();
-        
-       
 
-        // current info Update 
+
+
+        // current info Update
         $current_designation = $request->current_designation;
-        
+
         $duty_type = $request->duty_type;
-        
+
         $data = array(
          'district' => $district,
          'ulbid' => $ulbid,
          'current_designation' => $current_designation,
          'duty_type' => $duty_type,
         );
-        
+
         $EmployeesCurrentInfos = EmployeesCurrentInfosModel::where('employee_id',$emp_id)->update($data);
-       
-        
+
+
         return back()->with('success', ' Employee Updated successfully.');
     }
     public function ViewEmployee(Request $request)
@@ -990,13 +990,13 @@ class AddEmployeeController extends Controller
         }else{
              $employees = AddEmployeeModel::with('GetEmpType', 'GetCurrentStatus')->where('district',session()->get('distid'))->get();
         }
-       
+
        //dd($employees);
        return view('hrms/employees', compact("employees"));
     }
     public function EditUpdateEmployee(Request $request)
     {
-        
+
        $relations = RelationModel::all();
        $districts = DistricstsModel::all();
        $religions = ReligionModel::all();
@@ -1011,8 +1011,8 @@ class AddEmployeeController extends Controller
        $employeetypes = EmployeeType::all();
 
        $employeesDTL = AddEmployeeModel::with('GetCurrentStatus', 'GetWorkExperience','EmployeesnomineeModel','EmployeeFamilyDetails')->where('employee_id',$request->emp_id)->get();
-       
-       
+
+
        $GetDistwiseUlbs = Ulbs::where('distid', $employeesDTL[0]->district)->get();
        $discplines = DiscplineModel::where('education_id', $employeesDTL[0]->degree)->get();
 
@@ -1033,19 +1033,19 @@ class AddEmployeeController extends Controller
             else
             {
                $designations = DesignationModel::where('designation_level', "3")->get();
-            } 
+            }
         }
        $designationsALL = DesignationModel::get();
-       
+
     //   dd($employeesDTL);
-       
+
     //   if($employeesDTL[0]->employee_type == 3){
     //       return view('hrms/gov_edit_update_employees', compact("employeesDTL", "relations", "designations", "designationsALL", "districts", "religions", "casts", "matrialstatus", "educations", "years", "grades", "currentlevels", "dutytypes", "discplines", "currentstatus", "GetDistwiseUlbs", "GetMaritalStatusInfo", "employeetypes"));
     //   }
 
        return view('hrms/edit_update_employees', compact("employeesDTL", "relations", "designations", "designationsALL", "districts", "religions", "casts", "matrialstatus", "educations", "years", "grades", "currentlevels", "dutytypes", "discplines", "currentstatus", "GetDistwiseUlbs", "GetMaritalStatusInfo", "employeetypes"));
     }
-    
+
     public function UpdateEmployee(Request $request)
     {
          // dd($request->current_designation);
@@ -1054,7 +1054,7 @@ class AddEmployeeController extends Controller
                if(Session::get('user_type')=='PD'){
                      $dstreg='required';
                      }else{
-                      $dstreg='nullable';    
+                      $dstreg='nullable';
                      }
                $reg= [
                          'name'=> 'required|regex:/^[\pL\s\-]+$/u',
@@ -1076,7 +1076,7 @@ class AddEmployeeController extends Controller
                          //'state'=>'nullable|required|regex:/^[\pL\s\-]+$/u',
                          'mobile_number'=>'required|numeric|digits:10',
                         //  'alternative_mobile_number'=>'required|numeric|digits:10',
-                         //'email_id'=>'required|email',
+                         'email_id'=>'required|email',
                          //'religion'=>'required',
                          'caste'=>'required',
                          'subcaste'=>'required',
@@ -1120,28 +1120,28 @@ class AddEmployeeController extends Controller
                         //  'contributions_awards'=>'required',
                         //  'current_role_description'=>'required',
                         //  'discplinary_cases_suspensions'=>'required',
-                
+
                          "current_designation.*"    => "required",
                         //  "current_designation.*"  => "required|string|distinct|min:1",
-                
+
                          "current_status.*"    => "required",
                         //  "current_status.*"  => "required|string|distinct|min:1",
-                
+
                          "current_location.*"    => "required",
                         //  "current_location.*"  => "required|string|distinct|min:1",
-                
+
                          "duty_type.*"    => "required",
                         //  "duty_type.*"  => "required|string|distinct|min:1",
-                
+
                         //  "start_date.*"    => "required",
                         //  "start_date.*"  => "required|string|distinct|min:1",
-                
+
                         //  "end_date.*"    => "required",
                         //  "end_date.*"  => "required|string|distinct|min:1",
-                
+
                         //  "disgnation.*"    => "required",
                         //  "disgnation.*"  => "required|string|distinct|min:1",
-                
+
                         //  "work_experience_location.*"    => "required",
                         //  "work_experience_location.*"  => "required|string|distinct|min:1",
                         ];
@@ -1156,14 +1156,14 @@ class AddEmployeeController extends Controller
              "work_experience_location.*.required"    => "The work experience location Field is Required",
              "highest_dgre_certificates.required_if"    => "The highest Qualification  should be uploaded Required",
             ]);
-            
-            
+
+
             if(session()->get('user_type') == "AO"){
                 $approve_status = 1;
             }else{
                 $approve_status = 0;
             }
-      
+
         // dd($request);
         $name = htmlspecialchars($request->name);
         $surname = htmlspecialchars($request->surname);
@@ -1180,10 +1180,10 @@ class AddEmployeeController extends Controller
         $permenant_address_pin_code = htmlspecialchars($request->permenant_address_pin_code);
         $district = htmlspecialchars($request->district);
         $native_district = htmlspecialchars($request->native_district);
-        
+
         if($district)
         {
-           $district = htmlspecialchars($request->district); 
+           $district = htmlspecialchars($request->district);
         }
         else
         {
@@ -1192,7 +1192,7 @@ class AddEmployeeController extends Controller
         $ulbid = htmlspecialchars($request->ulbid);
         if($ulbid)
         {
-           $ulbid = htmlspecialchars($request->ulbid); 
+           $ulbid = htmlspecialchars($request->ulbid);
         }
         else
         {
@@ -1206,7 +1206,7 @@ class AddEmployeeController extends Controller
         $religion = htmlspecialchars($request->religion);
         $caste = htmlspecialchars($request->caste);
         $emp_remarks = htmlspecialchars($request->emp_Remarks);
-         
+
         $subcaste= htmlspecialchars($request->subcaste);
         $marital_status = htmlspecialchars($request->marital_status);
         $if_select_single = htmlspecialchars($request->if_select_single);
@@ -1242,8 +1242,8 @@ class AddEmployeeController extends Controller
         $relation_type = $request->relation_type;
         $relation_dob = $request->relation_dob;
         $relation_occupation = $request->relation_occupation;
-        
-       
+
+
 
 
         // $nominee_details = htmlspecialchars($request->nominee_details);
@@ -1264,23 +1264,23 @@ class AddEmployeeController extends Controller
         $AddEmployeeModel = new AddEmployeeModel;
 
         $AddEmployeeModel = AddEmployeeModel::find($request->edit_emp_id);
-        
+
         //  echo "<pre>";print_r($AddEmployeeModel);exit();
-        
+
         $AddEmployeeModel->name = $name;
         if($request->hasFile('photo'))
         {
-           $photoFileName = time().'_photo'.'.'.$request->photo->getClientOriginalExtension();  
+           $photoFileName = time().'_photo'.'.'.$request->photo->getClientOriginalExtension();
            $ext = pathinfo($photoFileName, PATHINFO_EXTENSION);
-           
+
            if($ext == 'jpg' || $ext == 'jpeg' || $ext = 'png' || $ext == 'pdf')
            {
                $request->photo->move(public_path('./assets/employee_files'), $photoFileName);
                $AddEmployeeModel->photo = $photoFileName;
            }
-           
+
         }
-        
+
         $AddEmployeeModel->surname = $surname;
         $AddEmployeeModel->dob = $dob;
         $AddEmployeeModel->co = $co;
@@ -1315,7 +1315,7 @@ class AddEmployeeController extends Controller
 
         if($request->hasFile('adhaar_card'))
         {
-           $adhaar_card_file = time().'_adhaar'.'.'.$request->adhaar_card->getClientOriginalExtension(); 
+           $adhaar_card_file = time().'_adhaar'.'.'.$request->adhaar_card->getClientOriginalExtension();
            $ext = pathinfo($adhaar_card_file, PATHINFO_EXTENSION);
            if($ext == 'jpg' || $ext == 'jpeg' || $ext = 'png' || $ext == 'pdf')
            {
@@ -1326,10 +1326,10 @@ class AddEmployeeController extends Controller
         $AddEmployeeModel->pan_card_number = $pan_card_number;
         // $AddEmployeeModel->pan_card = $pan_card_file;
 
-        
+
         if($request->hasFile('pan_card'))
         {
-           $pan_card_file = time().'_pan'.'.'.$request->pan_card->getClientOriginalExtension(); 
+           $pan_card_file = time().'_pan'.'.'.$request->pan_card->getClientOriginalExtension();
            $ext = pathinfo($pan_card_file, PATHINFO_EXTENSION);
            if($ext == 'jpg' || $ext == 'jpeg' || $ext = 'png' || $ext == 'pdf')
            {
@@ -1354,7 +1354,7 @@ class AddEmployeeController extends Controller
                $AddEmployeeModel->certificates = $certificates_file;
            }
         }
-        
+
            if($request->hasFile('highest_dgre_certificates'))
         {
            $highest_dgre_certificates = time().'_highest_dgre_certificates'.'.'.$request->highest_dgre_certificates->getClientOriginalExtension();
@@ -1382,7 +1382,7 @@ class AddEmployeeController extends Controller
         // $AddEmployeeModel->doj = $doj_file;
         if($request->hasFile('doj'))
         {
-           $doj_file = time().'_doj'.'.'.$request->doj->getClientOriginalExtension(); 
+           $doj_file = time().'_doj'.'.'.$request->doj->getClientOriginalExtension();
            $ext = pathinfo($doj_file, PATHINFO_EXTENSION);
            if($ext == 'jpg' || $ext == 'jpeg' || $ext = 'png' || $ext == 'pdf')
            {
@@ -1409,7 +1409,7 @@ class AddEmployeeController extends Controller
 
         if($request->hasFile('family_photo'))
         {
-           $family_photo_file = time().'_family_photo'.'.'.$request->family_photo->getClientOriginalExtension();  
+           $family_photo_file = time().'_family_photo'.'.'.$request->family_photo->getClientOriginalExtension();
            $ext = pathinfo($family_photo_file, PATHINFO_EXTENSION);
            if($ext == 'jpg' || $ext == 'jpeg' || $ext = 'png' || $ext == 'pdf')
            {
@@ -1417,11 +1417,11 @@ class AddEmployeeController extends Controller
                $AddEmployeeModel->family_photo = $family_photo_file;
            }
         }
-        
+
         // removing family member details
-        
+
         EmployeeFamilyDetails::where('employee_id',$request->edit_emp_id)->delete();
-        
+
         for($sr = 0; $sr < count($relation_name);$sr++){
             $FamilyDetails = new EmployeeFamilyDetails;
             if($relation_name[$sr] != ''){
@@ -1435,7 +1435,7 @@ class AddEmployeeController extends Controller
                $FamilyDetails->save();
             }
         }
-        
+
         // $AddEmployeeModel->nominee_details = $nominee_details;
         // $AddEmployeeModel->nominee_relation = $nominee_relation;
         // $AddEmployeeModel->nominee_gender = $nominee_gender;
@@ -1449,7 +1449,7 @@ class AddEmployeeController extends Controller
         $AddEmployeeModel->created_by = "1";
         $AddEmployeeModel->save();
 
-        // current info update 
+        // current info update
         $current_info_ids = $request->current_info_id;
 
         $current_designation = $request->current_designation;
@@ -1463,19 +1463,19 @@ class AddEmployeeController extends Controller
         // check Head Office, District, ULB count exists or not
         if($district == 'NULL' AND $ulbid == 'NULL')
         {
-            $ExitsSanctionedPosts = EmployeesCurrentInfosModel::where('employee_id', "$request->edit_emp_id")->get(); 
+            $ExitsSanctionedPosts = EmployeesCurrentInfosModel::where('employee_id', "$request->edit_emp_id")->get();
             $sanctionPostCounts = 1; // head office
         }
         else
         {
             if($ulbid == 'NULL')
             {
-                $ExitsSanctionedPosts = EmployeesCurrentInfosModel::where('employee_id', "$request->edit_emp_id")->where('district', "$district")->get(); 
+                $ExitsSanctionedPosts = EmployeesCurrentInfosModel::where('employee_id', "$request->edit_emp_id")->where('district', "$district")->get();
                 $sanctionPostCounts = 2; // district
             }
             else
             {
-                $ExitsSanctionedPosts = EmployeesCurrentInfosModel::where('employee_id', "$request->edit_emp_id")->where('ulbid', "$ulbid")->get(); 
+                $ExitsSanctionedPosts = EmployeesCurrentInfosModel::where('employee_id', "$request->edit_emp_id")->where('ulbid', "$ulbid")->get();
                 $sanctionPostCounts = 3; // ulb
             }
         }
@@ -1502,22 +1502,22 @@ class AddEmployeeController extends Controller
             $InsertDesignations = array_unique( $InsertDesignations);
         }
         //insert
-        // delete 
+        // delete
         $DeleteDesignations = array_diff($exitsDesignations, $current_designation);
         if(count($empty) > 0)
         {
             $DeleteDesignations = array_merge($DeleteDesignations, $empty);
             $DeleteDesignations = array_unique( $DeleteDesignations);
         }
-        // delete 
-        // update 
+        // delete
+        // update
         $specialupdateDesignations = array_intersect($exitsDesignations, $current_designation);
-        // update 
+        // update
         //dd($InsertDesignations);
         //dd($DeleteDesignations);
         //dd($specialupdateDesignations);
 
-        //update 
+        //update
         if(count($specialupdateDesignations) > 0)
         {
             foreach($current_designation as $currentDesignation)
@@ -1529,17 +1529,17 @@ class AddEmployeeController extends Controller
                         $EmployeesCurrentInfosModel = EmployeesCurrentInfosModel::find($request->current_info_id[$count]);
                         $EmployeesCurrentInfosModel->district = $district;
                         $EmployeesCurrentInfosModel->ulbid = $ulbid;
-                        
+
                         $EmployeesCurrentInfosModel->current_designation = $current_designation[$count];
                         $EmployeesCurrentInfosModel->current_status = $current_status[$count];
                         $EmployeesCurrentInfosModel->current_location = $current_location[$count];
                         $EmployeesCurrentInfosModel->duty_type = $duty_type[$count];
                         $EmployeesCurrentInfosModel->save();
-                    } 
+                    }
                 }
             }
         }
-        //update 
+        //update
 
         //insert
         if(count($InsertDesignations) > 0)
@@ -1550,7 +1550,7 @@ class AddEmployeeController extends Controller
                 {
                     if($currentDesignation == $roww)
                     {
-                        $sanctionedPosts1 = SanctionedPosts::where('level_id', "$sanctionPostCounts")->where('designation_id', "$currentDesignation")->first(); 
+                        $sanctionedPosts1 = SanctionedPosts::where('level_id', "$sanctionPostCounts")->where('designation_id', "$currentDesignation")->first();
                         //echo '<pre>';print_r($sanctionedPosts);
                         $post_sanctioned1 = $sanctionedPosts1->post_sanctioned;
                         $occupied_posts1 = $sanctionedPosts1->occupied_posts;
@@ -1558,7 +1558,7 @@ class AddEmployeeController extends Controller
                         {
                             $this->sanctionUpdate($current_designation[$keyyy], $district, $ulbid);
                             $EmployeesCurrentInfos = new EmployeesCurrentInfosModel;
-                    
+
                             $EmployeesCurrentInfos->employee_id = $request->edit_emp_id;
                             $EmployeesCurrentInfos->district = $district;
                             $EmployeesCurrentInfos->ulbid = $ulbid;
@@ -1588,11 +1588,11 @@ class AddEmployeeController extends Controller
         //print_r($sanctionPostCounts);
         // foreach($current_designation as $currentDesignation)
         // {
-        //     $sanctionedPosts = SanctionedPosts::where('level_id', "$sanctionPostCounts")->where('designation_id', "$currentDesignation")->first(); 
+        //     $sanctionedPosts = SanctionedPosts::where('level_id', "$sanctionPostCounts")->where('designation_id', "$currentDesignation")->first();
         //     //echo '<pre>';print_r($sanctionedPosts);
         //     $post_sanctioned = $sanctionedPosts->post_sanctioned;
         //     $occupied_posts = $sanctionedPosts->occupied_posts;
-            
+
         //     if($post_sanctioned > $occupied_posts)
         //     {
         //         $getLastAll = EmployeesCurrentInfosModel::where('employee_id', $request->edit_emp_id)->get();
@@ -1605,20 +1605,20 @@ class AddEmployeeController extends Controller
         //                     $EmployeesCurrentInfosModel = EmployeesCurrentInfosModel::find($request->current_info_id[$count]);
         //                     $EmployeesCurrentInfosModel->district = $district;
         //                     $EmployeesCurrentInfosModel->ulbid = $ulbid;
-                            
+
         //                     $EmployeesCurrentInfosModel->current_designation = $current_designation[$count];
         //                     $EmployeesCurrentInfosModel->current_status = $current_status[$count];
         //                     $EmployeesCurrentInfosModel->current_location = $current_location[$count];
         //                     $EmployeesCurrentInfosModel->duty_type = $duty_type[$count];
         //                     $EmployeesCurrentInfosModel->save();
         //                 }
-        //             } 
+        //             }
         //         }
         //         else
         //         {
         //             for($count1 = count($getLastAll); $count1 < count($current_designation); $count1++)
         //             {
-        //                 $sanctionedPosts1 = SanctionedPosts::where('level_id', "$sanctionPostCounts")->where('designation_id', "$currentDesignation")->first(); 
+        //                 $sanctionedPosts1 = SanctionedPosts::where('level_id', "$sanctionPostCounts")->where('designation_id', "$currentDesignation")->first();
         //                 //echo '<pre>';print_r($sanctionedPosts);
         //                 $post_sanctioned1 = $sanctionedPosts1->post_sanctioned;
         //                 $occupied_posts1 = $sanctionedPosts1->occupied_posts;
@@ -1626,7 +1626,7 @@ class AddEmployeeController extends Controller
         //                 {
         //                     $this->sanctionUpdate($current_designation[$count1], $district, $ulbid);
         //                     $EmployeesCurrentInfos = new EmployeesCurrentInfosModel;
-                    
+
         //                     $EmployeesCurrentInfos->employee_id = $request->edit_emp_id;
         //                     $EmployeesCurrentInfos->district = $district;
         //                     $EmployeesCurrentInfos->ulbid = $ulbid;
@@ -1646,7 +1646,7 @@ class AddEmployeeController extends Controller
         //     }
         // }
          //exit;
-        // check Head Office, District, ULB count exists or not 
+        // check Head Office, District, ULB count exists or not
 
 
 
@@ -1680,7 +1680,7 @@ class AddEmployeeController extends Controller
             for($count11 = count($getLastAllExp); $count11 < count($start_date); $count11++)
             {
                 $EmployeesWorkExp = new EmployeesWorkExpModel;
-                
+
                 $EmployeesWorkExp->employee_id = $request->edit_emp_id;
                 $EmployeesWorkExp->start_date = $start_date[$count11];
                 $EmployeesWorkExp->end_date = $end_date[$count11];
@@ -1689,8 +1689,8 @@ class AddEmployeeController extends Controller
                 $EmployeesWorkExp->save();
             }
         }
-        
-        
+
+
         $nominee_id = $request->nominee_id;
         $nominee_details = $request->nominee_details;
 
@@ -1743,20 +1743,20 @@ class AddEmployeeController extends Controller
         if(($district_id == "" && $ulb_id == "") || ($district_id == 'NULL' && $ulb_id == 'NULL'))
         {
             $sanctionedId = 1;
-            $DTL = SanctionedPosts::where('level_id', "1")->where('designation_id', $designation_id)->first(); 
+            $DTL = SanctionedPosts::where('level_id', "1")->where('designation_id', $designation_id)->first();
         }
         else
         {
            if($ulb_id == "" || $ulb_id == 'NULL')
             {
               $sanctionedId = 2;
-              $DTL = SanctionedPosts::where('level_id', "2")->where('designation_id', $designation_id)->first(); 
+              $DTL = SanctionedPosts::where('level_id', "2")->where('designation_id', $designation_id)->first();
             }
             else
             {
                $sanctionedId = 3;
-               $DTL = SanctionedPosts::where('level_id', "3")->where('designation_id', $designation_id)->first(); 
-            } 
+               $DTL = SanctionedPosts::where('level_id', "3")->where('designation_id', $designation_id)->first();
+            }
         }
 
 
@@ -1770,7 +1770,7 @@ class AddEmployeeController extends Controller
             $lastNumber = $last;
         }
         $final = $lastNumber+1;
-        
+
 
         $SanctionedPosts = SanctionedPosts::where('designation_id', $designation_id)->where('level_id', $sanctionedId)->first();
 
@@ -1782,34 +1782,34 @@ class AddEmployeeController extends Controller
 
     public function sanctionUpdateminus($designation_id, $district_id, $ulb_id)
     {
-        
+
 
         // HEAD DEPARMENT
         if(($district_id == "" && $ulb_id == "") || ($district_id == 'NULL' && $ulb_id == 'NULL'))
         {
             $sanctionedId = 1;
-            $DTL = SanctionedPosts::where('level_id', "1")->where('designation_id', $designation_id)->first(); 
+            $DTL = SanctionedPosts::where('level_id', "1")->where('designation_id', $designation_id)->first();
         }
         else
         {
-            
+
             // ULB
-// 
+//
           if($ulb_id == "" || $ulb_id == 'NULL')
             {
               $sanctionedId = 2;
-              $DTL = SanctionedPosts::where('level_id', "2")->where('designation_id', $designation_id)->first(); 
+              $DTL = SanctionedPosts::where('level_id', "2")->where('designation_id', $designation_id)->first();
             }
-            
+
             // DISTRICT
             else
             {
               $sanctionedId = 3;
-              $DTL = SanctionedPosts::where('level_id', "3")->where('designation_id', $designation_id)->first(); 
-            } 
+              $DTL = SanctionedPosts::where('level_id', "3")->where('designation_id', $designation_id)->first();
+            }
         }
-        
-     
+
+
         $last = $DTL->occupied_posts;
         if(($last == NULL) || ($last <= 0))
         {
@@ -1820,7 +1820,7 @@ class AddEmployeeController extends Controller
             $lastNumber = $last;
         }
         $final = $lastNumber-1;
-        
+
 
         $SanctionedPosts = SanctionedPosts::where('designation_id', $designation_id)->where('level_id', $sanctionedId)->first();
 
@@ -1831,8 +1831,8 @@ class AddEmployeeController extends Controller
             throw $error;
 
         }
-        
-       
+
+
 
         $SanctionedPosts->occupied_posts = $final;
         $SanctionedPosts->save();
@@ -1857,7 +1857,7 @@ class AddEmployeeController extends Controller
     public function GetMaritalStatus(Request $request)
     {
         $GetMatrialStatus = MatrialStatusModel::where('id', $request->matrialstatusid)->first();
-        
+
         echo json_encode($GetMatrialStatus);
     }
     public function GetDisciplineLists(Request $request)
@@ -1865,77 +1865,77 @@ class AddEmployeeController extends Controller
         $GetDisciplines = DiscplineModel::where('education_id', $request->nameofthedegree)->get();
         echo json_encode($GetDisciplines);
     }
-    
+
     protected function _get_sanctioned_post($designation,  $district = null, $ulb = null,$employee_type) {
-        
-        
-        
+
+
+
         $sactionedpost = SanctionedPosts::where('designation_id', $designation)->where('employee_type',$employee_type)
                             ->when($district, function($q) use ($district) {
                                 return $q->where('district_id', 'like', $district);
                             })
-                            
+
                             ->when(!$district, function($q) {
                                 return $q->whereNull('district_id');
                             })
-                            
+
                             ->when($ulb, function($q) use ($ulb) {
                                 return $q->where('ulb_id', 'like', $ulb);
                             })
-                            
+
                             ->when(!$ulb, function($q)  {
                                 return $q->whereNull('ulb_id');
                             })
                             ->first();
-                            
-                            
+
+
         return $sactionedpost;
     }
-    
+
     protected function _get_occupied_post($designation,  $district = null, $ulb = null,$employee_type) {
 
         $occupiedpost = EmployeesCurrentInfosModel::where('current_designation', $designation)->where('employee_type',$employee_type)
                             ->when($district, function($q) use ($district) {
                                 return $q->where('district', 'like', $district);
                             })
-                            
+
                             ->when(!$district, function($q) {
                                 return $q->where('district', 'like', 'NULL');
                             })
-                            
+
                             ->when($ulb, function($q) use ($ulb) {
                                 return $q->where('ulbid', 'like', $ulb);
                             })
-                            
+
                             ->when(!$ulb, function($q)  {
                                 return $q->where('ulbid', 'like', 'NULL');
                             })
                             ->get();
-                            
+
         return $occupiedpost;
     }
-    
+
     protected function _compare_occupied_to_sactioned_post($designation, $district = null, $ulb = null,$employee_type) {
 
-        return 
+        return
             ($this->_get_sanctioned_post($designation, $district, $ulb,$employee_type)->post_sanctioned
                     > count($this->_get_occupied_post($designation, $district, $ulb,$employee_type)));
     }
-    
+
     protected function _update_occupied_posts($designation, $operator, $district = null, $ulb = null){
         $sactionedpost = SanctionedPosts::where('designation_id', $designation)
                             ->when($district, function($q) use ($district) {
                                 return $q->where('district_id', 'like', $district);
                             })
-                            
+
                             ->when(!$district, function($q) {
                                 return $q->whereNull('district_id');
                             })
-                            
+
                             ->when($ulb, function($q) use ($ulb) {
                                 return $q->where('ulb_id', 'like', $ulb);
                             })
-                            
+
                             ->when(!$ulb, function($q)  {
                                 return $q->whereNull('ulb_id');
                             })
@@ -1945,15 +1945,15 @@ class AddEmployeeController extends Controller
                 $sactionedpost->occupied_posts = $sactionedpost->occupied_posts++;
             case "-":
                $sactionedpost->occupied_posts = $sactionedpost->occupied_posts--;
-            
+
             default:
                 //handle unrecognized operators
         }
-        return $sactionedpost->save(); 
+        return $sactionedpost->save();
     }
-    
+
     protected function _prepare_designation_array($request, $employee) {
-        
+
         $current_designation = $request->current_designation;
         $current_status = $request->current_status;
         $current_location =  $request->current_location;
@@ -1961,7 +1961,7 @@ class AddEmployeeController extends Controller
 
 
         $designationarray = [];
-        
+
         for($i = 0; $i < count($current_designation); $i++)
         {
             $tmp = [
@@ -1973,15 +1973,15 @@ class AddEmployeeController extends Controller
                 'district' => $request->district ?? null,
                 'ulbid' => $request->ulbid ?? null
                 ];
-                
+
                 array_push($designationarray, $tmp);
         }
-        
+
         return $designationarray;
     }
-    
+
     protected function _add_posts($currentDesignationInfos) {
-        
+
         foreach($currentDesignationInfos as $info) {
             $EmployeesCurrentInfos = new EmployeesCurrentInfosModel;
 
@@ -1993,12 +1993,12 @@ class AddEmployeeController extends Controller
             $EmployeesCurrentInfos->current_location = $info['current_location'];
             $EmployeesCurrentInfos->duty_type = $info['duty_type'];
             $EmployeesCurrentInfos->save();
-            
+
             $this->_update_occupied_posts($info['designation'], "+", $info['district'], $info['ulbid']);
         }
-        
+
     }
-    
+
     protected function _remove_all_current_designations_of($employee) {
         $employee = AddEmployeeModel::where('employee_id', $employee)->first();
         $currentdesignations = $emplyee->GetCurrentStatus;
@@ -2008,7 +2008,7 @@ class AddEmployeeController extends Controller
 
         return $emplyee->GetCurrentStatus()->delete();
     }
-    
+
     protected function _validate_incoming_designations($designations, $district =null, $ulbid =null,$employee_type) {
 
         for($i = 0; $i < count($designations); $i++)
@@ -2021,21 +2021,21 @@ class AddEmployeeController extends Controller
                 break;
             }
         }
-        
+
         return true;
-        
+
     }
-    
+
     public function ValidateDesignationAvaibility(Request $request) {
        return $this->_validate_incoming_designations((array) $request->designation, $request->district, $request->ulbid,$request->employee_type);
     }
-    
+
     public function ValidateDesignationAvaibility2(Request $request) {
        $desi = $request->designation;
        $allot = EmployeesCurrentInfosModel::where('current_designation',$desi)->count();
        $tot = SanctionedPosts::where('designation_id',$desi)->sum('post_sanctioned');
-       
-       
+
+
        if($tot <= $allot){
            $error = \Illuminate\Validation\ValidationException::withMessages([
                  'designation' => ['Sanctioned post not available in selected designation!'],
@@ -2043,25 +2043,25 @@ class AddEmployeeController extends Controller
             throw $error;
        }
        return true;
-       
+
     }
     public function reject_employee(Request $request){
         $emp = $request->emp;
         $remarks = $request->remarks;
-        
-        $AddEmployeeModel = new AddEmployeeModel; 
+
+        $AddEmployeeModel = new AddEmployeeModel;
         $AddEmployeeModel =  AddEmployeeModel::find($emp);
         $AddEmployeeModel->approve_status = 2;
         $AddEmployeeModel->remarks = $remarks;
         $result = $AddEmployeeModel->save();
-        
+
         if($result){
             echo 1;
         }else{
             echo 0;
         }
     }
-    
+
     public function curruntremovefamily(Request $request){
         $mem = $request->mem_id;
         $members = EmployeeFamilyDetails::find($mem)->delete();
@@ -2080,7 +2080,7 @@ class AddEmployeeController extends Controller
             echo 0;
         }
     }
-    
+
     public function removeExistsWorkExperience(Request $request){
         $exp = $request->exp_id;
         $expe = EmployeesWorkExpModel::find($exp)->delete();
@@ -2090,7 +2090,7 @@ class AddEmployeeController extends Controller
             echo 0;
         }
     }
-   
+
 }
 
 
