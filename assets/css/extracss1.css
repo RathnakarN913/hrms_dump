@@ -1,0 +1,72 @@
+ .breadcrumb i {
+    color: #3361ff;
+    margin: 0px 8px;
+    font-size: 14px;
+}
+.breadcrumb {
+    border:none!important;
+}
+a:hover {
+        text-decoration: none;
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ select {
+        border-radius: 3px !important;
+    border: 1px solid #9d9d9d  !important;
+    }
+     input {
+    margin-left: 0.5em;
+    display: inline-block;
+    width: auto;
+    border: 1px solid #9d9d9d  !important;
+    border-radius: 3px !important;
+    /*padding: 4px !important;*/
+}
+.export-xl  {
+        border: 1px solid #7a828b;
+    border-radius: 3px;
+}
+.search_btn {
+    padding: 2px 5px;
+    background: #327c95;
+    border: 1px solid #327c95 !important;
+    border-radius: 3px;
+    color: white;
+    }
+
+  table.dataTable thead td {
+    padding: 10px 18px;
+    border-bottom: 1px solid #111;
+    font-size: 14px;
+    font-weight: 600;
+}
+.name_prfle {
+    margin: 0px 5px;
+}
+.myclass{
+    color:red;
+}
+.mbl_card {
+    margin-right:15px;
+}
+
+
+
+@media only screen and (min-width: 300px) and (max-width: 768px) {
+
+} 
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
+}
+
