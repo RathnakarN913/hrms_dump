@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Mission for Elimination of Poverty in Municipal Areas (MEPMA)</title>
   <!--jquery-->
-    <script src="{{ url('assets/js/jquery.min.js')}}"></script>
+    <script src="{{ asset('assets/js/jquery.min.js')}}"></script>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{ asset('assets/vendors/feather/feather.css')}}">
   <link rel="stylesheet" href="{{ asset('assets/vendors/ti-icons/css/themify-icons.css')}}">
