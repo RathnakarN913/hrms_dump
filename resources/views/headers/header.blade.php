@@ -7,47 +7,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Mission for Elimination of Poverty in Municipal Areas (MEPMA)</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="{{ url('assets/vendors/feather/feather.css')}}">
-  <link rel="stylesheet" href="{{ url('assets/vendors/ti-icons/css/themify-icons.css')}}">
-  <link rel="stylesheet" href="{{ url('assets/vendors/css/vendor.bundle.base.css')}}">
+  <link rel="stylesheet" href="{{ asset('assets/vendors/feather/feather.css')}}">
+  <link rel="stylesheet" href="{{ asset('assets/vendors/ti-icons/css/themify-icons.css')}}">
+  <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css')}}">
   <!-- endinject -->
   <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="{{ url('assets/vendors/ti-icons/css/themify-icons.css')}}">
+  <link rel="stylesheet" href="{{ asset('assets/vendors/ti-icons/css/themify-icons.css')}}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="{{ url('assets/css/vertical-layout-light/style20.css')}}">
-   <!--<link rel="stylesheet" href="{{ url('assets/css/extracss1.css')}}">-->
-  <!--<link rel="stylesheet" href="{{ url('assets/css/extracss.css')}}">-->
+  <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style20.css')}}">
+   <!--<link rel="stylesheet" href="{{ asset('assets/css/extracss1.css')}}">-->
+  <!--<link rel="stylesheet" href="{{ asset('assets/css/extracss.css')}}">-->
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{ url('assets/images/favicon.png')}}" />
+  <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png')}}" />
 </head>
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-	  
-        <a class="navbar-brand brand-logo mr-5" href="{{ url('/dashboard') }}"><img src="{{ url('assets/images/main_logo2.png')}}" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="{{ url('/dashboard') }}"><img src="{{ url('assets/images/mepma.png')}}" alt="logo"/></a>
+
+        <a class="navbar-brand brand-logo mr-5" href="{{ url('/dashboard') }}"><img src="{{ asset('assets/images/main_logo2.png')}}" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="{{ url('/dashboard') }}"><img src="{{ asset('assets/images/mepma.png')}}" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span class="icon-menu"></span>
         </button>
-        
+
         <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-search d-none d-lg-block">
             <div class="input-group">
              <!--  Pattana Pragathi -->
-			  
+
             </div>
           </li>
         </ul>
 
         <ul class="navbar-nav navbar-nav-right">
 			<img src="https://telangana.emunicipal.in/assets/images/ktr-kcr1-b.png"class="kcr_ktr">
-			
+
 			<!--Nofification Bell-->
 			<li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
@@ -97,11 +97,11 @@
               </a>
             </div>
           </li>
-          
-          
+
+
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <!--<img src="{{ url('assets/images/faces/face28.jpg')}}" alt="profile"/>-->
+              <!--<img src="{{ asset('assets/images/faces/face28.jpg')}}" alt="profile"/>-->
               <span class="name_prfle">{{ Session::get('user_id') }}</span>
             </a>
             <!--<div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">-->
@@ -115,7 +115,7 @@
             <!--  </a>-->
             <!--</div>-->
           </li>
-          
+
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="icon-menu"></span>
@@ -143,12 +143,12 @@
           </div>
         </div>
       </div>
-     
+
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
-      
-      
-      
+
+
+
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
@@ -166,7 +166,7 @@
           </li>
         </ul>
       </nav>
-      
-      
-      
+
+
+
       <!-- partial -->
