@@ -115,20 +115,12 @@ Route::match(['post','get'], 'cppt',[UlbtoiletMapController::class,'index']);
 /** close ****/
 
 
-<<<<<<< HEAD
 // Add Employee
-=======
-// Add Employee
->>>>>>> e7b61f76b29621a46950ad59c14ed87b6c09a710
 Route::any('add-employee', [AddEmployeeController::class,'index'])->name('AddEmployee');
 Route::any('add-new-current_designation', [AddEmployeeController::class,'AddCurrentDesignation'])->name('AddCurrentDesignation');
 Route::any('remove-current_designation', [AddEmployeeController::class,'RemoveCurrentDesignation'])->name('RemoveCurrentDesignation');
 Route::any('add-new-work-experience', [AddEmployeeController::class,'AddWorkExperience'])->name('AddWorkExperience');
-<<<<<<< HEAD
 Route::any('remove-work-experience', [AddEmployeeController::class,'RemoveWorkExperience'])->name('RemoveWorkExperience');
-=======
-Route::any('remove-work-experience', [AddEmployeeController::class,'RemoveWorkExperience'])->name('RemoveWorkExperience');
->>>>>>> e7b61f76b29621a46950ad59c14ed87b6c09a710
 Route::any('add-Nomineee', [AddEmployeeController::class,'AddNominee'])->name('AddNominee');
 Route::any('add-Family', [AddEmployeeController::class,'AddFamily'])->name('AddFamily');
 
@@ -167,11 +159,7 @@ Route::any('/validate-selected-designation-avaibility', [AddEmployeeController::
 Route::any('/validate-selected-designation-avaibility2', [AddEmployeeController::class,'ValidateDesignationAvaibility2'])->name('validateSelectedDesignationAvaibility2');
 
 
-<<<<<<< HEAD
 // Add Employee
-=======
-// Add Employee
->>>>>>> e7b61f76b29621a46950ad59c14ed87b6c09a710
 // ADD ATTENDENCE
 Route::any('add-attendance', [AttendenceController::class,'attendence']);
 
@@ -197,19 +185,9 @@ Route::any('view-attandance', [ViewAttendenceController::class,'index'])->name('
 Route::any('rem_cur_desi', [AddEmployeeController::class,'rem_cur_desi'])->name('rem_cur_desi');
 
 Route::get('rcs', function() {
-<<<<<<< HEAD
-
-=======
-
->>>>>>> e7b61f76b29621a46950ad59c14ed87b6c09a710
     session()->regenerate();
      return response()->json([
         "token"=>csrf_token()],
       200);
-<<<<<<< HEAD
 
 })->name('rcs');
-=======
-
-})->name('rcs');
->>>>>>> e7b61f76b29621a46950ad59c14ed87b6c09a710
