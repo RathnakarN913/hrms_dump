@@ -81,15 +81,29 @@ td input.form-control {
 .t-head {
     z-index:99;
 }
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 1px !important;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+    display: block;
+    padding-left: 8px;
+    padding-right: 20px;
+    overflow: visible !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 </style>
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
             <div class="col-md-12 ">
-              
+
             </div>
           </div>
-          
+
             @if(session()->has('msg'))
             <div class="alert alert-danger alert-dismissible">
                 {{session()->get('msg')}}
@@ -106,10 +120,10 @@ td input.form-control {
 
        <!--start content-->
               <main class="page-content">
-    
+
 <div class="card">
-  <div class="card-body">  
-  
+  <div class="card-body">
+
     <div class="bg-white">
             <div class="row align-items-center mt-4 mb-4 ">
                     <div class="col-md-6">
@@ -118,85 +132,85 @@ td input.form-control {
                     <input id="myInput" type="text" placeholder="Search.." class="form-control">
                 </div>
             </div>
-        <!--<h4><b>ULB Sanctioned Post Entries</b></h4>-->
-        <!--<br>-->
-        <!--    <input id="myInput" type="text" placeholder="Search.." class="form-control">-->
-            
+        <form action="" method="post" id="ulb_form">
+            @csrf
+            <div class="row align-items-center mt-4 mb-4 ">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-4">
+                    <select name="ulb" id="ulb" >
+                        <option value="">Select ULB</option>
+                        @foreach ($ulblist as $ulb)
+                            <option value="{{ $ulb->ulbid }}" @if($ulb->ulbid == $ind_ulb) selected @endif> {{ $ulb->ulbname }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <h4><b>ULB Name: {{ $ulb_name->ulbname }}</b></h4>
+                </div>
+            </div>
+        </form>
+
+
       <div class="table-content table table-responsive thead-scroll">
-          
+
         <form id="myform" method="post" action="{{ url('/ulbinsert') }}">
          @csrf
-        <table class="" border="1" style="font-size:13px;" id="example">
+         <input type="hidden" name="ulbid" id="ulbid" value="{{ $ulb_name->ulbid }}">
+         <input type="hidden" name="distid" id="distid" value="{{ $ulb_name->distid }}">
+        <table class="" border="1" id="example" style="margin-left: 223px;">
           <thead class="t-head" style="position: sticky;top: 0;">
             <tr class="table-primary text-center">
-              <th style="padding: 10px; position: sticky;top: 0; font-size: 12px !important;" rowspan="4" class="sticky-col first-col">S.NO</th>
-              <th style="width: 20%; position: sticky;top: 0; font-size: 12px !important;" rowspan="4" class="sticky-col second-col">ULB Name</th>
-              @foreach($designation as $des)
-              <th colspan="4" style="position: sticky;top: 0; font-size: 12px !important; ">{{$des->description}}</th>
+              <th>S.NO</th>
+              <th>ULB Name</th>
+              @foreach($emp_type as $type)
+                <th>{{$type->employee_type_desc}}</th>
               @endforeach
-              <th style="position: sticky;top: 0; width: 7%;" rowspan="4">Total</th>
-            </tr>
-            <tr class="table-primary text-center">
-               @foreach($designation as $des)
-                @foreach($emp_type as $type)
-                    <th style="font-size: 12px !important;width:80px">{{$type->employee_type_desc}}</th>
-                @endforeach
-                   <th>Total</th>
-               @endforeach
+             <th>Total</th>
             </tr>
           </thead>
           <tbody class="text-center" id="search_content">
               @php $i = 1 @endphp
-              @foreach($ulblist as $ulb)
+              @foreach($designation as $des)
                 <tr class="pad-tdd">
-                    <td class="sticky-col first-col">{{$i++}}</td>
-                    <td style="font-size: 12px !important;" class="sticky-col second-col">{{$ulb->ulbname}}</td>
-                    @foreach($designation as $des)
+                    <td>{{$i++}}</td>
+                    <td>{{$des->description}}</td>
                         @foreach($emp_type as $type)
                             <td class="input-group-sm">
-                                <input style="width:60px;" type="number" @if($type->employee_type_desc == 'HR') @if(!$des->hr) readonly @endif @endif @if($type->employee_type_desc == 'Non HR') @if(!$des->non_hr) readonly @endif @endif @if($type->employee_type_desc == 'Government') @if(!$des->govt) readonly @endif @endif name="post[]" class="form-control post" value="{{$ind_count[$ulb->ulbid][$des->id][$type->employee_type_id]}}" id="post{{$des->id}}{{$ulb->ulbid}}{{$type->employee_type_id}}">
-                                <input type="hidden" name="ulbid[]" class="form-control" value="{{$ulb->ulbid}}" id="ulb{{$des->id}}{{$ulb->ulbid}}{{$type->employee_type_id}}">
-                                <input type="hidden" name="desid[]" class="form-control" value="{{$des->id}}" id="desi{{$des->id}}{{$ulb->ulbid}}{{$type->employee_type_id}}">
-                                <input type="hidden" name="dist_id[]" class="form-control" value="{{$ulb->DistrictModel->distid}}" id="dist{{$des->id}}{{$ulb->ulbid}}{{$type->employee_type_id}}">
-                                <input type="hidden" name="emp_type[]" class="form-control" value="{{$type->employee_type_id}}" id="emp{{$des->id}}{{$ulb->ulbid}}{{$type->employee_type_id}}">
-                                <p class="error_div" style="display:none;color:red;" id="error{{$des->id}}{{$ulb->ulbid}}{{$type->employee_type_id}}"></p>
+                                <input type="number" value="{{ $post_count->where('designation_id',$des->id)->where('employee_type',$type->employee_type_id)->sum('post_sanctioned') }}" @if($type->employee_type_desc == 'HR') @if(!$des->hr) readonly @endif @endif @if($type->employee_type_desc == 'Non HR') @if(!$des->non_hr) readonly @endif @endif @if($type->employee_type_desc == 'Government') @if(!$des->govt) readonly @endif @endif name="post[]" class="form-control post"  id="post{{$des->id}}{{$type->employee_type_id}}">
+                                <input type="hidden" name="desid[]" class="form-control" value="{{$des->id}}" id="desi{{$des->id}}{{$type->employee_type_id}}">
+                                <input type="hidden" name="emp_type[]" class="form-control" value="{{$type->employee_type_id}}" id="emp{{$des->id}}{{$type->employee_type_id}}">
+                                <p class="error_div" style="display:none;color:red;" id="error{{$des->id}}{{$type->employee_type_id}}"></p>
                             </td>
                         @endforeach
-                        <td>{{$count[$ulb->ulbid][$des->id]}}</td>
-                    @endforeach
-                    <td>{{$ulb_count[$ulb->ulbid]}}</td>
+                    <td>{{ $post_count->where('designation_id',$des->id)->sum('post_sanctioned') }}</td>
                 </tr>
               @endforeach
            </tbody>
            <tfoot>
                <tr class="total-bg">
                   <td colspan="2" class="sticky-col first-col">Total</td>
-                  
-                   @foreach($designation as $des)
                        @foreach($emp_type as $type)
-                        <td >{{$ind_des_count[$des->id][$type->employee_type_id]}}</td>
+                         <td >{{ $post_count->where('employee_type',$type->employee_type_id)->sum('post_sanctioned') }}</td>
                        @endforeach
-                    <td>{{$des_count[$des->id]}}</td>
-                   @endforeach
-                   <td style="padding: 10px;">{{$total}}</td>
-              </tr>
+                   <td>{{ $post_count->sum('post_sanctioned') }}</td>
+               </tr>
            </tfoot>
 
-        </table>      
-                        
+        </table>
+
       </div>
           <div class="row mt-4">
             <div class="col-md-12 text-center p-0">
-          <button class="btn btn-submit" type="submit" name="save">Save</button> 
-          <!--<input class="btn btn-submit" type="submit" name="save" value="Save">-->
+          <button class="btn btn-submit" type="submit" name="save">Save</button>
         </div>
-        
+
         </div>
-    
+
     </form>
     </div>
-    
-  </div>  
+
+  </div>
 </div>
 
 
@@ -211,6 +225,15 @@ td input.form-control {
 
   </div>
   <!--end wrapper-->
+
+
+  <script>
+    $(document).ready(function(){
+        $('#ulb').on('change',function(){
+            var form = $('#ulb_form').submit();
+        })
+    })
+</script>
 <script>
   $('#myform').submit(function (e) {
     var form = this;
@@ -228,10 +251,10 @@ td input.form-control {
             var num = id.match(/\d/g);
             num = num.join("");
             var desid = $('#desi'+num).val();
-            var ulb = $('#ulb'+num).val();
-            var dist = $('#dist'+num).val();
+            var ulb = $('#ulbid').val();
+            var dist = $('#distid').val();
             var emp = $('#emp'+num).val();
-            
+
             var _token = '<?php echo csrf_token()  ?>';
             $.ajax({
                 url:"get_post_count",
@@ -255,16 +278,15 @@ td input.form-control {
                         $('#post'+num).css('border','1px solid #00ff95');
                     }
                 }
-                
+
             });
         });
     });
-        
+
    function mydiv(){
        $('.error_div').fadeOut();
    }
 </script>
-
 
 
 <script>
@@ -281,3 +303,8 @@ td input.form-control {
 
   <!-- Bootstrap bundle JS -->
    @include('headers.footer')
+   <script>
+        $(document).ready(function() {
+            $('#ulb').select2();
+        });
+    </script>

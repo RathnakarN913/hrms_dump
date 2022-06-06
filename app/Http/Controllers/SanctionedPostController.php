@@ -147,7 +147,7 @@ class SanctionedPostController extends Controller
                 $data['ind_dist'] = '01';
              }
              $data['ind_dist_name'] = DistricstsModel::where('distid',$data['ind_dist'])->value('distname');
-             $data['desi_val'] = Hrms_Sanctioned_PostsModel::where('district_id',$data['ind_dist'])->get();
+             $data['desi_val'] = Hrms_Sanctioned_PostsModel::where('district_id',$data['ind_dist'])->where('level_id',2)->get();
 
 
              $data['total'] = Hrms_Sanctioned_PostsModel::where('level_id',2)->sum('post_sanctioned');
@@ -208,22 +208,22 @@ return;
 
      public function districtinsert(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $login_id= Session::get('user_id');
 
         $post = $request->post;
-        $dist_id = $request->distid;
+        $dist_id = $request->dist;
         $levelid = $request->levelid;
-        $desid = $request->desid;
+        $desid = $request->designation;
         $emp_type = $request->emp_type;
 
 
-        for($i=0;$i < count($dist_id);$i++){
+        for($i=0;$i < count($post);$i++){
             if($post[$i] == ''){
                 $post[$i] = 0;
             }
             $data = array(
-                'district_id' => $dist_id[$i],
+                'district_id' => $dist_id,
                 'level_id' => $levelid,
                 'designation_id' => $desid[$i],
                 'employee_type' => $emp_type[$i],
@@ -234,7 +234,7 @@ return;
             );
 
             $data1 = array(
-                'district_id' => $dist_id[$i],
+                'district_id' => $dist_id,
                 'level_id' => $levelid,
                 'designation_id' => $desid[$i],
                 'employee_type' => $emp_type[$i],
@@ -248,9 +248,6 @@ return;
     }
 
 
-
-
-
     public function ulbinsert(Request $request)
     {
 
@@ -259,19 +256,19 @@ return;
         // dd($request);
 
         $post = $request->post;
-        $distid = $request->dist_id;
+        $distid = $request->distid;
         $desid = $request->desid;
         $ulbid = $request->ulbid;
         $emp_type = $request->emp_type;
 
-        for($i=0;$i < count($ulbid);$i++){
+        for($i=0;$i < count($post);$i++){
             if($post[$i] == ''){
                 $post[$i] = 0;
             }
 
             $data = array(
-                'district_id' => $distid[$i],
-                'ulb_id' => $ulbid[$i],
+                'district_id' => $distid,
+                'ulb_id' => $ulbid,
                 'level_id' => 3,
                 'designation_id' => $desid[$i],
                 'employee_type' => $emp_type[$i],
@@ -282,22 +279,14 @@ return;
             );
 
             $data1 = array(
-                'district_id' => $distid[$i],
-                'ulb_id' => $ulbid[$i],
+                'district_id' => $distid,
+                'ulb_id' => $ulbid,
                 'level_id' => 3,
                 'designation_id' => $desid[$i],
                 'employee_type' => $emp_type[$i],
             );
 
             Hrms_Sanctioned_PostsModel::updateOrCreate($data1,$data);
-            // if(count($repeat) > 0){
-            //     DB::table('hrms_sanctioned_posts')->where($data1)->update($data);
-            // }else{
-
-            //     DB::table('hrms_sanctioned_posts')->insert($data);
-
-            // }
-
 
         }
 
@@ -316,46 +305,16 @@ return;
             $data['designation'] = Hrms_DesignationsModel::where('designation_level',3)->orderby('sort_order','asc')->get();
             $data['emp_type'] = EmployeeType::all();
 
-            foreach($data['ulblist'] as $ulb){
-                foreach($data['designation'] as $des){
-                    foreach($data['emp_type'] as $type){
-                        $cal = array(
-                            'ulb_id' => $ulb->ulbid,
-                            'level_id' => 3,
-                            'designation_id' => $des->id,
-                            'employee_type' => $type->employee_type_id,
-                        );
-                        $cal1 = array(
-                            // 'ulb_id' => $ulb->ulbid,
-                            'level_id' => 3,
-                            'designation_id' => $des->id,
-                            'employee_type' => $type->employee_type_id,
-                        );
-                        $data['ind_count'][$ulb->ulbid][$des->id][$type->employee_type_id] = Hrms_Sanctioned_PostsModel::where($cal)->value('post_sanctioned');
-                        $data['ind_des_count'][$des->id][$type->employee_type_id] = Hrms_Sanctioned_PostsModel::where($cal1)->sum('post_sanctioned');
-                    }
-                     $data1 = array(
-                        'ulb_id' => $ulb->ulbid,
-                        'level_id' => 3,
-                        'designation_id' => $des->id,
-                    );
-                    $data2 = array(
-                        'ulb_id' => $ulb->ulbid,
-                        'level_id' => 3,
-                    );
-                     $data['count'][$ulb->ulbid][$des->id] = Hrms_Sanctioned_PostsModel::where($data1)->sum('post_sanctioned');
-                }
-                $data['ulb_count'][$ulb->ulbid] = Hrms_Sanctioned_PostsModel::where($data2)->sum('post_sanctioned');
+            if($request->ulb == ''){
+                $data['ind_ulb'] = '001';
+            }else{
+                $data['ind_ulb'] = $request->ulb;
             }
 
-            foreach($data['designation'] as $des){
-                 $data3 = array(
-                        'level_id' => 3,
-                        'designation_id' => $des->id,
-                    );
-                $data['des_count'][$des->id] = Hrms_Sanctioned_PostsModel::where($data3)->sum('post_sanctioned');
-             }
-            $data['total'] = Hrms_Sanctioned_PostsModel::where('level_id',3)->sum('post_sanctioned');
+            $data['ulb_name'] = UlbmstModel::where('ulbid',$data['ind_ulb'])->first();
+
+            $data['post_count'] = Hrms_Sanctioned_PostsModel::where('level_id',3)->where('ulb_id',$data['ind_ulb'])->get();
+
         }
             return view('hrms.ulb',$data );
     }

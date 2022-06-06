@@ -141,7 +141,7 @@ td input.form-control {
                                 </form>
                             </div>
                             <div class="col">
-                                <h3 class="mt-4"><b>District : {{ $ind_dist_name }}</b></h3>
+                                <h3 style="margin-top: 39px;"><b>District : {{ $ind_dist_name }}</b></h3>
                             </div>
                         </div>
                         <br>
@@ -190,7 +190,7 @@ td input.form-control {
                             </tbody>
 
                             <tfoot>
-                                <tr class="total-bg">
+                                <tr class="total-bg" class="text-center">
                                 <td colspan="2">Total</td>
                                 @foreach($emp_type as $type)
                                 <td>{{ $desi_val->where('employee_type',$type->employee_type_id)->sum('post_sanctioned') }}</td>
