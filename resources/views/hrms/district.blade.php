@@ -135,7 +135,6 @@ td input.form-control {
                             <div class="container mt-4 mb-4">
                             <div class="row align-items-center">
                             <div class="col-md-6 pl-0"><h4><b>District Sanctioned Post Entries </b></h4></div>
-                            <div class="col-md-6"><input id="myInput" type="text" placeholder="Search.." class="form-control"></div>
                           </div>
                         </div>
 
@@ -157,24 +156,22 @@ td input.form-control {
                                 <h4><b>District : {{ $ind_dist_name }}</b></h4>
                             </div>
                         </div>
-                        <br>
+
                           <form name="frm" method="post" id="myform" action="{{ url('/districtinsert') }}">
                             @csrf
-
-
-
-
                             <div class="table-responsive table thead-scroll">
-                          <table class="table table-bordered" id="example" style="width:80%;margin-left: 93px;">
+                          <table class="table table-bordered" id="example1" style="width:100%;">
                             <thead>
                               <tr class="table-primary text-center">
-                                <th>S.NO</th>
-                                 <th>Designation Name</th>
-                                 @foreach($emp_type as $type)
-                                      <th >{{$type->employee_type_desc}}</th>
-                                   @endforeach
-                                   <th >Total</th>
-
+                                <th rowspan="2">S.NO</th>
+                                 <th rowspan="2">Designation Name</th>
+                                 <th colspan="3">Employee Type</th>
+                                <th rowspan="2">Number of Sanctioned Posts</th>
+                              </tr>
+                              <tr class="table-primary text-center">
+                                @foreach($emp_type as $type)
+                                    <th>{{$type->employee_type_desc}}</th>
+                                @endforeach
                               </tr>
 
                             </thead>
@@ -195,7 +192,7 @@ td input.form-control {
                                             <p class="error_div" style="display:none;color:red;" id="error{{ $des->id }}{{ $type->employee_type_id }}"></p>
                                         </td>
                                     @endforeach
-                                    <td>{{ $desi_val->where('designation_id',$des->id)->sum('post_sanctioned') }}</td>
+                                    <td><input type="hidden" value="{{ $desi_val->where('designation_id',$des->id)->sum('post_sanctioned') }}">{{ $desi_val->where('designation_id',$des->id)->sum('post_sanctioned') }}</td>
                                 </tr>
 
                                  @endforeach
@@ -203,7 +200,7 @@ td input.form-control {
                             </tbody>
 
                             <tfoot>
-                                <tr class="total-bg" class="text-center">
+                                <tr class="total-bg text-center">
                                 <td colspan="2">Total</td>
                                 @foreach($emp_type as $type)
                                 <td>{{ $desi_val->where('employee_type',$type->employee_type_id)->sum('post_sanctioned') }}</td>
@@ -330,3 +327,35 @@ $(document).ready(function() {
   <!-- Bootstrap bundle JS -->
    @include('headers.footer')
 
+   <script>
+    $(document).ready(function(){
+        $('#example1').DataTable({
+              "bPaginate": false,
+              dom: 'Bfrtip',
+              buttons: [
+
+                ],
+              footerCallback: function (row, data, start, end, display) {
+              var api = this.api();
+
+              // Remove the formatting to get integer data for summation
+              var intVal = function (i) {
+                  return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+              };
+
+              // Total over this page
+              for(let i=2;i<6;i++){
+                  pageTotal = api
+                  .column(i, { page: 'current' })
+                  .nodes()
+                  .reduce(function (a, b) {
+                      return intVal(a) + intVal($('input', b).val());
+                  }, 0);
+
+              // Update footer
+              $(api.column(i).footer()).html(pageTotal);
+              }
+          },
+        });
+    })
+</script>

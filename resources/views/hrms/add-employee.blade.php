@@ -5,7 +5,7 @@
 {
     color: red;
     font-size:13px;
-        
+
 }
        .table th, .jsgrid .jsgrid-table th, .table td, .jsgrid .jsgrid-table td {
     padding: 10px 3px;
@@ -32,9 +32,9 @@
 }
 svg > g:last-child > g:last-child {
     pointer-events: none !important
-    
+
 }
-div.google-visualization-tooltip { 
+div.google-visualization-tooltip {
     pointer-events: none !important
     }
     .export-btn {
@@ -221,7 +221,7 @@ tr:nth-child(even) {
 .card_bd_pd1{
         padding: 8px !important;
 }
- 
+
 
 .colr1{
     background-color: #FFF2F2;
@@ -229,7 +229,7 @@ tr:nth-child(even) {
     border-bottom-right-radius: 10px;
 }
 
- 
+
 .colr2{
     background-color: #e6fbf8;
     border-bottom-left-radius: 10px;
@@ -316,38 +316,38 @@ label {
 </script>
 
       <div class="main-panel">
-          
+
         <div class="content-wrapper">
-            
+
                <main class="page-content">
-              
+
                @if($message = Session::get('success'))
                <div class="alert alert-success  alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert">×</button>   
+                <button type="button" class="close" data-dismiss="alert">×</button>
                    <strong>{{ $message }}</strong>
                </div>
                @endif
-                
-                
-                
+
+
+
                  <div class="mb-0 ml-4"><b>Add Employees Details</b></div>
-               
+
                   <div class="bg-white1">
-                      
-                    <div class="table-content"> 
-                         
+
+                    <div class="table-content">
+
                          <form name="add" method="post" action="{{ route('CreateAddEmployee') }}" enctype="multipart/form-data">
-                             
+
                                 @csrf
-                                 
-                                 
-                               <div class="card shadow"> 
-                                
-                                <div class="card-body p-3 pb-3">  
-                                 
+
+
+                               <div class="card shadow">
+
+                                <div class="card-body p-3 pb-3">
+
                                   <div class="row m-0 colr1 p-2">
-                                 
-                                               
+
+
                             <div class="col-md-3">
                                 <lable for="employee_type">Employee Type <span class="mandatory ">*</span></lable>
                                 <select class="form-control-sm  select-input" name="employee_type" id="emp_type" onchange="checkulbpost()">
@@ -360,11 +360,11 @@ label {
                                  </select>
                                    <span class="text-danger">{{$errors->first('employee_type')}}</span>
                             </div>
-                            
+
                         @if(Session::get('user_type')=='PD')
-                        
+
                         <input type="hidden" value="pd" id="ckecpd">
-                        
+
                             <div class="col-md-3">
                                 <lable for="district">District <span class="mandatory ">*</span></lable>
                                   <select class="form-control-sm  select-input" name="district" id="district"   onChange="GetUlbs(),checkulbpost()">
@@ -377,7 +377,7 @@ label {
                                   </select>
                                    <span class="text-danger">{{$errors->first('district')}}</span>
                             </div>
-                            
+
                             <div class="col-md-3 ulbhide" style="display:@if(old('ulbid') || old('district')) block @else none @endif" >
                                 <lable for="ulbid">ULB</lable>
                                   <select class="form-control-sm  select-input" name="ulbid" id="ulbid_list" onChange="GetCurrentDesignationByUlb(),checkulbpost()">
@@ -389,29 +389,29 @@ label {
                                     @endif
                                   </select>
                             </div>
-                            
+
                       @endif
-                      
-                                        
-                                   </div> 
-                                   
-                                   
-                                </div> 
-                                 
-                            </div>  
-                                 
-                                 
-                                 
-                                 
-                                 
-                            <div class="card shadow mt-3"> 
+
+
+                                   </div>
+
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+                            <div class="card shadow mt-3">
                                <div class="card-header p-0"> <div class="bg-head"><b>Personal Information</b></div> </div>
-                                <div class="card-body">  
-                                 
+                                <div class="card-body">
+
                                   <div class="row m-0 colr1" >
-                                 
+
                                         <div class="col-md-9 order-sm-first order-last card_bd_pd">
-                                            
+
                                             <div class="row mt-2">
                                     <div class="col-md-4 mb-3">
                                       <label>Name of the employee <span class="mandatory ">*</span></label>
@@ -428,7 +428,7 @@ label {
                                       <input type="date" class="form-control form-control-sm  ml-0" value="{{old('dob')}}" placeholder="" onchange="submitBday(this.value)" name="dob" min="1950-01-01" max="<?php echo date("Y-m-d") ?>" >
                                       <span class="text-danger">{{$errors->first('dob')}}</span>
                                     </div>
-                                   
+
                                     <div class="col-md-4">
                                       <label>Gender <span class="mandatory">*</span></label>
                                       <select class="form-control-sm  select-input" name="gender">
@@ -491,9 +491,9 @@ label {
                                       <span class="text-danger">{{$errors->first('nationality')}}</span>
                                     </div>
                                     </div>
-                                            
+
                                             <div class="row">
-                                                
+
                                                 <div class="col-md-8 pt-3">
                                                    <label>Present address <span class="mandatory">*</span></label>
                                                   <textarea class="textarea-form form-control" name="communication_address" id="communication_address" value="{{old('communication_address')}}" style="height: 64px;" name="communication_address">{{old('communication_address')}}</textarea>
@@ -504,12 +504,12 @@ label {
                                                   <input type="text" class="form-control form-control-sm  ml-0" maxlength="6" placeholder="" value="{{old('communication_address_pin_code')}}" id="communication_address_pin_code" name="communication_address_pin_code" oninput="this.value.replace(/[^0-9,]/g, "").replace(/(,.*?),(.*,)?/, "$1"); onkeydown="if(event.key==='.'){event.preventDefault();}">
                                                   <span class="text-danger">{{$errors->first('communication_address_pin_code')}}</span>
                                                 </div>
-                                                
+
                                               <div class="mb-3 mt-3 ml-3">
                                                 <input type="checkbox" id="permenant_address_same_as_above" value="{{old('permenant_address_same_as_above')}}" name="permenant_address_same_as_above" value="1" > Please select Permanent address same as above
                                                 <span class="text-danger">{{$errors->first('permenant_address_same_as_above')}}</span>
                                               </div>
-                                              
+
                                                 <div class="col-md-8">
                                                    <label>Permanent Address <span class="mandatory">*</span></label>
                                                   <textarea class="textarea-form form-control" value="{{old('permenant_address')}}" name="permenant_address" id="permenant_address" style="height: 64px;">{{old('permenant_address')}}</textarea>
@@ -520,13 +520,13 @@ label {
                                                   <input type="text" class="form-control form-control-sm mb-3  ml-0" maxlength="6" placeholder="" id="permenant_address_pin_code" value="{{old('permenant_address_pin_code')}}" name="permenant_address_pin_code" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                                                   <span class="text-danger">{{$errors->first('permenant_address_pin_code')}}</span>
                                                 </div>
-                                                
-                                                
+
+
                                               </div>
-                                              
-                                              
+
+
                                             <div class="row mt-3">
-                                    
+
                                                 <div class="col-md-4">
                                                   <label>Mobile number <span class="mandatory">*</span></label>
                                                  <input type="text" class="form-control form-control-sm  ml-0" maxlength="10" placeholder="" value="{{old('mobile_number')}}" name="mobile_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
@@ -537,20 +537,20 @@ label {
                                                   <input type="text" class="form-control form-control-sm  ml-0 " maxlength="10" placeholder=""  value="{{old('alternative_mobile_number')}}" name="alternative_mobile_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                                                   <span class="text-danger">{{$errors->first('alternative_mobile_number')}}</span>
                                                 </div>
-                                                
+
                                                  <div class="col-md-4 mb-3">
                                                   <label>Email id <span class="mandatory">*</span></label>
                                                   <input type="email" class="form-control form-control-sm   ml-0" placeholder="" value="{{old('email_id')}}" name="email_id">
                                                   <span class="text-danger">{{$errors->first('email_id')}}</span>
                                                 </div>
-                                                
-                                                
+
+
                                                 </div>
-                                            
-                                        </div> 
-                                        
+
+                                        </div>
+
                                         <div class="col-md-3 pt-3">
-                                        
+
                                              <div class="col-ting">
                                                 <div class="control-group file-upload" id="file-upload1">
                                                   <div class="image-box text-center">
@@ -565,67 +565,67 @@ label {
                                                 	<center>
                                                 	<div class="image_upload"><small>Please Click here to Upload Photo </small><span class="mandatory"> *</span></div>
                                                 	<span class="text-danger">{{$errors->first('photo')}}</span>
-                                                </center>	
+                                                </center>
                                                 </div>
                                             </div>
-                                        
-                                        
-                                        </div> 
-                                        
-                                        
-                                   </div> 
-                                   
-                                   
-                                </div> 
-                                 
-                            </div>     
-                             
-                       
-                            <div class="card shadow mt-3"> 
+
+
+                                        </div>
+
+
+                                   </div>
+
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="card shadow mt-3">
                                 <div class="card-header p-0"> <div class="bg-head"><b>Native Details</b></div> </div>
-                                
-                                    <div class="card-body card_bd_pd1"> 
-                                    
+
+                                    <div class="card-body card_bd_pd1">
+
                                       <div class="row colr2 m-1 pt-3 pb-3">
-                                          
+
                                             <div class="col-md-4 mb-3">
                                               <label>Native State <span class="mandatory"></span></label>
                                               <input type="text" class="form-control form-control-sm ml-0 " id="state-field" placeholder="" value="{{old('state')}}" name="state" oninput="this.value = this.value.replace(/[^A-z]/g, '').replace(/(\..*)\./g, '$1');">
                                               <span class="text-danger">{{$errors->first('state')}}</span>
                                             </div>
-                                            
+
                                              <div class="col-md-4">
                                               <label>Native  District  <span class="mandatory">*</span></label>
                                               <input type="text" class="form-control form-control-sm ml-0 " placeholder="" oninput="this.value = this.value.replace(/[^A-z]/g, '').replace(/(\..*)\./g, '$1');"  id="district-field" value="{{old('native_district')}}" name="native_district">
                                               <span class="text-danger">{{$errors->first('native_district')}}</span>
                                             </div>
-                                            
+
                                              <div class="col-md-4">
                                               <label>Native Mandal <span class="mandatory"></span></label>
                                               <input type="text" class="form-control form-control-sm ml-0 " placeholder="" id="mandal-field" value="{{old('mandal')}}" name="mandal" oninput="this.value = this.value.replace(/[^A-z]/g, '').replace(/(\..*)\./g, '$1');">
                                               <span class="text-danger">{{$errors->first('mandal')}}</span>
                                             </div>
-                                            
+
                                             <div class="col-md-4">
                                               <label>Upload Native  District certificate  <span class="mandatory"></span></label>
                                               <input type="file" class="form-control form-control-sm ml-0 " placeholder="" value="{{old('district_certi')}}" name="district_certi">
                                               <span class="text-danger">{{$errors->first('district_certi')}}</span>
                                             </div>
-                                            
+
                                    </div>
-                                    
-                                    </div>     
+
+                                    </div>
                             </div>
-                            
-                            
-                             <div class="card shadow mt-3"> 
-                             
+
+
+                             <div class="card shadow mt-3">
+
                                    <div class="card-header p-0"> <div class="bg-head"><b>Statutory Details</b></div> </div>
-                                   
-                                    <div class="card-body card_bd_pd1"> 
-                        
+
+                                    <div class="card-body card_bd_pd1">
+
                                         <div class="row colr3 m-1 pt-3 pb-3">
-                                            
+
                                      <div class="col-md-4 mb-3">
                                       <label>Aadhar Card number <span class="mandatory">*</span></label>
                                       <input type="text" class="form-control form-control-sm ml-0" maxlength="12" placeholder="" value="{{old('adhaar_card_number')}}" name="adhaar_card_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
@@ -637,7 +637,7 @@ label {
                                       <small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>
                                       <span class="text-danger">{{$errors->first('adhaar_card')}}</span>
                                     </div>
-                                   
+
                                     <div class="col-md-4">
                                       <label>Pan Card number <span class="mandatory">*</span></label>
                                       <input type="text" class="form-control form-control-sm ml-0" id="pan_card_number" placeholder="" value="{{old('pan_card_number')}}" name="pan_card_number" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)">
@@ -665,85 +665,98 @@ label {
                                           <span class="text-danger">{{$errors->first('esi_number')}}</span>
                                         </div>
                                   </div>
-                        
-                                   </div>     
+
+                                   </div>
                             </div>
-                       
-                            <div class="card shadow mt-3"> 
+
+                            <div class="card shadow mt-3">
                                 <div class="card-header p-0"> <div class="bg-head"><b>Education Details</b></div> </div>
-                                
-                                <div class="card-body card_bd_pd1"> 
-                                 
-                                 <div class="row colr4 m-1 pt-3">
-                                      
-                                  <div class="col-md-4 mb-3">
-                                      <label>Educational Qualification <span class="mandatory">*</span></label>
-                                      <select class="form-control-sm select-input" name="degree" id='degree'  onChange="GetDiscipline(this)">
-                                        <option value="">Select</option>
-                                        @if($educations)
-                                            @foreach($educations as $key=> $val)
-                                             <option value="{{ $val->id }}" @if($val->id == old('degree')) selected @endif>{{ $val->education_name }}</option>
-                                            @endforeach
-                                        @endif
-                                      </select>
-                                      <span class="text-danger">{{$errors->first('degree')}}</span>
+
+                                <div class="card-body card_bd_pd1">
+
+                                <div class="row colr4 m-1 pt-3">
+                                    <div class="col-md-11">
+                                        <div class="row">
+                                            <div class="col-md-4 mb-3">
+                                                <label>Educational Qualification <span class="mandatory">*</span></label>
+                                                <select class="form-control-sm select-input" name="degree[]" id='degree'  onChange="GetDiscipline(this)">
+                                                    <option value="">Select</option>
+                                                    @if($educations)
+                                                        @foreach($educations as $key=> $val)
+                                                        <option value="{{ $val->id }}" @if($val->id == old('degree')) selected @endif>{{ $val->education_name }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                <span class="text-danger">{{$errors->first('degree')}}</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Year of passing <span class="mandatory">*</span></label>
+                                                <select class="form-control-sm  select-input" name="year_of_passing[]">
+                                                    <option value="">Select</option>
+                                                    @if($years)
+                                                        @foreach($years as $key=> $val)
+                                                        <option value="{{ $val->id }}" @if($val->id == old('year_of_passing')) selected @endif>{{ $val->year }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                <span class="text-danger">{{$errors->first('year_of_passing')}}</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>University/college <span class="mandatory">*</span></label>
+                                                <input type="text" class="form-control form-control-sm ml-0" id="university_college" placeholder="" value="{{old('university_college')}}" name="university_college[]">
+                                                <span class="text-danger">{{$errors->first('university_college')}}</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Specialization <span class="mandatory"></span></label>
+                                                {{-- <select class="form-control-sm  select-input" name="discpline" id="discpline"> --}}
+                                                    {{-- <option value="">Select</option> --}}
+                                                    {{--@if($discplines)
+                                                    @foreach($discplines as $key=> $val)
+                                                    <option value="{{ $val->id }}" @if($val->id == old('discpline')) selected @endif>{{ $val->discpline }}</option>
+                                                    @endforeach
+                                                    @endif--}}
+                                                {{-- </select> --}}
+                                                <input type="text" name="discpline[]" id="" value="{{ old('discpline') }}" class="form-control">
+                                                <span class="text-danger">{{$errors->first('discpline')}}</span>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label>Upload SSC Certificate  <span class="mandatory">*</span></label>
+                                                <input type="file" class="form-control form-control-sm ml-0 " placeholder="" value="{{old('certificates')}}" name="certificates">
+                                                <small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>
+                                                <span class="text-danger">{{$errors->first('certificates')}}</span>
+                                            </div>
+                                            <div class="col-md-4 mb-3 height_cet" style="display:@if(old('degree')>1)block @else none @endif">
+                                                <label> Highest Qualification Certificate  <span class="mandatory">*</span></label>
+                                                <input type="file" class="form-control form-control-sm  height_cet" placeholder="" value="{{old('highest_dgre_certificates')}}" name="highest_dgre_certificates[]">
+                                                <small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>
+                                                <span class="text-danger">{{$errors->first('highest_dgre_certificates')}}</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4">
-                                      <label>Year of passing <span class="mandatory">*</span></label>
-                                      <select class="form-control-sm  select-input" name="year_of_passing">
-                                        <option value="">Select</option>
-                                        @if($years)
-                                            @foreach($years as $key=> $val)
-                                             <option value="{{ $val->id }}" @if($val->id == old('year_of_passing')) selected @endif>{{ $val->year }}</option>
-                                            @endforeach
-                                        @endif
-                                      </select>
-                                      <span class="text-danger">{{$errors->first('year_of_passing')}}</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                      <label>University/college <span class="mandatory">*</span></label>
-                                      <input type="text" class="form-control form-control-sm ml-0" id="university_college" placeholder="" value="{{old('university_college')}}" name="university_college">
-                                      <span class="text-danger">{{$errors->first('university_college')}}</span>
-                                    </div>
-                                     <div class="col-md-4">
-                                      <label>Discipline <span class="mandatory"></span></label>
-                                      <select class="form-control-sm  select-input" name="discpline" id="discpline">
-                                        <option value="">Select</option>
-                                        {{--@if($discplines)
-                                        @foreach($discplines as $key=> $val)
-                                         <option value="{{ $val->id }}" @if($val->id == old('discpline')) selected @endif>{{ $val->discpline }}</option>
-                                        @endforeach
-                                        @endif--}}
-                                      </select>
-                                      <span class="text-danger">{{$errors->first('discpline')}}</span>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                      <label>Upload SSC Certificate  <span class="mandatory">*</span></label>
-                                      <input type="file" class="form-control form-control-sm ml-0 " placeholder="" value="{{old('certificates')}}" name="certificates">
-                                       <small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>
-                                       <span class="text-danger">{{$errors->first('certificates')}}</span>
-                                    </div>
-                                    <div class="col-md-4 mb-3 height_cet" style="display:@if(old('degree')>1)block @else none @endif">
-                                      <label> Highest Qualification Certificate  <span class="mandatory">*</span></label>
-                                      <input type="file" class="form-control form-control-sm  height_cet" placeholder="" value="{{old('highest_dgre_certificates')}}" name="highest_dgre_certificates">
-                                       <small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>
-                                       <span class="text-danger">{{$errors->first('highest_dgre_certificates')}}</span>
-                                    </div>
+
+                                    <div class="col-md-1 p-0 d-flex align-items-center justify-content-center" >
+                                        <span class="btn-plus add_Edu" style="margin:0px 2px"><i class="fa fa-plus"></i></span>
+                                       <span class="btn-minus" style="margin:0px 2px"><i class="fa fa-minus"></i></span>
                                   </div>
-                                 
-                                 
-                                </div>     
+                                  <input name="edu_no" id="Edu_no" type="hidden" value="0">
+                                  <span class="text-danger">{{$errors->first('edu_no')}}</span>
+
+                                </div>
+                                    <div class="Edu_no">
+
+                                    </div>
+                                </div>
                             </div>
-                        
-                        
-                            <div class="card shadow mt-3"> 
+
+
+                            <div class="card shadow mt-3">
                                 <div class="card-header p-0"> <div class="bg-head"><b>Professional Information</b></div> </div>
-                                
-                                <div class="card-body card_bd_pd1"> 
-                                
+
+                                <div class="card-body card_bd_pd1">
+
                                      <div class="row colr5 m-1 pt-3">
                                   <div class="col-md-4 mb-3">
-                                      <label>Date of joining <span class="mandatory">*</span> <span style="font-size: 12px;">( Net effective date)</span></label>
+                                      <label>Date of joining <span class="mandatory">*</span> <span style="font-size: 12px;">( First Joining date )</span></label>
                                         <input type="date" class="form-control form-control-sm ml-0" placeholder="" value="{{old('date_of_joining')}}" name="date_of_joining" onkeydown="return false">
                                         <span class="text-danger">{{$errors->first('date_of_joining')}}</span>
                                     </div>
@@ -770,7 +783,7 @@ label {
                                        <small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>
                                        <span class="text-danger">{{$errors->first('doj')}}</span>
                                     </div>
-                                    
+
                                     <div class="col-md-4 mb-3">
                                       <label>Retirement Date <span style="font-size: 12px;">(From DOB to 61 Years)</span> <span class="mandatory">*</span></label>
                                       <input type="date" class="form-control form-control-sm ml-0" placeholder="" value="{{old('retirement_date')}}" id="retirement_date" name="retirement_date" readonly>
@@ -778,10 +791,10 @@ label {
                                        <span class="text-danger">{{$errors->first('retirement_date')}}</span>
                                     </div>
                                   </div>
-                                   
-                                  
+
+
                                     <div class="row mt-3 colr5 m-1 pt-3">
-                                      
+
                                     <div class="col-md-4 pb-3">
                                       <label>Current Level/Category <span class="mandatory">*</span></label>
                                        <select class="form-control-sm select-input" id="level" name="current_level">
@@ -797,7 +810,7 @@ label {
                                       </select>
                                       <span class="text-danger">{{$errors->first('current_level')}}</span>
                                     </div>
-                                    
+
                                     <input type="hidden" name="grade_dup" value="{{old('grade_dup')}}" id="grade_dup">
                                      <div class="col-md-4 mb-3" id="grade_div" @if(old('grade_dup') == 1) style="display:block" @else style="display:none" @endif>
                                       <label>Current Grade <span class="mandatory">*</span></label>
@@ -811,19 +824,19 @@ label {
                                       </select>
                                       <span class="text-danger">{{$errors->first('current_grade')}}</span>
                                     </div>
-                                 
+
                                     <!-- <div class="col-md-4">-->
                                     <!--  <label>Current Category </label>-->
                                     <!--   <select class="form-control-sm   select-input" name="category">-->
                                     <!--        <option value="">Select</option>-->
-                                            
+
                                     <!--  </select>-->
                                     <!--  <span class="text-danger">{{$errors->first('category')}}</span>-->
                                     <!--</div>-->
                                   </div>
-                                  
-                                  
-                                   <div class="row colr5 m-1 m-0" style="background-color: #e2eeef;">  
+
+
+                                   <div class="row colr5 m-1 m-0" style="background-color: #e2eeef;">
                                   <span id="designationerrors"></span>
                                       <div class="col-md-12 pt-2" style="border-right: 1px #aedde1  solid;">
                                         <div class="row">
@@ -836,11 +849,11 @@ label {
                                                          <option value="{{ $val->id }}" @if($val->id == old('current_designation.0')) selected @endif>{{ $val->description }}</option>
                                                         @endforeach
                                                     @endif
-                                               
+
                                               </select>
                                               <span class="text-danger" >{{$errors->first('current_designation.0')}}</span>
                                             </div>
-                                            
+
                                             <div class="col-md-4">
                                               <label>Current Status <span class="mandatory">*</span></label>
                                               <select class="form-control-sm   select-input" name="current_status[]">
@@ -853,14 +866,14 @@ label {
                                               </select>
                                               <span class="text-danger" >{{$errors->first('current_status.0')}}</span>
                                             </div>
-                                            
-                                            
+
+
                                             <div class="col-md-4">
                                               <label>Current Location <span class="mandatory">*</span></label>
                                               <input type="text" class="form-control form-control-sm ml-0" id="current_location" placeholder="" value="{{old('current_location.0')}}" name="current_location[]">
                                               <span class="text-danger">{{$errors->first('current_location.0')}}</span>
                                             </div>
-                                            
+
                                             <!--<div class="col-md-4 mb-3">-->
                                             <!--  <label>Duty type <span class="mandatory">*</span></label>-->
                                             <!--  <select class="form-control-sm   select-input" name="duty_type[]">-->
@@ -873,9 +886,9 @@ label {
                                             <!--  </select>-->
                                             <!--  <span class="text-danger">{{$errors->first('duty_type.0')}}</span>-->
                                             <!--</div>-->
-                                      </div>  
+                                      </div>
                                   </div>
-                                  
+
                                    <!--<div class="col-md-1 p-0 d-flex align-items-center justify-content-center">-->
                                    <!--   <span class="btn-plus add-new" style="margin:0px 2px"><i class="fa fa-plus"></i></span>-->
                                    <!--   <span class="btn-minus" style="margin:0px 2px"><i class="fa fa-minus"></i></span>-->
@@ -883,15 +896,15 @@ label {
                                    <input name="current_designation_no" id="current_designation_no" type="hidden" value="0">
                                    <span class="text-danger">{{$errors->first('current_designation_no')}}</span>
                                 </div>
-                                
+
                                     <div class="current_designation">
-                                        
+
                                     </div>
-                                  
-                                  
+
+
                                   <p class="mt-3 mb-0 ml-1"><b>Work Experience</b></p>
-                                  
-                                  
+
+
                                    <div class="row colr5 m-1 m-0" style="background-color: #e2eeef;">
                                         <div class="col-md-11 pb-3 pt-2" style="border-right: 1px #aedde1  solid;">
                                            <div class="row">
@@ -909,7 +922,7 @@ label {
                                               </div>
                                             </div>
                                             </div>
-                                            
+
                                              <div class="col-md-4 ">
                                               <label>Designation <span class="mandatory"></span></label>
                                               <select class="form-control-sm  select-input" name="disgnation[]">
@@ -922,46 +935,46 @@ label {
                                               </select>
                                               <span class="text-danger">{{$errors->first('disgnation.0')}}</span>
                                             </div>
-                                            
+
                                              <div class="col-md-4 mt-3">
                                                   <label>Location <span class="mandatory"></span></label>
                                                   <input type="text" class="form-control form-control-sm ml-0" id="work_experience_location" placeholder="" value="{{old('work_experience_location.0')}}" name="work_experience_location[]">
                                                   <span class="text-danger">{{$errors->first('work_experience_location.0')}}</span>
                                                  </div>
-                                               </div> 
+                                               </div>
                                         </div>
-                                        
+
                                         <div class="col-md-1 p-0 d-flex align-items-center justify-content-center" >
                                               <span class="btn-plus add-new1" style="margin:0px 2px"><i class="fa fa-plus"></i></span>
                                              <span class="btn-minus" style="margin:0px 2px"><i class="fa fa-minus"></i></span>
                                         </div>
-                                        
+
                                         <input name="work_experience_no" id="work_experience_no" type="hidden" value="0">
                                         <span class="text-danger">{{$errors->first('work_experience_no')}}</span>
                                     </div>
-                                    
+
                                     <div class="work_experience">
-                                        
+
                                     </div>
-                                  
-                                
-                                </div>     
+
+
+                                </div>
                             </div>
-                        
-                            
-                            
-                            <div class="card shadow mt-3"> 
+
+
+
+                            <div class="card shadow mt-3">
                                 <div class="card-header p-0"> <div class="bg-head"><b>Bank Details</b></div> </div>
-                                
-                                <div class="card-body card_bd_pd1"> 
-                                
+
+                                <div class="card-body card_bd_pd1">
+
                                      <div class="row colr6 m-1 pt-3">
                                   <div class="col-md-4 mb-3">
                                    <label>Account holder name <span class="mandatory">*</span></label>
                                    <input type="text" class="form-control form-control-sm ml-0" id="account_holder_name" placeholder="" value="{{old('account_holder_name')}}" name="account_holder_name">
                                    <span class="text-danger">{{$errors->first('account_holder_name')}}</span>
                                   </div>
-                           
+
                                     <div class="col-md-4">
                                       <label>Bank name <span class="mandatory">*</span></label>
                                      <input type="text" class="form-control form-control-sm ml-0 " placeholder="" value="{{old('bank_name')}}" name="bank_name">
@@ -972,35 +985,35 @@ label {
                                     <!--  <input type="password" class="form-control form-control-sm  " placeholder="" value="{{old('account_number')}}" name="account_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">-->
                                     <!--  <span class="text-danger">{{$errors->first('account_number')}}</span>-->
                                     <!--</div>-->
-                                    
+
                                     <div class="col-md-4">
                                       <label>Account number <span class="mandatory">*</span></label>
                                       <input type="text" class="form-control form-control-sm  ml-0" placeholder="" value="{{old('account_number')}}" name="account_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                                       <span class="text-danger acnt_nmbr
                                       ">{{$errors->first('account_number')}}</span>
                                     </div>
-                                    
+
                                     <div class="col-md-4 mb-3">
                                       <label>IFSC code <span class="mandatory">*</span></label>
                                       <input type="text" class="form-control form-control-sm ml-0" placeholder="" value="{{old('ifsc_code')}}" name="ifsc_code" >
                                       <span class="text-danger">{{$errors->first('ifsc_code')}}</span>
                                     </div>
                                 </div>
-                                
-                                </div>     
+
+                                </div>
                             </div>
-                            
-                        
-                            <div class="card shadow mt-3"> 
+
+
+                            <div class="card shadow mt-3">
                                 <div class="card-header p-0"> <div class="bg-head"><b>Family Details</b></div> </div>
-                                
-                                <div class="card-body card_bd_pd1"> 
-                                
+
+                                <div class="card-body card_bd_pd1">
+
                                 <div class="row colr8 m-1 pt-3">
                                     <div class="col-md-11">
                                         <div class="row">
                                             <div class="col-md-4 mb-3">
-                                                <label>Relation name <span class="mandatory">*</span></label>
+                                                <label>Name <span class="mandatory">*</span></label>
                                                 <input type="text" class="form-control form-control-sm ml-0" placeholder="" value="{{old('relation_name.0')}}" name="relation_name[]">
                                                 <span class="text-danger">{{$errors->first('relation_name.0')}}</span>
                                             </div>
@@ -1023,7 +1036,7 @@ label {
                                                  <option value="{{ $val->id }}" @if($val->id == old('relation_type.0')) selected @endif>{{ $val->relation }}</option>
                                                 @endforeach
                                                 @endif
-                                              </select> 
+                                              </select>
                                               <span class="text-danger">{{$errors->first('relation_type.0')}}</span>
                                             </div>
                                             <div class="col-md-4 mb-3">
@@ -1044,29 +1057,29 @@ label {
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-1 p-0 d-flex align-items-center justify-content-center" >
                                           <span class="btn-plus add_Family" style="margin:0px 2px"><i class="fa fa-plus"></i></span>
                                          <span class="btn-minus" style="margin:0px 2px"><i class="fa fa-minus"></i></span>
                                     </div>
                                     <input name="family_no" id="Family_no" type="hidden" value="0">
                                     <span class="text-danger">{{$errors->first('family_no')}}</span>
-                                    
+
                                 </div>
-                                
+
                                 <div class="Family_no">
-                                        
+
                                 </div>
-                                
-                                </div>     
+
+                                </div>
                             </div>
-                        
-                        
-                            <div class="card shadow mt-3"> 
+
+
+                            <div class="card shadow mt-3">
                                 <div class="card-header p-0"> <div class="bg-head"><b>Nominee Details</b></div> </div>
-                                
-                                <div class="card-body card_bd_pd1"> 
-                                
+
+                                <div class="card-body card_bd_pd1">
+
                                     <div class="row colr7 m-1 pt-3" style="background-color: #e2eeef;">
                                         <div class="col-md-11 pb-3 pt-2" style="border-right: 1px #aedde1  solid;">
                                            <div class="row">
@@ -1091,7 +1104,7 @@ label {
                                               </div>
                                             </div>
                                             </div>
-                                            
+
                                              <div class="col-md-4 ">
                                             <label>Nominee gender <span class="mandatory"></span></label>
                                              <select class="form-control-sm  select-input " name="nominee_gender[]">
@@ -1102,12 +1115,12 @@ label {
                                               </select>
                                               <span class="text-danger">{{$errors->first('nominee_gender.0')}}</span>
                                             </div>
-                                            
+
                                              <div class="col-md-4">
                                                  <label>Nominee DOB <span class="mandatory"></span></label>
                                                   <input type="date" class="form-control form-control-sm " placeholder="" value="{{old('nominee_dob.0')}}" name="nominee_dob[]" onkeydown="return false">
                                                   <span class="text-danger">{{$errors->first('nominee_dob.0')}}</span>
-                                               </div> 
+                                               </div>
                                         </div>
                                        </div>
                                         <div class="col-md-1 p-0 d-flex align-items-center justify-content-center" >
@@ -1116,157 +1129,157 @@ label {
                                         </div>
                                         <input name="work_experience_no" id="Nominee_no" type="hidden" value="0">
                                         <span class="text-danger">{{$errors->first('Nominee_no')}}</span>
-                                    
+
                                  </div>
-                                 
-                                 
+
+
                                  <div class="Nominee_no">
-                                        
+
                                     </div>
-                                    
-                                    
-                                    
-                                
-                                </div>     
+
+
+
+
+                                </div>
                             </div>
-                        
-                        
-                         <div class="card mt-3 shadow"> 
-                   
+
+
+                         <div class="card mt-3 shadow">
+
                            <div class="card-header p-0"> <div class="bg-head"><b>Disciplinary cases/suspensions <span class="mandatory">*</span></b></div> </div>
-                           
+
                             <div class="card-body card_bd_pd1 colr9">
-                           
+
                               <div class="">
-                                  
+
                                 <textarea class="w-100 textarea-h" name="discplinary_cases_suspensions">{{old('discplinary_cases_suspensions')}}</textarea>
                                  <span class="text-danger">{{$errors->first('discplinary_cases_suspensions')}}</span>
                              </div>
-                              
+
                             </div>
-                           
+
                            </div>
-                        
-                            
-                        
-                        
-                        <div class="card mt-3 shadow"> 
-                   
+
+
+
+
+                        <div class="card mt-3 shadow">
+
                            <div class="card-header p-0"> <div class="bg-head"><b>Remarks <span class="mandatory"></span></b></div> </div>
-                           
+
                             <div class="card-body card_bd_pd1 colr10">
-                           
+
                               <div class="">
-                                  
+
                                  <textarea class="w-100 textarea-h" name="emp_Remarks">{{old('emp_Remarks')}}</textarea>
                                 <span class="text-danger">{{$errors->first('emp_Remarks')}}</span>
                              </div>
-                              
+
                             </div>
-                           
+
                            </div>
-                           
-                           
-                           <div class="card mt-3 shadow"> 
-                   
+
+
+                           <div class="card mt-3 shadow">
+
                            <div class="card-header p-0"> <div class="bg-head"><b>Objective/inspirations <span class="mandatory"></span></b></div> </div>
-                           
+
                             <div class="card-body card_bd_pd1 colr11">
-                           
+
                               <div class="">
-                                  
+
                                  <textarea class="w-100 textarea-h" name="objective_aspirations">{{old('objective_aspirations')}}</textarea>
                                <span class="text-danger">{{$errors->first('objective_aspirations')}}</span>
                              </div>
-                              
+
                             </div>
-                           
+
                            </div>
-                        
-                        
-                        
-                         <div class="card mt-3 shadow"> 
-                   
+
+
+
+                         <div class="card mt-3 shadow">
+
                            <div class="card-header p-0"> <div class="bg-head"><b>Rewards/Achivments <span class="mandatory"></span></b></div> </div>
-                           
+
                             <div class="card-body card_bd_pd1 colr12">
-                           
+
                               <div class="">
-                                  
+
                                   <textarea class="w-100 textarea-h" name="contributions_awards">{{old('contributions_awards')}}</textarea>
                                   <span class="text-danger">{{$errors->first('contributions_awards')}}</span>
                              </div>
-                              
+
                             </div>
-                           
+
                            </div>
-                           
-                           
-                           <div class="card mt-3 shadow"> 
-                   
+
+
+                           <div class="card mt-3 shadow">
+
                            <div class="card-header p-0"> <div class="bg-head"><b>Current role description <span class="mandatory"></span></b></div> </div>
-                           
+
                             <div class="card-body card_bd_pd1 colr13">
-                           
+
                               <div class="">
-                                  
+
                                   <textarea class="w-100 textarea-h" name="current_role_description">{{old('current_role_description')}}</textarea>
                                   <span class="text-danger">{{$errors->first('current_role_description')}}</span>
                              </div>
-                              
+
                             </div>
-                           
+
                            </div>
-                        
-                        
-                        
-                         <div class="card mt-3 rounded-0 "> 
-                   
-                          
-                           
+
+
+
+                         <div class="card mt-3 rounded-0 ">
+
+
+
                             <div class="card-body card_bd_pd1  ">
-                           
+
                               <div class="">
-                                  
+
                                   <div class="text-center mt-1 mb-2">
                                      <button class="btn btn-md btn-submit" name="submit" value="submit">Submit</button>
                                </div>
-                               
+
                              </div>
-                              
+
                             </div>
-                           
+
                            </div>
-                        
-                        
-                        
-                        
+
+
+
+
                           </div>
-        
-                        
-                         
-        
+
+
+
+
                           </div>
                         </div>
                     </form>
-                    
+
                      </div>
-                    
-                    
+
+
                     </div>
-    
+
           </main>
-               
-    
-    
-    
-    
-    
+
+
+
+
+
+
     </div>
-    
-  </div>        
-  
-  
+
+  </div>
+
+
   <script>
       $(document).ready(function(){
           $('#level').on('change',function(){
@@ -1313,14 +1326,14 @@ $(".image-box").click(function(event) {
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="assets/plugins/easyPieChart/jquery.easypiechart.js"></script>
- 
+
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
 
 <script>
     $(document).ready(function(){
         $('#current_basic_salary').on('change',function(){
             var sal = parseInt($(this).val());
-          
+
             if(sal > 21000){
                 $('#esi_number').prop('readonly',true);
             }else{
@@ -1342,7 +1355,7 @@ $(".image-box").click(function(event) {
             if(emp_type==3){
                 if($('#ulbid_list').val()){
                    alert('Select employee type HR or Non HR');
-                  $('#ulbid_list').val(''); 
+                  $('#ulbid_list').val('');
                   $('#private_form').hide();
                   return false;
                 }
@@ -1359,7 +1372,7 @@ $(".image-box").click(function(event) {
             //         $('#private_form').hide();
             //     }else{
             //         $('.emp_val').val(emp_type);
-                    
+
             //         $('#govt_form').hide();
             //     }
             // }else{
@@ -1367,7 +1380,7 @@ $(".image-box").click(function(event) {
             //     $('#private_form').hide();
             //     $('#govt_form').hide();
             // }
-            
+
         })
     })
 </script>
@@ -1384,7 +1397,7 @@ function checkulbpost(){
             if(emp_type==3){
                 if($('#ulbid_list').val()){
                    alert('Select employee type HR or Non HR');
-                  $('#ulbid_list').val(''); 
+                  $('#ulbid_list').val('');
                   $('#private_form').hide();
                   return false;
                 }
@@ -1407,8 +1420,8 @@ function checkulbpost(){
 <script>
 </script>
 
- <script>  
-// validation 
+ <script>
+// validation
 
 // jQuery.validator.addMethod("dob", function(value, element) {
 //     // $('#dob-field-error').remove();
@@ -1419,8 +1432,8 @@ function checkulbpost(){
 //         //     $('input[name=dob]').val('');
 //         //     console.log('less than 18');
 //         //     $('input[name=dob]').after('<label id="dob-field-error" class="error" for="dob-field">Age should not be less than 18 years!</label>')
-            
-//         // } 
+
+//         // }
 // //   return this.optional(element) || /^http:\/\/mycorporatedomain.com/.test(value);
 // }, "Age should not be less than 18 years!");
 
@@ -1442,9 +1455,9 @@ function checkulbpost(){
             $('#permenant_address_pin_code').val("");
         }
     });
-    
+
     // add new
-    
+
     $('.add-new').on('click', function() {
         // alert(1);
         $.ajaxSetup({
@@ -1453,7 +1466,7 @@ function checkulbpost(){
             }
         });
         var current_designation_no = $('#current_designation_no').val();
-        
+
         var district = $('#district').val();
         var ulbid = $('#ulbid_list').val();
         $.ajax({
@@ -1461,16 +1474,16 @@ function checkulbpost(){
                url:'{{ route('AddCurrentDesignation'); }}',
                data:{current_designation_no : current_designation_no, district: district, ulbid:ulbid},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
                   $(".current_designation").append(data.html);
                   $('#current_designation_no').val(data.return_numbers);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
@@ -1480,30 +1493,56 @@ function checkulbpost(){
     function remove(no)
     {
         //  $('.render'+no).css('display', 'none');
-         
+
         //  $('.current_location'+no).val('');
-         
+
          var current_designation_no = $('#current_designation_no').val();
          $.ajax({
                type:'POST',
                url:'{{ route('RemoveCurrentDesignation'); }}',
                data:{current_designation_no : current_designation_no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
-                   $('.render'+no).remove(); 
+                   $('.render'+no).remove();
                 //   $('#current_designation_no').val(data.return_numbers);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
     }
-    
+
+    // function eduremove(no)
+    // {
+    //     var edu_no = $('#Edu_no')
+
+    //     $.ajax({
+    //            type:'POST',
+    //            url:'{{ route('RemoveEdu'); }}',
+    //            data:{edu_no : edu_no},
+    //            dataType: 'JSON',
+    //            beforeSend: function()
+    //             {
+    //                 $("#overlay").fadeIn();
+    //             },
+    //            success:function(data) {
+    //                $('.edu'+no).remove();
+    //               $('#Edu_no').val(data.return_numbers);
+    //            },
+    //             complete: function()
+    //             {
+    //                 $("#overlay").fadeOut();
+    //             }
+    //         });
+    // }
+
+
+
     $('.add-new1').on('click', function() {
         // alert(1);
         $.ajaxSetup({
@@ -1517,16 +1556,16 @@ function checkulbpost(){
                url:'{{ route('AddWorkExperience'); }}',
                data:{work_experience_no : work_experience_no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
                   $(".work_experience").append(data.html);
                   $('#work_experience_no').val(data.return_numbers);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
@@ -1539,15 +1578,15 @@ function checkulbpost(){
                url:'{{ route('RemoveWorkExperience'); }}',
                data:{work_experience_no : work_experience_no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
-                   $('.render-work-exp'+no).remove(); 
+                   $('.render-work-exp'+no).remove();
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
@@ -1560,15 +1599,15 @@ function checkulbpost(){
                url:'{{ route('RemoveFamily'); }}',
                data:{family_no : family_no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
-                   $('.render-family'+no).remove(); 
+                   $('.render-family'+no).remove();
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
@@ -1586,22 +1625,22 @@ function checkulbpost(){
                url:'{{ route('AddNominee'); }}',
                data:{Nominee_no : Nominee_no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
                   $(".Nominee_no").append(data.html);
                   $('#Nominee_no').val(data.return_numbers);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
     });
-    
-    
+
+
     $('.add_Family').on('click', function() {
         $.ajaxSetup({
             headers: {
@@ -1614,21 +1653,48 @@ function checkulbpost(){
                url:'{{ route('AddFamily'); }}',
                data:{Family_no : Family_no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
                   $(".Family_no").append(data.html);
                   $('#Family_no').val(data.return_numbers);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
     });
-   
+
+    $('.add_Edu').on('click', function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var Edu_no = $('#Edu_no').val();
+        $.ajax({
+               type:'POST',
+               url:'{{ route('AddEdu'); }}',
+               data:{Edu_no : Edu_no},
+               dataType: 'JSON',
+               beforeSend: function()
+                {
+                    $("#overlay").fadeIn();
+                },
+               success:function(data) {
+                  $(".Edu_no").append(data.html);
+                  $('#Edu_no').val(data.return_numbers);
+               },
+                complete: function()
+                {
+                    $("#overlay").fadeOut();
+                }
+            });
+    });
+
      function nominee_remove(no)
     {
          var Nominee_no = $('#Nominee_no').val();
@@ -1637,15 +1703,15 @@ function checkulbpost(){
                url:'{{ route('RemoveNomineee'); }}',
                data:{Nominee_no : Nominee_no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
-                   $('.render-nominee'+no).remove(); 
+                   $('.render-nominee'+no).remove();
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
@@ -1659,7 +1725,7 @@ function checkulbpost(){
                 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
             }
         });
-        
+
         var district = $('#district').val();
         $('#ulbid_list').empty();
         $('#ulbid_list').html('<option value="">Select Ulb </option>');
@@ -1668,8 +1734,8 @@ function checkulbpost(){
                url:'{{ route('GetUlbs'); }}',
                data:{district : district},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
@@ -1679,16 +1745,16 @@ function checkulbpost(){
                        $('.ulbhide').css('display','none');
                  }else{
                       $.each(data, function(key, value) {
-                     
+
                           $('#ulbid_list').append('<option value="'+ value.ulbid +'">'+ value.ulbname +'</option>');
-                      
-                    }); 
+
+                    });
                  }
-                
+
                 GetCurrentDesignation(district);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
@@ -1699,15 +1765,15 @@ function checkulbpost(){
          GetCurrentDesignation(district);
       //   alert( "ready!" );
       }
-      
+
     });
     function GetCurrentDesignationByUlb()
     {
         var district = $('#district').val();
-        
+
         GetCurrentDesignation(district);
     }
-    
+
     function validateDesignationAvaibility(e) {
         closediv();
         var designation = e;
@@ -1720,14 +1786,14 @@ function checkulbpost(){
                 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
             }
         });
-        
+
         $.ajax({
                type:'POST',
                url:'{{ route('validateSelectedDesignationAvaibility'); }}',
                data:{designation: designation, district : district, ulbid: ulbid, employee_type:employee_type },
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {},
@@ -1743,13 +1809,13 @@ function checkulbpost(){
                 complete: function()  {   $("#overlay").fadeOut(); }
             });
     }
-    
+
     function closediv(){
         $('.input-error').hide();
     }
     function GetCurrentDesignation(district)
     {
-        
+
         jQuery('.current_designation div').html('');
 
         $.ajaxSetup({
@@ -1765,8 +1831,8 @@ function checkulbpost(){
                url:'{{ route('GetCurrentDesignationS'); }}',
                data:{district : district, ulbid: ulbid },
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
@@ -1775,13 +1841,13 @@ function checkulbpost(){
                         $('.current_designations').append('<option value="'+ value.id +'">'+ value.description +'</option>');
                     });
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
     }
-    
+
     function GetMaritalStatusDtl()
     {
         $.ajaxSetup({
@@ -1798,16 +1864,16 @@ function checkulbpost(){
                url:'{{ route('GetMaritalStatus'); }}',
                data:{matrialstatusid : matrialstatusid},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
                  $("#if_select_single").prop("readonly", false);
                  $('.MaritalHeading').text(data.status_name);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
@@ -1943,7 +2009,7 @@ function checkulbpost(){
 
     function GetDiscipline(NameoftheDegree)
     {
-      
+
       var deg = parseInt($('#degree').val());
         //  alert(deg);
             if(deg == '1' || deg == ''){
@@ -1965,8 +2031,8 @@ function checkulbpost(){
                url:'{{ route('GetDisciplineLists'); }}',
                data:{nameofthedegree : NameoftheDegree.value},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
@@ -1974,8 +2040,8 @@ function checkulbpost(){
                         $('#discpline').append('<option value="'+ value.id +'">'+ value.discpline +'</option>');
                     });
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
@@ -1992,7 +2058,7 @@ function checkulbpost(){
             $('input[name=dob]').after('<label id="dob-field-error" class="error" for="dob-field">Age should not be less than 18 years!</label>')
         }else{
             var r_date = new Date(Bday.setFullYear(Bday.getFullYear() + 61));
-            
+
             const offset = r_date.getTimezoneOffset()
             yourDate = new Date(r_date.getTime() - (offset*60*1000));
             r_date = yourDate.toISOString().split('T')[0];
@@ -2002,7 +2068,7 @@ function checkulbpost(){
 
 
     </script>
-    
+
     <script>
         $(document).ready(function(){
             $('#district').on('change',function(){

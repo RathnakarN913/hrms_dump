@@ -2,7 +2,7 @@
     <div class="col-md-11">
         <div class="row">
             <div class="col-md-4 mb-3">
-                <label>Relation name <span class="mandatory">*</span></label>
+                <label>Name <span class="mandatory">*</span></label>
                 <input type="text" class="form-control form-control-sm ml-0" placeholder="" value="{{old('relation_name')}}" name="relation_name[]">
                 <span class="text-danger">{{$errors->first('relation_name')}}</span>
             </div>
@@ -25,7 +25,7 @@
                  <option value="{{ $val->id }}" @if($val->id == old('relation_type')) selected @endif>{{ $val->relation }}</option>
                 @endforeach
                 @endif
-              </select> 
+              </select>
               <span class="text-danger">{{$errors->first('relation_type')}}</span>
             </div>
             <div class="col-md-4 mb-3">
@@ -46,24 +46,13 @@
             <!--</div>-->
         </div>
     </div>
-    
+
     <div class="col-md-1 p-0 d-flex align-items-center justify-content-center" >
           <!--<span class="btn-plus add_Family" style="margin:0px 2px"><i class="fa fa-plus"></i></span>-->
          <span class="btn-minus" onClick="family_remove(<?php echo $numbers; ?>);" style="margin:0px 2px"><i class="fa fa-minus"></i></span>
     </div>
-    <input name="family_no" id="Family_no" type="hidden" value="0">
-    <span class="text-danger">{{$errors->first('Nominee_no')}}</span>
-    
+    {{-- <input name="family_no" id="Family_no" type="hidden" value="0">
+    <span class="text-danger">{{$errors->first('Nominee_no')}}</span> --}}
+
 </div>
 
-<script>
-    
-    $('#work_experience_location1').bind('keypress', work_experience_locationfieldInput1);
-    $('#work_experience_location1').bind('paste', work_experience_locationfieldInput1);
-    
-    function work_experience_locationfieldInput1(event) {
-       var value = String.fromCharCode(event.which);
-       var pattern = new RegExp(/[a-zåäö ]/i);
-       return pattern.test(value);
-    }
-</script>

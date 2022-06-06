@@ -123,9 +123,11 @@ Route::any('add-new-work-experience', [AddEmployeeController::class,'AddWorkExpe
 Route::any('remove-work-experience', [AddEmployeeController::class,'RemoveWorkExperience'])->name('RemoveWorkExperience');
 Route::any('add-Nomineee', [AddEmployeeController::class,'AddNominee'])->name('AddNominee');
 Route::any('add-Family', [AddEmployeeController::class,'AddFamily'])->name('AddFamily');
+Route::any('add-Edu', [AddEmployeeController::class,'AddEdu'])->name('AddEdu');
 
 Route::any('remove-Nomineee', [AddEmployeeController::class,'RemoveNomineee'])->name('RemoveNomineee');
 Route::any('remove-family', [AddEmployeeController::class,'RemoveFamily'])->name('RemoveFamily');
+Route::any('remove-edu', [AddEmployeeController::class,'RemoveEdu'])->name('RemoveEdu');
 
 Route::any('view-employee', [AddEmployeeController::class,'ViewEmployee'])->name('ViewEmployee');
 Route::any('reject_employee', [AddEmployeeController::class,'reject_employee'])->name('reject_employee');

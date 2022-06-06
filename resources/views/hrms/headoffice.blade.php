@@ -88,9 +88,9 @@ td input.form-control {
                                 <div class="row align-items-center mt-3 mb-3 ">
                                     <div class="col-md-6">
                                         <h4><b>Head Office Sanctioned Post Entries </b></h4></div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <input id="myInput" type="text" placeholder="Search.." class="form-control mb-3" style="">
-                                </div>
+                                </div> --}}
                             </div>
                         <!--<div class="mb-4"><h4><b>  </b></h4></div>-->
                         <!--     <input id="myInput" type="text" placeholder="Search.." class="form-control mb-3" style="width:20%">-->
@@ -253,33 +253,35 @@ td input.form-control {
   <!-- Bootstrap bundle JS -->
    @include('headers.footer')
 
+   <script>
+    $(document).ready(function(){
+        $('#example1').DataTable({
+              "bPaginate": false,
+              dom: 'Bfrtip',
+              buttons: [
 
-  <!--  <script>-->
-  <!--    $(document).ready(function(){-->
-  <!--        $('#example1').DataTable({-->
-  <!--              "bPaginate": false,-->
-  <!--              dom: 'Bfrtip',-->
-  <!--              footerCallback: function (row, data, start, end, display) {-->
-  <!--              var api = this.api();-->
+                ],
+              footerCallback: function (row, data, start, end, display) {
+              var api = this.api();
 
-                // Remove the formatting to get integer data for summation
-  <!--              var intVal = function (i) {-->
-  <!--                  return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;-->
-  <!--              };-->
+              // Remove the formatting to get integer data for summation
+              var intVal = function (i) {
+                  return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+              };
 
-                // Total over this page
-  <!--              for(let i=2;i<6;i++){-->
-  <!--                  pageTotal = api-->
-  <!--                  .column(i, { page: 'current' })-->
-  <!--                  .data()-->
-  <!--                  .reduce(function (a, b) {-->
-  <!--                      return intVal(a) + intVal(b);-->
-  <!--                  }, 0);-->
+              // Total over this page
+              for(let i=2;i<6;i++){
+                  pageTotal = api
+                  .column(i, { page: 'current' })
+                  .nodes()
+                  .reduce(function (a, b) {
+                      return intVal(a) + intVal($('input', b).val());
+                  }, 0);
 
-                // Update footer
-  <!--              $(api.column(i).footer()).html(pageTotal);-->
-  <!--              }-->
-  <!--          },-->
-  <!--        });-->
-  <!--    })-->
-  <!--</script>-->
+              // Update footer
+              $(api.column(i).footer()).html(pageTotal);
+              }
+          },
+        });
+    })
+</script>

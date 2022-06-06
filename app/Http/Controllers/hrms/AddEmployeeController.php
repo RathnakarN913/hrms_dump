@@ -166,6 +166,15 @@ class AddEmployeeController extends Controller
         $return_array = array('return_numbers' => $numbers);
         echo json_encode($return_array);
     }
+
+    public function RemoveEdu(Request $request)
+    {
+        $get_numbers = $request->edu_no;
+        $numbers = $get_numbers-1;
+
+        $return_array = array('return_numbers' => $numbers);
+        echo json_encode($return_array);
+    }
     public function AddNominee(Request $request)
     {
         $get_numbers = $request->Nominee_no;
@@ -183,6 +192,17 @@ class AddEmployeeController extends Controller
         $numbers = $get_numbers+1;
         $relations = RelationModel::all();
         $html = view('hrms/Add_Emp_Common/family-add-more', compact("numbers", "relations"))->render();
+        //echo $html;
+        $return_array = array('html' => $html, 'return_numbers' => $numbers);
+        echo json_encode($return_array);
+    }
+    public function AddEdu(Request $request)
+    {
+        $get_numbers = $request->Family_no;
+        $numbers = $get_numbers+1;
+        $relations = RelationModel::all();
+        $educations = EducationModel::all();
+        $html = view('hrms/Add_Emp_Common/edu-add-more', compact("numbers", "educations"))->render();
         //echo $html;
         $return_array = array('html' => $html, 'return_numbers' => $numbers);
         echo json_encode($return_array);

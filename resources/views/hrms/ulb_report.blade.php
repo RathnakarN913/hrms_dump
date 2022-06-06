@@ -57,7 +57,7 @@ padding: 25px;
         <div class="content-wrapper">
           <div class="row">
             <div class="col-md-12 ">
-              
+
             </div>
           </div>
           @if($errors->any())
@@ -71,20 +71,20 @@ padding: 25px;
 
        <!--start content-->
               <main class="page-content">
-    
+
 <div  >
-  <div >  
-  
+  <div >
+
     <div class="">
-        
+
       <div class="table-content">
-          
+
         <!--<div class="mb-4"><h4><b>ULB Sanction Posts Report</b></h4></div>-->
-        
+
         <!--<form name="frm" method="post" action="{{ url('/ulbinsert') }}">-->
          <!--@csrf-->
          <div id="table-print " class="">
-             
+
                 <!-- <div class="row align-items-center mt-3 mb-3 ">-->
                 <!--    <div class="col-md-6">-->
                 <!--        <h4><b></b></h4></div>-->
@@ -92,13 +92,13 @@ padding: 25px;
                 <!--        <input id="myInput" type="text" placeholder="Search.." class="form-control">-->
                 <!--    </div>-->
                 <!--</div>-->
-            
+
              <!--<input id="myInput" type="text" placeholder="Search.." class="form-control">-->
-             
+
               <div class="card ">
                           <div class="card-header bg-white"><b>ULB Sanction Posts Report </b></div>
                        <div class="card-body" style="padding-left: 0px !important;">
-                           
+
                             <div class="table-responsive thead-scroll">
                 <table class="table table-bordered table-striped " id="example1">
           <thead class="t-head">
@@ -108,7 +108,7 @@ padding: 25px;
             @foreach($designation as $des)
                 <th colspan="3">{{$des->description}}</th>
             @endforeach
-          
+
               <th colspan="3">Total</th>
             </tr>
             <tr class="table-primary text-center">
@@ -117,7 +117,7 @@ padding: 25px;
                     <td>Available</td>
                     <td>Total</td>
                 @endforeach
-              
+
                 <td>Occupied</td>
                 <td>Available</td>
                 <td>Total</td>
@@ -139,8 +139,8 @@ padding: 25px;
                     <td>{{$ulb_count[$ulb->ulbid]}}</td>
                 </tr>
               @endforeach
-              
-           
+
+
            </tbody>
            <tfoot>
                <tr class="total-bg">
@@ -149,11 +149,11 @@ padding: 25px;
                    <th>{{$des_occupy[$des->id]}}</th>
                    <th>{{ $des_count[$des->id] - $des_occupy[$des->id] }}</th>
                     <th>{{$des_count[$des->id]}}</th>
-                    
+
                     @php
                         $total_occupy = $total_occupy + $des_occupy[$des->id];
                     @endphp
-                    
+
                    @endforeach
                    <th>{{$total_occupy}}</th>
                    <th>{{$total - $total_occupy}}</th>
@@ -163,25 +163,25 @@ padding: 25px;
 
         </table>
            </div>
-                           
-                           
+
+
                         </div>
-              </div>          
-              
-           
-           
+              </div>
+
+
+
         </div>
-        
-        
+
+
           <center>
-              
+
          <button onclick="exportTableToExcel('example', 'Overall report')" class="export-xl btn btn-success btn-sm" style="    background-color: #56a400; border-color: #56a400;">Export Excel</button>
          </center>
         <!--</form>-->
       </div>
     </div>
-    
-  </div>  
+
+  </div>
 </div>
 
 
@@ -195,17 +195,17 @@ padding: 25px;
        <!--End Back To Top Button-->
 
   </div>
-  
+
 
 
 
 
   <!--end wrapper-->
 
- 
+
   <!-- Bootstrap bundle JS -->
    @include('headers.footer')
- 
+
    <script>
     var myApp = new function () {
         this.printTable = function () {
@@ -225,12 +225,12 @@ padding: 25px;
                 dom: 'Bfrtip',
                 footerCallback: function (row, data, start, end, display) {
                 var api = this.api();
-     
+
                 // Remove the formatting to get integer data for summation
                 var intVal = function (i) {
                     return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
                 };
-                
+
                 // Total over this page
                 for(let i=2;i<17;i++){
                     pageTotal = api
@@ -239,7 +239,7 @@ padding: 25px;
                     .reduce(function (a, b) {
                         return intVal(a) + intVal(b);
                     }, 0);
-     
+
                 // Update footer
                 $(api.column(i).footer()).html(pageTotal);
                 }
@@ -247,6 +247,5 @@ padding: 25px;
           });
       })
   </script>
-   
-   
-   
+
+

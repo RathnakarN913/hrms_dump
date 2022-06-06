@@ -128,9 +128,9 @@ td input.form-control {
             <div class="row align-items-center mt-4 mb-4 ">
                     <div class="col-md-6">
                         <h4><b>ULB Sanctioned Post Entries </b></h4></div>
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <input id="myInput" type="text" placeholder="Search.." class="form-control">
-                </div>
+                </div> --}}
             </div>
         <form action="" method="post" id="ulb_form">
             @csrf
@@ -158,7 +158,7 @@ td input.form-control {
          @csrf
          <input type="hidden" name="ulbid" id="ulbid" value="{{ $ulb_name->ulbid }}">
          <input type="hidden" name="distid" id="distid" value="{{ $ulb_name->distid }}">
-        <table class="" border="1" id="example" style="margin-left: 223px;">
+        <table class="table" border="1" id="example1" style="width:100%">
           <thead class="t-head" style="position: sticky;top: 0;">
             <tr class="table-primary text-center">
               <th>S.NO</th>
@@ -183,7 +183,7 @@ td input.form-control {
                                 <p class="error_div" style="display:none;color:red;" id="error{{$des->id}}{{$type->employee_type_id}}"></p>
                             </td>
                         @endforeach
-                    <td>{{ $post_count->where('designation_id',$des->id)->sum('post_sanctioned') }}</td>
+                    <td> <input type="hidden" value="{{ $post_count->where('designation_id',$des->id)->sum('post_sanctioned') }}"> {{ $post_count->where('designation_id',$des->id)->sum('post_sanctioned') }}</td>
                 </tr>
               @endforeach
            </tbody>
@@ -308,3 +308,36 @@ td input.form-control {
             $('#ulb').select2();
         });
     </script>
+
+<script>
+    $(document).ready(function(){
+        $('#example1').DataTable({
+              "bPaginate": false,
+              dom: 'Bfrtip',
+              buttons: [
+                    
+                ],
+              footerCallback: function (row, data, start, end, display) {
+              var api = this.api();
+
+              // Remove the formatting to get integer data for summation
+              var intVal = function (i) {
+                  return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+              };
+
+              // Total over this page
+              for(let i=2;i<6;i++){
+                  pageTotal = api
+                  .column(i, { page: 'current' })
+                  .nodes()
+                  .reduce(function (a, b) {
+                      return intVal(a) + intVal($('input', b).val());
+                  }, 0);
+
+              // Update footer
+              $(api.column(i).footer()).html(pageTotal);
+              }
+          },
+        });
+    })
+</script>
