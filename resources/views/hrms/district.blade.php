@@ -126,24 +126,30 @@ td input.form-control {
                           </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4">
+                                <label for="district">Select District</label>
+                                <form action="" method="post" id="dist_form" name="dist_form">
+                                    @csrf
+                                    <select name="district" class="form-control" id="district">
+                                        <option value="">---Select District---</option>
+                                            @foreach ($district as $dist)
+                                                <option value="{{ $dist->distid }}" @if($dist->distid == $ind_dist) selected @endif>{{ $dist->distname }}</option>
+                                            @endforeach
+                                    </select>
+                                </form>
+                            </div>
+                            <div class="col">
+                                <h3 class="mt-4"><b>District : {{ $ind_dist_name }}</b></h3>
+                            </div>
+                        </div>
+                        <br>
                           <form name="frm" method="post" id="myform" action="{{ url('/districtinsert') }}">
                             @csrf
 
-                            <div class="row">
-                                <div class="col"></div>
-                                <div class="col">
-                                    <label for="district">Select District</label>
-                                    <select name="district" class="form-control" id="district">
-                                        <option value="">---Select District---</option>
-                                        @foreach ($district as $dist)
-                                            <option value="{{ $dist->distid }}" @if($dist->distid == '01') selected @endif>{{ $dist->distname }}</option>
-                                        @endforeach
 
-                                    </select>
-                                </div>
-                                <div class="col"></div>
-                            </div>
-                            <br>
+
 
                             <div class="table-responsive table thead-scroll">
                           <table class="table table-bordered" id="example">
@@ -160,6 +166,7 @@ td input.form-control {
 
                             </thead>
                             <input type="hidden" name="levelid" value="{{$designation[0]->designation_level}}" class="form-control">
+                            <input type="hidden" name="dist" id="" value="{{ $ind_dist }}">
                             <tbody class="text-center" id="search_content">
                                 @php $i = 1 @endphp
 
@@ -169,42 +176,16 @@ td input.form-control {
                                     <td>{{$des->description}}</td>
                                     @foreach($emp_type as $type)
                                         <td>
-                                            <input type="text" name="post[]" id="post{{ $des->id }}{{ $type->employee_type_id }}" class="form-control post" @if($type->employee_type_desc == 'Government') @if(!$des->govt) readonly @endif @endif @if($des->govt) @if($type->employee_type_desc == 'Government') @else readonly @endif @endif onkeyup="javascript: this.value=this.value.match(/\d*/);">
-                                            <input type="hidden" name="designation" id="desi{{ $des->id }}{{ $type->employee_type_id }}" value="{{ $des->id }}" class="form-control" >
+                                            <input type="text" name="post[]" id="post{{ $des->id }}{{ $type->employee_type_id }}" value="{{ $desi_val->where('employee_type',$type->employee_type_id)->where('designation_id',$des->id)->sum('post_sanctioned') }}" class="form-control post" @if($type->employee_type_desc == 'Government') @if(!$des->govt) readonly @endif @endif @if($des->govt) @if($type->employee_type_desc == 'Government') @else readonly @endif @endif onkeyup="javascript: this.value=this.value.match(/\d*/);">
+                                            <input type="hidden" name="designation[]" id="desi{{ $des->id }}{{ $type->employee_type_id }}" value="{{ $des->id }}" class="form-control" >
                                             <input type="hidden" name="emp_type[]" id="emp{{ $des->id }}{{ $type->employee_type_id }}" value="{{ $type->employee_type_id }}">
                                             <p class="error_div" style="display:none;color:red;" id="error{{ $des->id }}{{ $type->employee_type_id }}"></p>
                                         </td>
                                     @endforeach
-                                    <td></td>
+                                    <td>{{ $desi_val->where('designation_id',$des->id)->sum('post_sanctioned') }}</td>
                                 </tr>
 
                                  @endforeach
-                            {{-- @foreach($district as $dist)
-
-                                <tr class="pad-tdd">
-                                    <td class="sticky-col first-col">{{$i++}}</td>
-                                    <td style="font-size: 12px !important;" class="sticky-col second-col">{{$dist->distname}}</td>
-                                    @for($s=0;$s < count($designation);$s++)
-                                        @foreach($emp_type as $type)
-                                            <td class="input-group-sm" >
-                                                <input type="number" @if($type->employee_type_desc == 'HR') @if(!$designation[$s]->hr) readonly @endif @endif @if($type->employee_type_desc == 'Non HR') @if(!$designation[$s]->non_hr) readonly @endif @endif @if($type->employee_type_desc == 'Government') @if(!$designation[$s]->govt) readonly @endif @endif name="post[]" value="{{$ind_count[$dist->distid][$designation[$s]->id][$type->employee_type_id]}}" id="post{{$designation[$s]->id}}{{$dist->distid}}{{$type->employee_type_id}}" class="form-control post" >
-                                                <input type="hidden" name="distid[]" value="{{$dist->distid}}" id="dist{{$designation[$s]->id}}{{$dist->distid}}{{$type->employee_type_id}}" class="form-control">
-                                                <input type="hidden" name="desid[]" value="{{$designation[$s]->id}}" id="desi{{$designation[$s]->id}}{{$dist->distid}}{{$type->employee_type_id}}" class="form-control">
-                                                <input type="hidden" name="emp_type[]" value="{{$type->employee_type_id}}" id="emp{{$designation[$s]->id}}{{$dist->distid}}{{$type->employee_type_id}}" class="form-control">
-                                                <p class="error_div" style="display:none;color:red;" id="error{{$designation[$s]->id}}{{$dist->distid}}{{$type->employee_type_id}}"></p>
-
-                                            </td>
-                                        @endforeach
-                                        <td class="input-group-sm">
-                                            {{$count[$dist->distid][$designation[$s]->id]}}
-                                            <!--<input type="number" value="" class="form-control post">-->
-                                        </td>
-                                    @endfor
-                                    <td>{{$dist_count[$dist->distid]}}</td>
-                                </tr>
-
-                            @endforeach --}}
-
 
                             </tbody>
 
@@ -212,9 +193,9 @@ td input.form-control {
                                 <tr class="total-bg">
                                 <td colspan="2">Total</td>
                                 @foreach($emp_type as $type)
-                                <td></td>
+                                <td>{{ $desi_val->where('employee_type',$type->employee_type_id)->sum('post_sanctioned') }}</td>
                                 @endforeach
-                                <td></td>
+                                <td>{{ $desi_val->sum('post_sanctioned') }}</td>
                             </tr>
                             </tfoot>
 
@@ -243,6 +224,13 @@ td input.form-control {
   </div>
   <!--end wrapper-->
 
+  <script>
+      $(document).ready(function(){
+          $('#district').on('change',function(){
+              var form = $('#dist_form').submit();
+          })
+      })
+  </script>
  <script>
   $('#myform').submit(function (e) {
     var form = this;

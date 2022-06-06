@@ -138,56 +138,18 @@ class SanctionedPostController extends Controller
         if(Session::get('user_type')=='AO')
         {
              $data['district'] = DistricstsModel::orderby('distname','asc')->get();
-
              $data['designation'] = Hrms_DesignationsModel::where('designation_level',2)->orderby('sort_order','asc')->get();
-
-            //  dd($data['designation']->pluck('id'));
-
              $data['emp_type'] = EmployeeType::all();
 
-            //  dd($data['designation']);
-
-             foreach($data['district'] as $dist){
-                 foreach($data['designation'] as $des){
-                     foreach($data['emp_type'] as $type){
-                         $calu = array(
-                            'district_id' => $dist->distid,
-                            'level_id' => 2,
-                            'designation_id' => $des->id,
-                            'employee_type' => $type->employee_type_id,
-                        );
-                        $calu1 = array(
-                            // 'district_id' => $dist->distid,
-                            'level_id' => 2,
-                            'designation_id' => $des->id,
-                            'employee_type' => $type->employee_type_id,
-                        );
-
-                        $data['ind_count'][$dist->distid][$des->id][$type->employee_type_id] = Hrms_Sanctioned_PostsModel::where($calu)->sum('post_sanctioned');
-                        $data['ind_des_count'][$des->id][$type->employee_type_id] = Hrms_Sanctioned_PostsModel::where($calu1)->sum('post_sanctioned');
-
-                     }
-                     $data1 = array(
-                        'district_id' => $dist->distid,
-                        'level_id' => 2,
-                        'designation_id' => $des->id,
-                    );
-                    $data2 = array(
-                        'district_id' => $dist->distid,
-                        'level_id' => 2,
-                    );
-                     $data['count'][$dist->distid][$des->id] = Hrms_Sanctioned_PostsModel::where($data1)->sum('post_sanctioned');
-                 }
-                 $data['dist_count'][$dist->distid] = Hrms_Sanctioned_PostsModel::where($data2)->sum('post_sanctioned');
+             if($request->district){
+                 $data['ind_dist'] = $request->district;
+             }else{
+                $data['ind_dist'] = '01';
              }
+             $data['ind_dist_name'] = DistricstsModel::where('distid',$data['ind_dist'])->value('distname');
+             $data['desi_val'] = Hrms_Sanctioned_PostsModel::where('district_id',$data['ind_dist'])->get();
 
-             foreach($data['designation'] as $des){
-                 $data3 = array(
-                        'level_id' => 2,
-                        'designation_id' => $des->id,
-                    );
-                $data['des_count'][$des->id] = Hrms_Sanctioned_PostsModel::where($data3)->sum('post_sanctioned');
-             }
+
              $data['total'] = Hrms_Sanctioned_PostsModel::where('level_id',2)->sum('post_sanctioned');
         }
     //   dd($data['designation']);
@@ -246,6 +208,7 @@ return;
 
      public function districtinsert(Request $request)
     {
+        dd($request->all());
         $login_id= Session::get('user_id');
 
         $post = $request->post;
