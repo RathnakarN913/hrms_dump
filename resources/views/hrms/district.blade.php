@@ -86,6 +86,19 @@ td input.form-control {
 .t-head {
     z-index:99;
 }
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 1px !important;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+    display: block;
+    padding-left: 8px;
+    padding-right: 20px;
+    overflow: visible !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 </style>
 
 
@@ -129,11 +142,11 @@ td input.form-control {
                         <div class="row">
                             <div class="col-md-1"></div>
                             <div class="col-md-4">
-                                <label for="district">Select District</label>
+                                {{-- <label for="district">Select District</label> --}}
                                 <form action="" method="post" id="dist_form" name="dist_form">
                                     @csrf
-                                    <select name="district" class="form-control" id="district">
-                                        <option value="">---Select District---</option>
+                                    <select name="district" id="district">
+                                        <option value="">Select District</option>
                                             @foreach ($district as $dist)
                                                 <option value="{{ $dist->distid }}" @if($dist->distid == $ind_dist) selected @endif>{{ $dist->distname }}</option>
                                             @endforeach
@@ -141,7 +154,7 @@ td input.form-control {
                                 </form>
                             </div>
                             <div class="col">
-                                <h3 style="margin-top: 39px;"><b>District : {{ $ind_dist_name }}</b></h3>
+                                <h4><b>District : {{ $ind_dist_name }}</b></h4>
                             </div>
                         </div>
                         <br>
@@ -152,7 +165,7 @@ td input.form-control {
 
 
                             <div class="table-responsive table thead-scroll">
-                          <table class="table table-bordered" id="example">
+                          <table class="table table-bordered" id="example" style="width:80%;margin-left: 93px;">
                             <thead>
                               <tr class="table-primary text-center">
                                 <th>S.NO</th>
@@ -309,7 +322,11 @@ $(document).ready(function() {
 });
 </script>
 
-
+<script>
+    $(document).ready(function() {
+        $('#district').select2();
+    });
+</script>
   <!-- Bootstrap bundle JS -->
    @include('headers.footer')
 
