@@ -1051,7 +1051,7 @@ class AddEmployeeController extends Controller
     public function EditUpdateEmployee(Request $request)
     {
 
-       $relations = RelationModel::all();
+       $relations = RelationModel::where('status',2)->get();
        $districts = DistricstsModel::all();
        $religions = ReligionModel::all();
        $casts = CastModel::all();
