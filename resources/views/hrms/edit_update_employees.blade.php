@@ -917,20 +917,20 @@ input:read-only {
                               <div class="row  colr6 m-1 pt-3">
 
                               <div class="col-md-4">
-                               <label>Account Holder Name <span class="mandatory"></span> </label>
+                               <label>Account Holder Name <span class="mandatory">*</span> </label>
                                <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" id="account_holder_name" value="{{ $employeesDTL[0]->account_holder_name }}" name="account_holder_name">
                               </div>
 
                                 <div class="col-md-4">
-                                  <label>Bank Name <span class="mandatory"></span></label>
+                                  <label>Bank Name <span class="mandatory">*</span></label>
                                  <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" value="{{ $employeesDTL[0]->bank_name }}" name="bank_name">
                                 </div>
                                 <div class="col-md-4">
-                                  <label>Account Number <span class="mandatory"></span></label>
+                                  <label>Account Number <span class="mandatory">*</span></label>
                                   <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" value="{{ $employeesDTL[0]->account_number }}" name="account_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                                 </div>
                                 <div class="col-md-4">
-                                  <label>IFSC Code <span class="mandatory"></span> </label>
+                                  <label>IFSC Code <span class="mandatory">*</span> </label>
                                   <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" value="{{ $employeesDTL[0]->ifsc_code }}" name="ifsc_code" >
                                 </div>
                             </div>
