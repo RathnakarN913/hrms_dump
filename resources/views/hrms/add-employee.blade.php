@@ -699,11 +699,11 @@ label {
                                                     <option value="">Select</option>
                                                     @if($educations)
                                                         @foreach($educations as $key=> $val)
-                                                        <option value="{{ $val->id }}" @if($val->id == old('degree')) selected @endif>{{ $val->education_name }}</option>
+                                                        <option value="{{ $val->id }}" @if($val->id == old('degree.0')) selected @endif>{{ $val->education_name }}</option>
                                                         @endforeach
                                                     @endif
                                                 </select>
-                                                <span class="text-danger">{{$errors->first('degree')}}</span>
+                                                <span class="text-danger">{{$errors->first('degree.0')}}</span>
                                             </div>
                                             <div class="col-md-4">
                                                 <label>Year of Passing <span class="mandatory">*</span></label>
@@ -711,16 +711,16 @@ label {
                                                     <option value="">Select</option>
                                                     @if($years)
                                                         @foreach($years as $key=> $val)
-                                                        <option value="{{ $val->id }}" @if($val->id == old('year_of_passing')) selected @endif>{{ $val->year }}</option>
+                                                        <option value="{{ $val->id }}" @if($val->id == old('year_of_passing.0')) selected @endif>{{ $val->year }}</option>
                                                         @endforeach
                                                     @endif
                                                 </select>
-                                                <span class="text-danger">{{$errors->first('year_of_passing')}}</span>
+                                                <span class="text-danger">{{$errors->first('year_of_passing.0')}}</span>
                                             </div>
                                             <div class="col-md-4">
                                                 <label>University/College <span class="mandatory">*</span></label>
-                                                <input type="text" class="form-control form-control-sm ml-0" id="university_college" placeholder="" value="{{old('university_college')}}" name="university_college[]">
-                                                <span class="text-danger">{{$errors->first('university_college')}}</span>
+                                                <input type="text" class="form-control form-control-sm ml-0" id="university_college" placeholder="" value="{{old('university_college.0')}}" name="university_college[]">
+                                                <span class="text-danger">{{$errors->first('university_college.0')}}</span>
                                             </div>
                                             <div class="col-md-4">
                                                 <label>Specialization <span class="mandatory"></span></label>
@@ -732,8 +732,8 @@ label {
                                                     @endforeach
                                                     @endif--}}
                                                 {{-- </select> --}}
-                                                <input type="text" name="discpline[]" id="" value="{{ old('discpline') }}" class="form-control">
-                                                <span class="text-danger">{{$errors->first('discpline')}}</span>
+                                                <input type="text" name="discpline[]" id="" value="{{ old('discpline.0') }}" class="form-control">
+                                                <span class="text-danger">{{$errors->first('discpline.0')}}</span>
                                             </div>
                                             <div class="col-md-4 mb-3">
                                                 <label>Upload SSC Certificate  <span class="mandatory">*</span></label>
@@ -741,11 +741,11 @@ label {
                                                 <small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>
                                                 <span class="text-danger">{{$errors->first('certificates')}}</span>
                                             </div>
-                                            <div class="col-md-4 mb-3 height_cet" style="display:@if(old('degree')>1)block @else none @endif">
+                                            <div class="col-md-4 mb-3 height_cet" style="display:@if(old('degree.0')>1)block @else none @endif">
                                                 <label> Highest Qualification Certificate  <span class="mandatory">*</span></label>
-                                                <input type="file" class="form-control form-control-sm  height_cet" placeholder="" value="{{old('highest_dgre_certificates')}}" name="highest_dgre_certificates[]">
+                                                <input type="file" class="form-control form-control-sm  height_cet" placeholder="" value="{{old('highest_dgre_certificates.0')}}" name="highest_dgre_certificates[]">
                                                 <small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>
-                                                <span class="text-danger">{{$errors->first('highest_dgre_certificates')}}</span>
+                                                <span class="text-danger">{{$errors->first('highest_dgre_certificates.0')}}</span>
                                             </div>
                                         </div>
                                     </div>
