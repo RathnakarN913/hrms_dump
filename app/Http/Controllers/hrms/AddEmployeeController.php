@@ -37,6 +37,7 @@ use App\Models\hrms\Ulbs;
 use App\Models\hrms\EmployeeType;
 use App\Models\hrms\SanctionedPosts;
 use App\Models\hrms\EmployeeFamilyDetails;
+use App\Models\hrms\EmployeeEducationDetailsModel;
 
 use Session;
 use DB;
@@ -179,7 +180,7 @@ class AddEmployeeController extends Controller
     {
         $get_numbers = $request->Nominee_no;
         $numbers = $get_numbers+1;
-        $relations = RelationModel::all();
+        $relations = RelationModel::where('status',2)->get();
         $html = view('hrms/Add_Emp_Common/nomine-add-more', compact("numbers", "relations"))->render();
         //echo $html;
         $return_array = array('html' => $html, 'return_numbers' => $numbers);
@@ -190,7 +191,7 @@ class AddEmployeeController extends Controller
     {
         $get_numbers = $request->Family_no;
         $numbers = $get_numbers+1;
-        $relations = RelationModel::all();
+        $relations = RelationModel::where('status',2)->get();
         $html = view('hrms/Add_Emp_Common/family-add-more', compact("numbers", "relations"))->render();
         //echo $html;
         $return_array = array('html' => $html, 'return_numbers' => $numbers);
@@ -198,11 +199,12 @@ class AddEmployeeController extends Controller
     }
     public function AddEdu(Request $request)
     {
-        $get_numbers = $request->Family_no;
+        $get_numbers = $request->Edu_no;
         $numbers = $get_numbers+1;
-        $relations = RelationModel::all();
+        $years = YearsModel::all();
+        // $relations = RelationModel::all();
         $educations = EducationModel::all();
-        $html = view('hrms/Add_Emp_Common/edu-add-more', compact("numbers", "educations"))->render();
+        $html = view('hrms/Add_Emp_Common/edu-add-more', compact("numbers", "educations","years"))->render();
         //echo $html;
         $return_array = array('html' => $html, 'return_numbers' => $numbers);
         echo json_encode($return_array);
@@ -241,9 +243,7 @@ class AddEmployeeController extends Controller
 
     public function Create(Request $request)
     {
-        // dd($request->current_designation);
-//         dd($this->_validate_incoming_designations($request));
-// dd($request);
+
         if(Session::get('user_type')=='PD'){
          $dstreg='required';
          }else{
@@ -280,12 +280,13 @@ class AddEmployeeController extends Controller
          'adhaar_card'=>'required|mimes:jpeg,bmp,jpg,png,pdf',
          'pan_card_number'=>'required|string|size:9',
          'pan_card'=>'required|mimes:jpeg,bmp,jpg,png,pdf',
-         'degree'=>'required',
-         'highest_dgre_certificates'=>'required_if:degree,2,3,4,5',
 
-         'year_of_passing'=>'required',
-         'university_college'=>'required',
+         'degree.0'=>'required',
+         'highest_dgre_certificates.0'=>'required_if:degree,2,3,4,5',
+         'year_of_passing.0'=>'required',
+         'university_college.0'=>'required',
          'certificates'=>'required|mimes:jpeg,bmp,jpg,png,pdf',
+
          'photo'=>'required|mimes:jpeg,bmp,jpg,png,pdf',
          //'discpline'=>'required',
          'date_of_joining'=>'required',
@@ -423,12 +424,13 @@ class AddEmployeeController extends Controller
         $request->pan_card->move(public_path('./assets/employee_files'), $pan_card_file);
         // pan card
 
-        $degree = htmlspecialchars($request->degree);
-        $year_of_passing = htmlspecialchars($request->year_of_passing);
-        $university_college = htmlspecialchars($request->university_college);
+        // educational Qualification
 
+        $degree = $request->degree;
+        $year_of_passing = $request->year_of_passing;
+        $university_college = $request->university_college;
+        $discpline = $request->discpline;
 
-        $discpline = htmlspecialchars($request->discpline);
         $date_of_joining = htmlspecialchars($request->date_of_joining);
         $retirement_date = htmlspecialchars($request->retirement_date);
 
@@ -536,9 +538,12 @@ class AddEmployeeController extends Controller
         $AddEmployeeModel->adhaar_card = $adhaar_card_file;
         $AddEmployeeModel->pan_card_number = $pan_card_number;
         $AddEmployeeModel->pan_card = $pan_card_file;
-        $AddEmployeeModel->degree = $degree;
-        $AddEmployeeModel->year_of_passing = $year_of_passing;
-        $AddEmployeeModel->university_college = $university_college;
+
+
+        $AddEmployeeModel->degree = $degree[0];
+        $AddEmployeeModel->year_of_passing = $year_of_passing[0];
+        $AddEmployeeModel->university_college = $university_college[0];
+
          $AddEmployeeModel->emp_remarks = $emp_remarks;
         // certificates
         if($request->hasFile('certificates')){
@@ -548,12 +553,13 @@ class AddEmployeeController extends Controller
         }
         // certificates
         // $highest_dgre_certificates
-        if($request->hasFile('highest_dgre_certificates')){
+        if($request->hasFile('highest_dgre_certificates')[0]){
 
         $highest_dgre_certificates = time().'_photo'.'.'.$request->highest_dgre_certificates->getClientOriginalExtension();
-        $request->highest_dgre_certificates->move(public_path('./assets/employee_files'), $highest_dgre_certificates);
+        $request->highest_dgre_certificates[0]->move(public_path('./assets/employee_files'), $highest_dgre_certificates);
          $AddEmployeeModel->highest_degree_certificates = $highest_dgre_certificates;
         }
+
         // $highest_dgre_certificates
         $AddEmployeeModel->discpline = $discpline;
         $AddEmployeeModel->date_of_joining = $date_of_joining;
@@ -595,6 +601,33 @@ class AddEmployeeController extends Controller
         $AddEmployeeModel->save();
         $empID = $AddEmployeeModel->employee_id;
 
+        // Educational details Insert
+
+        for($i=0;$i<count($degree);$i++){
+
+            $emp_edu_model = new EmployeeEducationDetailsModel;
+
+            $high = $request->highest_dgre_certificates[$i];
+
+            if($high){
+                $highest_dgre_certificates = time().'_photo'.'.'.$high->getClientOriginalExtension();
+                $high->move(public_path('./assets/employee_files'), $highest_dgre_certificates);
+                //  $AddEmployeeModel->highest_degree_certificates = $highest_dgre_certificates;
+                }
+
+
+            // if($degree[$i] != ''){
+                $emp_edu_model->employee_id = $empID;
+                $emp_edu_model->degree  = $degree[$i];
+                $emp_edu_model->year_of_passing = $year_of_passing[$i];
+                $emp_edu_model->university_college  = $university_college[$i];
+                $emp_edu_model->discpline  = $discpline[$i];
+                $emp_edu_model->ssc  = $certificates_file;
+                $emp_edu_model->highest_dgre_certificates  = $highest_dgre_certificates;
+                $emp_edu_model->save();
+            // }
+        }
+
         // current info insert
         $current_designation = $request->current_designation;
         $current_status = $request->current_status;
@@ -605,7 +638,6 @@ class AddEmployeeController extends Controller
         for($i = 0; $i < count($current_designation); $i++)
         {
             $EmployeesCurrentInfos = new EmployeesCurrentInfosModel;
-
             $EmployeesCurrentInfos->employee_id = $empID;
             $EmployeesCurrentInfos->district = $district;
             $EmployeesCurrentInfos->ulbid = $ulbid;
@@ -617,9 +649,10 @@ class AddEmployeeController extends Controller
             $EmployeesCurrentInfos->save();
         }
 
+
          for($ik = 0; $ik < count($nominee_details); $ik++){
-             if($nominee_details[$ik] != ''){
-             $AddnomineeModel = new EmployeesnomineeModel;
+            $AddnomineeModel = new EmployeesnomineeModel;
+            //  if($nominee_details[$ik] != ''){
              $AddnomineeModel->employee_id = $empID;
              $AddnomineeModel->district = $district;
              $AddnomineeModel->ulbid = $ulbid;
@@ -629,7 +662,7 @@ class AddEmployeeController extends Controller
              $AddnomineeModel->nominee_gender = $nominee_gender[$ik];
              $AddnomineeModel->nominee_dob = $nominee_dob[$ik];
              $AddnomineeModel->save();
-            }
+            // }
         }
 
         // Family Members Insert
@@ -641,9 +674,10 @@ class AddEmployeeController extends Controller
             $AddEmployeeModel->family_photo = $family_photo_file;
         }
         // family photo
+
         for($sr = 0; $sr < count($relation_name);$sr++){
             $FamilyDetails = new EmployeeFamilyDetails;
-            if($relation_name[$sr] != ''){
+            // if($relation_name[$sr] != ''){
                $FamilyDetails->employee_id = $empID;;
                $FamilyDetails->relation_name = $relation_name[$sr];
                $FamilyDetails->relation_gender = $relation_gender[$sr];
@@ -652,7 +686,7 @@ class AddEmployeeController extends Controller
                $FamilyDetails->relation_occupation = $relation_occupation[$sr];
               $FamilyDetails->family_photo  = $family_photo_file;
                $FamilyDetails->save();
-            }
+            // }
         }
         // current info insert
         // work experience insert
@@ -662,10 +696,10 @@ class AddEmployeeController extends Controller
         $work_experience_location = $request->work_experience_location;
 
 
+
         for($j = 0; $j < count($start_date); $j++)
         {
             $EmployeesWorkExp = new EmployeesWorkExpModel;
-
             $EmployeesWorkExp->employee_id = $empID;
             $EmployeesWorkExp->start_date = $start_date[$j];
             $EmployeesWorkExp->end_date = $end_date[$j];
@@ -1030,9 +1064,8 @@ class AddEmployeeController extends Controller
        $currentstatus = CurrentStatusModel::all();
        $employeetypes = EmployeeType::all();
 
-       $employeesDTL = AddEmployeeModel::with('GetCurrentStatus', 'GetWorkExperience','EmployeesnomineeModel','EmployeeFamilyDetails')->where('employee_id',$request->emp_id)->get();
-
-
+       $employeesDTL = AddEmployeeModel::with('GetCurrentStatus', 'GetWorkExperience','EmployeesnomineeModel','EmployeeFamilyDetails','EducationDetails')->where('employee_id',$request->emp_id)->get();
+// dd($employeesDTL);
        $GetDistwiseUlbs = Ulbs::where('distid', $employeesDTL[0]->district)->get();
        $discplines = DiscplineModel::where('education_id', $employeesDTL[0]->degree)->get();
 
@@ -1236,13 +1269,12 @@ class AddEmployeeController extends Controller
         $pan_card_number = htmlspecialchars($request->pan_card_number);
 
 
-        $degree = htmlspecialchars($request->degree);
-        $year_of_passing = htmlspecialchars($request->year_of_passing);
-        $university_college = htmlspecialchars($request->university_college);
+        $degree = $request->degree;
+        $year_of_passing = $request->year_of_passing;
+        $university_college = $request->university_college;
+        $discpline = $request->discpline;
+        $date_of_joining = $request->date_of_joining;
 
-
-        $discpline = htmlspecialchars($request->discpline);
-        $date_of_joining = htmlspecialchars($request->date_of_joining);
         $designation = htmlspecialchars($request->designation);
         $location = htmlspecialchars($request->location);
 
@@ -1359,9 +1391,10 @@ class AddEmployeeController extends Controller
 
         }
 
-        $AddEmployeeModel->degree = $degree;
-        $AddEmployeeModel->year_of_passing = $year_of_passing;
-        $AddEmployeeModel->university_college = $university_college;
+        $AddEmployeeModel->degree = $degree[0];
+        $AddEmployeeModel->year_of_passing = $year_of_passing[0];
+        $AddEmployeeModel->university_college = $university_college[0];
+        $AddEmployeeModel->discpline = $discpline[0];
         // $AddEmployeeModel->certificates = $certificates_file;
 
         if($request->hasFile('certificates'))
@@ -1375,20 +1408,20 @@ class AddEmployeeController extends Controller
            }
         }
 
-           if($request->hasFile('highest_dgre_certificates'))
-        {
-           $highest_dgre_certificates = time().'_highest_dgre_certificates'.'.'.$request->highest_dgre_certificates->getClientOriginalExtension();
-           $ext = pathinfo($highest_dgre_certificates, PATHINFO_EXTENSION);
-           if($ext == 'jpg' || $ext == 'jpeg' || $ext = 'png' || $ext == 'pdf')
-           {
-               $request->highest_dgre_certificates->move(public_path('./assets/employee_files'), $highest_dgre_certificates);
-               $AddEmployeeModel->highest_degree_certificates = $highest_dgre_certificates;
-           }
-        }
+        //    if($request->hasFile('highest_dgre_certificates'))
+        // {
+        //    $highest_dgre_certificates = time().'_highest_dgre_certificates'.'.'.$request->highest_dgre_certificates->getClientOriginalExtension();
+        //    $ext = pathinfo($highest_dgre_certificates, PATHINFO_EXTENSION);
+        //    if($ext == 'jpg' || $ext == 'jpeg' || $ext = 'png' || $ext == 'pdf')
+        //    {
+        //        $request->highest_dgre_certificates->move(public_path('./assets/employee_files'), $highest_dgre_certificates);
+        //        $AddEmployeeModel->highest_degree_certificates = $highest_dgre_certificates;
+        //    }
+        // }
           if($request->hasFile('district_certi'))
         {
            $district_certi = time().'_district_certi'.'.'.$request->district_certi->getClientOriginalExtension();
-           $ext = pathinfo($highest_dgre_certificates, PATHINFO_EXTENSION);
+           $ext = pathinfo($district_certi, PATHINFO_EXTENSION);
            if($ext == 'jpg' || $ext == 'jpeg' || $ext = 'png' || $ext == 'pdf')
            {
                $request->district_certi->move(public_path('./assets/employee_files'), $district_certi);
@@ -1455,6 +1488,50 @@ class AddEmployeeController extends Controller
                $FamilyDetails->save();
             }
         }
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------
+
+        // Educational details Insert
+        $rm_edu = EmployeeEducationDetailsModel::where('employee_id',$request->edit_emp_id)->delete();
+
+        if($rm_edu){
+            for($i=0;$i<count($degree);$i++){
+
+                $emp_edu_model = new EmployeeEducationDetailsModel;
+
+                $high = $request->highest_dgre_certificates[$i];
+
+                if($high){
+                    $highest_dgre_certificates = time().'_photo'.'.'.$high->getClientOriginalExtension();
+                    $high->move(public_path('./assets/employee_files'), $highest_dgre_certificates);
+                    //  $AddEmployeeModel->highest_degree_certificates = $highest_dgre_certificates;
+                    $emp_edu_model->highest_dgre_certificates  = $highest_dgre_certificates;
+                    }
+
+                    if($request->hasFile('certificates'))
+                    {
+                        $certificates_file = time().'_certificates'.'.'.$request->certificates->getClientOriginalExtension();
+                        $ext = pathinfo($certificates_file, PATHINFO_EXTENSION);
+                        if($ext == 'jpg' || $ext == 'jpeg' || $ext = 'png' || $ext == 'pdf')
+                        {
+                            $request->certificates->move(public_path('./assets/employee_files'), $certificates_file);
+                            $emp_edu_model->ssc  = $certificates_file;
+                        }
+                    }
+
+
+                // if($degree[$i] != ''){
+                    $emp_edu_model->employee_id = $request->edit_emp_id;
+                    $emp_edu_model->degree  = $degree[$i];
+                    $emp_edu_model->year_of_passing = $year_of_passing[$i];
+                    $emp_edu_model->university_college  = $university_college[$i];
+                    $emp_edu_model->discpline  = $discpline[$i];
+                    $emp_edu_model->save();
+                // }
+            }
+        }
+
+
 
         // $AddEmployeeModel->nominee_details = $nominee_details;
         // $AddEmployeeModel->nominee_relation = $nominee_relation;

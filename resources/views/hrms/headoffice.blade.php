@@ -145,7 +145,7 @@ td input.form-control {
 
                             </tbody>
                             <tfoot>
-                                <tr class="total-bg t-body">
+                                <tr class="total-bg t-body text-center">
                                     <th colspan="2"><b>Total</b></th>
                                     @foreach($emp_type as $type)
                                     <th>{{$post2[$type->employee_type_id]}}</th>

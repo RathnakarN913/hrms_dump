@@ -384,7 +384,7 @@ input:read-only {
 
                             <div class="row">
                             <div class="col-md-4">
-                              <label>Name of the employee  <span class="mandatory">*</span></label>
+                              <label>Name of the Employee  <span class="mandatory">*</span></label>
                               <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="Name" id="name-field" name="name" value="{{ $employeesDTL[0]->name }}" required>
                             </div>
                             <div class="col-md-4">
@@ -392,7 +392,7 @@ input:read-only {
                               <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="Surname" id="surname-field" name="surname" value="{{ $employeesDTL[0]->surname }}">
                             </div>
                             <div class="col-md-4">
-                              <label>Date of birth <span class="mandatory">*</span></label>
+                              <label>Date of Birth <span class="mandatory">*</span></label>
                               <input type="date" class="form-control form-control-sm mb-3 ml-0" placeholder="" onchange="submitBday(this.value)" name="dob" value="{{ $employeesDTL[0]->dob }}" min="1950-01-01" max="<?php echo date("Y-m-d") ?>" onkeydown="return false">
                             </div>
 
@@ -406,7 +406,7 @@ input:read-only {
                               </select>
                             </div>
                               <div class="col-md-4">
-                              <label>Marital status <span class="mandatory">*</span></label>
+                              <label>Marital Status <span class="mandatory">*</span></label>
                               <select class="form-control-sm mb-3 select-input" name="marital_status" id="marital_status" onChange="GetMaritalStatusDtl();">
                                 <option value="">Select</option>
                                 @if($matrialstatus)
@@ -458,7 +458,7 @@ input:read-only {
                               <textarea class="textarea-form form-control" name="communication_address" id="communication_address" style="height: 64px;" name="communication_address">{{ $employeesDTL[0]->communication_address }}</textarea>
                             </div>
                             <div class="col-md-4">
-                              <label>Pin code <span class="mandatory">*</span></label>
+                              <label>Pin Code <span class="mandatory">*</span></label>
                               <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" maxlength="6" value="{{ $employeesDTL[0]->communication_address_pin_code }}" id="communication_address_pin_code" name="communication_address_pin_code" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                             </div>
 
@@ -470,19 +470,19 @@ input:read-only {
                               <textarea class="textarea-form form-control" name="permenant_address" id="permenant_address" style="height: 64px;">{{ $employeesDTL[0]->permenant_address }}</textarea>
                             </div>
                             <div class="col-md-4">
-                              <label>Pin code <span class="mandatory">*</span></label>
+                              <label>Pin Code <span class="mandatory">*</span></label>
                               <input type="text" class="form-control form-control-sm mb-3 ml-0" maxlength="6" value="{{ $employeesDTL[0]->permenant_address_pin_code }}" placeholder="" id="permenant_address_pin_code" name="permenant_address_pin_code" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                             </div>
                              <div class="col-md-4">
-                              <label>Mobile number <span class="mandatory">*</span></label>
+                              <label>Mobile Number <span class="mandatory">*</span></label>
                              <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="mobile_number" value="{{ $employeesDTL[0]->mobile_number }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                             </div>
                             <div class="col-md-4">
-                              <label>Alternative mobile number <span class="mandatory"></span></label>
+                              <label>Alternative Mobile Number <span class="mandatory"></span></label>
                               <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="alternative_mobile_number" value="{{ $employeesDTL[0]->alternative_mobile_number }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                             </div>
                             <div class="col-md-4">
-                              <label>Email id <span class="mandatory">*</span></label>
+                              <label>Email Id <span class="mandatory">*</span></label>
                               <input type="email" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="email_id" value="{{ $employeesDTL[0]->email_id }}">
                             </div>
                           </div>
@@ -538,7 +538,7 @@ input:read-only {
                                   <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" id="mandal-field" name="mandal" value="{{ $employeesDTL[0]->mandal }}">
                                 </div>
                                 <div class="col-md-4">
-                                  <label>Uploaded Native District certificate <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->district_certi }}"><i class="fas fa-file-alt"></i> File</a></label>
+                                  <label>Uploaded Native District Certificate <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->district_certi }}"><i class="fas fa-file-alt"></i> File</a></label>
                                   <input type="file" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="district_certi">
                                 </div>
 
@@ -562,7 +562,7 @@ input:read-only {
 
                             <div class="row  m-1 pt-3">
                                 <div class="col-md-4">
-                                  <label>Aadhar Card number <span class="mandatory">*</span></label>
+                                  <label>Aadhar Card Number <span class="mandatory">*</span></label>
                                   <input type="text" class="form-control form-control-sm mb-3 ml-0" maxlength="12" placeholder="" name="adhaar_card_number" value="{{ $employeesDTL[0]->adhaar_card_number }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                                 </div>
 
@@ -574,7 +574,7 @@ input:read-only {
 
                             <div class="row  m-1 pt-3">
                                 <div class="col-md-4">
-                                  <label>Pan Card number <span class="mandatory">*</span></label>
+                                  <label>Pan Card Number <span class="mandatory">*</span></label>
                                   <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" id="pan_card_number" name="pan_card_number" value="{{ $employeesDTL[0]->pan_card_number }}" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)">
                                 </div>
                                 <div class="col-md-4">
@@ -587,7 +587,7 @@ input:read-only {
                             <div class="row colr3 m-1 pt-3">
 
                             <div class="col-md-4">
-                                  <label>Basic salary <span class="mandatory">*</span></label>
+                                  <label>Basic Salary <span class="mandatory">*</span></label>
                                   <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" value="{{ $employeesDTL[0]->current_basic_salary }}" name="current_basic_salary" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" id="current_basic_salary">
                                 </div>
 
@@ -615,56 +615,80 @@ input:read-only {
                        <div class="card-header p-0"> <div class="bg-head"><b>Education Details</b></div> </div>
 
                         <div class="card-body card_bd_pd1">
+                    @if($employeesDTL[0]->EducationDetails)
+                    @foreach($employeesDTL[0]->EducationDetails as $keyy => $childedu)
+                    <div class="row">
+                        <div class="col-md-11">
+                            <div class="row colr4 m-1 pt-3">
+                                    <div class="col-md-4">
+                                        <label>Educational Qualification  <span class="mandatory">*</span></label>
+                                        <select class="form-control-sm mb-3 select-input" id="degree" name="degree[]" onChange="GetDiscipline(this)">
+                                            <option value="">Select</option>
+                                                @if($educations)
+                                                    @foreach($educations as $key=> $val)
+                                                        <option value="{{ $val->id }}" @if($val->id == $childedu->degree) selected @endif>{{ $val->education_name }}</option>
+                                                    @endforeach
+                                                @endif
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Year of Passing <span class="mandatory">*</span></label>
+                                        <select class="form-control-sm mb-3 select-input" name="year_of_passing[]">
+                                            <option value="">Select</option>
+                                                @if($years)
+                                                    @foreach($years as $key=> $val)
+                                                        <option value="{{ $val->id }}" @if($val->id == $childedu->year_of_passing) selected @endif>{{ $val->year }}</option>
+                                                    @endforeach
+                                                @endif
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>University/College <span class="mandatory">*</span></label>
+                                        <input type="text" class="form-control form-control-sm mb-3" placeholder="" id="university_college" value="{{ $childedu->university_college }}" name="university_college[]">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Discipline <span class="mandatory"></span></label>
 
-                          <div class="row colr4 m-1 pt-3">
-                             <div class="col-md-4">
-                              <label>Educational Qualification  <span class="mandatory">*</span></label>
-                              <select class="form-control-sm mb-3 select-input" id="degree" name="degree" onChange="GetDiscipline(this)">
-                                <option value="">Select</option>
-                                @if($educations)
-                                @foreach($educations as $key=> $val)
-                                 <option value="{{ $val->id }}" @if($val->id == $employeesDTL[0]->degree) selected @endif>{{ $val->education_name }}</option>
-                                @endforeach
-                                @endif
-                              </select>
-                            </div>
-                             <div class="col-md-4">
-                              <label>Year of passing <span class="mandatory">*</span></label>
-                              <select class="form-control-sm mb-3 select-input" name="year_of_passing">
-                                <option value="">Select</option>
-                                @if($years)
-                                @foreach($years as $key=> $val)
-                                 <option value="{{ $val->id }}" @if($val->id == $employeesDTL[0]->year_of_passing) selected @endif>{{ $val->year }}</option>
-                                @endforeach
-                                @endif
-                              </select>
-                            </div>
-                             <div class="col-md-4">
-                              <label>University/college <span class="mandatory">*</span></label>
-                              <input type="text" class="form-control form-control-sm mb-3" placeholder="" id="university_college" value="{{ $employeesDTL[0]->university_college }}" name="university_college">
-                            </div>
-                             <div class="col-md-4">
-                              <label>Discipline <span class="mandatory"></span></label>
-                              <select class="form-control-sm mb-3 select-input" name="discpline" id="discpline">
-                                <option value="">Select</option>
-                                @if($discplines)
-                                @foreach($discplines as $key=> $val)
-                                 <option value="{{ $val->id }}" @if($val->id == $employeesDTL[0]->discpline) selected @endif>{{ $val->discpline }}</option>
-                                @endforeach
-                                @endif
-                              </select>
-                            </div>
-                             <div class="col-md-4">
-                              <label>SSC Certificate Upload <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->certificates }}"><i class="fas fa-file-alt"></i> File</a></label>
-                              <input type="file" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="certificates">
-                            </div>
-                             <div class="col-md-4 height_cet" style='@if($employeesDTL[0]->degree > 1) display:block @else display:none @endif'>
-                              <label>Highest Qualification Certificate <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->highest_degree_certificates }}"><i class="fas fa-file-alt"></i> File</a></label>
-                              <input type="file" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="highest_dgre_certificates">
-                            </div>
+                                        <!--- <select class="form-control-sm mb-3 select-input" name="discpline" id="discpline">
+                                            <option value="">Select</option>
+                                            @if($discplines)
+                                            @foreach($discplines as $key=> $val)
+                                            <option value="{{ $val->id }}" @if($val->id == $employeesDTL[0]->discpline) selected @endif>{{ $val->discpline }}</option>
+                                            @endforeach
+                                            @endif
+                                        </select> -->
 
-                          </div>
+                                        <input type="text" name="discpline[]" id="" class="form-control" value="{{ $childedu->discpline }}">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>SSC Certificate Upload <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->certificates }}"><i class="fas fa-file-alt"></i> File</a></label>
+                                        <input type="file" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="certificates">
+                                    </div>
+                                    <div class="col-md-4 height_cet" style='@if( $childedu->degree > 1) display:block @else display:none @endif'>
+                                        <label>Highest Qualification Certificate <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $childedu->highest_dgre_certificates }}"><i class="fas fa-file-alt"></i> File</a></label>
+                                        <input type="file" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="highest_dgre_certificates[]">
+                                    </div>
 
+                            </div>
+                        </div>
+                            <div class="col-md-1 p-0 d-flex align-items-center justify-content-center">
+                                    @if($keyy == 0)
+                                    <span class="btn-plus add_Edu"><i class="fas fa-plus"></i></span>
+                                    @else
+                                    <span class="btn-minus " onclick="" style="margin-top: 20px; display: inherit;"><i class="fa fa-minus"></i></span>
+                                    @endif
+
+                            </div>
+                            <input name="edu_no" id="Edu_no" type="hidden" value="{{ count($employeesDTL[0]->EducationDetails) }}">
+
+                    </div>
+
+                        @endforeach
+                        @endif
+
+                        <div class="Edu_no">
+
+                        </div>
                         </div>
 
                        </div>
@@ -679,7 +703,7 @@ input:read-only {
                             <div class="row colr5 m-1 pt-3">
 
                           <div class="col-md-4">
-                              <label>Date of joining <span style="font-size: 12px;">( Net effective date) <span class="mandatory">*</span></span></label>
+                              <label>Date of Joining <span style="font-size: 12px;">(First Joining date) <span class="mandatory">*</span></span></label>
                                 <input type="date" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="date_of_joining" value="{{ $employeesDTL[0]->date_of_joining }}" onkeydown="return false">
                             </div>
                             <div class="col-md-4">
@@ -698,12 +722,12 @@ input:read-only {
                               <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" id="location" name="location" value="{{ $employeesDTL[0]->location }}" >
                             </div>
                             <div class="col-md-4">
-                              <label>DOJ (Certificates to be uploaded) <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->doj }}"><i class="fas fa-file-alt"></i> File</a></label>
+                              <label>DOJ (Certificates to be Uploaded) <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->doj }}"><i class="fas fa-file-alt"></i> File</a></label>
                               <input type="file" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="doj">
                             </div>
 
                           <div class="col-md-4  ">
-                                  <label>Retirement Date <span style="font-size: 12px;">(From DOB to 61 Years)</span> <span class="mandatory">*</span></label>
+                                  <label>Retirement Date<span style="font-size: 12px;">(From DOB to 61 Years)</span> <span class="mandatory">*</span></label>
                                   <input type="date" class="form-control form-control-sm ml-0" placeholder="" value="{{ $employeesDTL[0]->retirement_date }}" id="retirement_date" name="retirement_date" readonly="">
                                    <!--<small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>-->
                                    <span class="text-danger"></span>
@@ -713,9 +737,26 @@ input:read-only {
 
                             <div class="row mt-3 colr5 m-1 pt-3">
 
+
                              <div class="col-md-4">
+                              <label>Current Level/Category <span class="mandatory">*</span></label>
+                               <select class="form-control-sm mb-3 select-input" id="level" name="current_level">
+                                <option value="">Select</option>
+                                @if($currentlevels)
+                                @foreach($currentlevels as $key=> $val)
+                                 <option value="{{ $val->id }}" @if($val->id == $employeesDTL[0]->current_level) selected @endif>{{ $val->description }}</option>
+                                @endforeach
+                                <option value="">Select</option>
+                                    <option value="c1" @if("c1" == $employeesDTL[0]->current_level) selected @endif>C1</option>
+                                    <option value="c2" @if("c2" == $employeesDTL[0]->current_level) selected @endif>C2</option>
+                                    <option value="c3" @if("c3" == $employeesDTL[0]->current_level) selected @endif>C3</option>
+                                @endif
+                              </select>
+                            </div>
+
+                            <div class="col-md-4" id="grade_div">
                               <label>Current Grade <span class="mandatory">*</span></label>
-                              <select class="form-control-sm mb-3 select-input" name="current_grade">
+                              <select class="form-control-sm mb-3 select-input" name="current_grade" id="grade">
                                 <option value="">Select</option>
                                 @if($grades)
                                 @foreach($grades as $key=> $val)
@@ -724,26 +765,7 @@ input:read-only {
                                 @endif
                               </select>
                             </div>
-                             <div class="col-md-4">
-                              <label>Current Level <span class="mandatory">*</span></label>
-                               <select class="form-control-sm mb-3 select-input" name="current_level">
-                                <option value="">Select</option>
-                                @if($currentlevels)
-                                @foreach($currentlevels as $key=> $val)
-                                 <option value="{{ $val->id }}" @if($val->id == $employeesDTL[0]->current_level) selected @endif>{{ $val->description }}</option>
-                                @endforeach
-                                @endif
-                              </select>
-                            </div>
-                            <div class="col-md-4">
-                              <label>Category </label>
-                               <select class="form-control-sm   select-input" name="category">
-                                    <option value="">Select</option>
-                                    <option value="c1">C1</option>
-                                    <option value="c2">C2</option>
-                                    <option value="c3">C3</option>
-                              </select>
-                            </div>
+
                           </div>
 
 
@@ -832,11 +854,11 @@ input:read-only {
                                 <div class="col-md-11 pt-2" style="border-right: 1px #aedde1  solid;">
                                    <div class="row">
                                       <div class="col-md-4  ">
-                                          <label>Start date <span class="mandatory"></span></label>
+                                          <label>Start Date <span class="mandatory"></span></label>
                                         <input type="date" name="start_date[]" class="form-control form-control-sm ml-0" placeholder="Start date"  value="{{ $childWorkExperience->start_date }}" onkeydown="return false">
                                       </div>
                                       <div class="col-md-4   ">
-                                          <label>End date <span class="mandatory"></span></label>
+                                          <label>End Date <span class="mandatory"></span></label>
                                         <input type="date" name="end_date[]" class="form-control form-control-sm ml-0" placeholder="End date"  value="{{ $childWorkExperience->end_date }}" onkeydown="return false">
                                       </div>
 
@@ -895,20 +917,20 @@ input:read-only {
                               <div class="row  colr6 m-1 pt-3">
 
                               <div class="col-md-4">
-                               <label>Account holder name <span class="mandatory"></span> </label>
+                               <label>Account Holder Name <span class="mandatory"></span> </label>
                                <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" id="account_holder_name" value="{{ $employeesDTL[0]->account_holder_name }}" name="account_holder_name">
                               </div>
 
                                 <div class="col-md-4">
-                                  <label>Bank name <span class="mandatory"></span></label>
+                                  <label>Bank Name <span class="mandatory"></span></label>
                                  <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" value="{{ $employeesDTL[0]->bank_name }}" name="bank_name">
                                 </div>
                                 <div class="col-md-4">
-                                  <label>Account number <span class="mandatory"></span></label>
+                                  <label>Account Number <span class="mandatory"></span></label>
                                   <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" value="{{ $employeesDTL[0]->account_number }}" name="account_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                                 </div>
                                 <div class="col-md-4">
-                                  <label>IFSC code <span class="mandatory"></span> </label>
+                                  <label>IFSC Code <span class="mandatory"></span> </label>
                                   <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" value="{{ $employeesDTL[0]->ifsc_code }}" name="ifsc_code" >
                                 </div>
                             </div>
@@ -932,11 +954,11 @@ input:read-only {
 
                                            <div class="row">
                                      <div class="col-md-4">
-                                       <label>Relation name <span class="mandatory">*</span></label>
+                                       <label>Relation Name <span class="mandatory">*</span></label>
                                      <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" value="{{ $familydetails->relation_name }}" name="relation_name[]">
                                     </div>
                                         <div class="col-md-4">
-                                          <label>Relation gender <span class="mandatory">*</span></label>
+                                          <label>Relation Gender <span class="mandatory">*</span></label>
                                          <select class="form-control-sm mb-3 select-input" name="relation_gender[]">
                                             <option value="">Select</option>
                                             <option value="Male" @if($familydetails->relation_gender == 'Male') selected @endif>Male</option>
@@ -960,11 +982,11 @@ input:read-only {
                                           <input type="date" class="form-control form-control-sm mb-3 ml-0" placeholder="" value="{{ $familydetails->relation_dob }}" name="relation_dob[]" onkeydown="return false">
                                         </div>
                                         <div class="col-md-4">
-                                          <label>Relation occupation <span class="mandatory">*</span></label>
+                                          <label>Relation Occupation <span class="mandatory">*</span></label>
                                           <input type="text" class="form-control form-control-sm mb-3 ml-0" placeholder="" value="{{ $familydetails->relation_occupation }}" name="relation_occupation[]">
                                         </div>
                                         <div class="col-md-4">
-                                          <label>Family photo should be added <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->family_photo }}"><i class="fas fa-file-alt"></i> File</a></label>
+                                          <label>Family Photo should be added <a class="badge bg-success text-white" target="_blank" href="{{ asset('assets/employee_files') }}/{{ $employeesDTL[0]->family_photo }}"><i class="fas fa-file-alt"></i> File</a></label>
                                           <input type="file" class="form-control form-control-sm mb-3 ml-0" placeholder="" name="family_photo">
                                         </div>
                                         </div>
@@ -982,17 +1004,17 @@ input:read-only {
                                </div>
                               @endforeach
                               @else
-                              <!--extra cose for no family details-->
+                              <!--extra code for no family details-->
                               <div class="row colr8 m-1 pt-3">
                                     <div class="col-md-11">
                                         <div class="row">
                                             <div class="col-md-4 mb-3">
-                                                <label>Relation name <span class="mandatory">*</span></label>
+                                                <label>Relation Name <span class="mandatory">*</span></label>
                                                 <input type="text" class="form-control form-control-sm ml-0" placeholder="" value="{{old('relation_name.0')}}" name="relation_name[]">
                                                 <span class="text-danger">{{$errors->first('relation_name.0')}}</span>
                                             </div>
                                             <div class="col-md-4">
-                                              <label>Relation gender <span class="mandatory">*</span></label>
+                                              <label>Relation Gender <span class="mandatory">*</span></label>
                                              <select class="form-control-sm   select-input" name="relation_gender[]">
                                                 <option value="">Select</option>
                                                 <option value="Male" @if('Male' == old('relation_gender.0')) selected @endif>Male</option>
@@ -1019,12 +1041,12 @@ input:read-only {
                                               <span class="text-danger">{{$errors->first('relation_dob.0')}}</span>
                                             </div>
                                             <div class="col-md-4">
-                                              <label>Relation occupation <span class="mandatory">*</span></label>
+                                              <label>Relation Occupation <span class="mandatory">*</span></label>
                                               <input type="text" class="form-control form-control-sm  ml-0" placeholder="" value="{{old('relation_occupation.0')}}" name="relation_occupation[]">
                                               <span class="text-danger">{{$errors->first('relation_occupation.0')}}</span>
                                             </div>
                                             <div class="col-md-4 mb-3">
-                                              <label>Family photo should be added <span class="mandatory">*</span></label>
+                                              <label>Family Photo should be added <span class="mandatory">*</span></label>
                                               <input type="file" class="form-control form-control-sm ml-0 " placeholder=""  name="family_photo">
                                                <small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>
                                                <span class="text-danger">{{$errors->first('family_photo')}}</span>
@@ -1051,7 +1073,7 @@ input:read-only {
 
                        </div>
 
-                        <!--<p class="mt-3 mb-3"><b>Work Experiencedsafas</b></p>-->
+                        <!--<p class="mt-3 mb-3"><b>Work Experience</b></p>-->
 
 
                           <div class="card mt-3 shadow">
@@ -1072,7 +1094,7 @@ input:read-only {
                                             <div class="col-md-8 ">
                                               <div class="row">
                                               <div class="col-md-6  ">
-                                                  <label>Nominee name <span class="mandatory"></span></label>
+                                                  <label>Nominee Name <span class="mandatory"></span></label>
                                                      <input type="text" class="form-control form-control-sm " placeholder="" value="{{$nominnedetails->nominee_details}}" name="nominee_details[]">
                                                      <span class="text-danger">{{$errors->first('nominee_details.0')}}</span>
                                               </div>
@@ -1092,7 +1114,7 @@ input:read-only {
                                             </div>
 
                                              <div class="col-md-4 ">
-                                            <label>Nominee gender <span class="mandatory"></span></label>
+                                            <label>Nominee Gender <span class="mandatory"></span></label>
                                              <select class="form-control-sm  select-input " name="nominee_gender[]">
                                                 <option value="">Select</option>
                                                 <option value="Male" @if('Male' == $nominnedetails->nominee_gender) selected @endif>Male</option>
@@ -1128,7 +1150,7 @@ input:read-only {
                                             <div class="col-md-8 ">
                                               <div class="row">
                                               <div class="col-md-6  ">
-                                                  <label>Nominee name <span class="mandatory"></span></label>
+                                                  <label>Nominee Name <span class="mandatory"></span></label>
                                                      <input type="text" class="form-control form-control-sm " placeholder="" value="{{old('nominee_details.0')}}" name="nominee_details[]">
                                                      <span class="text-danger">{{$errors->first('nominee_details.0')}}</span>
                                               </div>
@@ -1148,7 +1170,7 @@ input:read-only {
                                             </div>
 
                                              <div class="col-md-4 ">
-                                            <label>Nominee gender <span class="mandatory"></span></label>
+                                            <label>Nominee Gender <span class="mandatory"></span></label>
                                              <select class="form-control-sm  select-input " name="nominee_gender[]">
                                                 <option value="">Select</option>
                                                 <option value="Male" @if('Male' == old('nominee_gender.0')) selected @endif>Male</option>
@@ -1186,7 +1208,7 @@ input:read-only {
 
                        <div class="card mt-3 shadow">
 
-                       <div class="card-header p-0"> <div class="bg-head"><b>Disciplinary cases/suspensions</b></div> </div>
+                       <div class="card-header p-0"> <div class="bg-head"><b>Disciplinary Cases/Suspensions</b></div> </div>
 
                         <div class="card-body card_bd_pd1 colr9">
 
@@ -1224,7 +1246,7 @@ input:read-only {
 
                        <div class="card mt-3 shadow">
 
-                       <div class="card-header p-0"> <div class="bg-head"><b>Objective/inspirations <span class="mandatory"></span></b></div> </div>
+                       <div class="card-header p-0"> <div class="bg-head"><b>Objective/Inspirations <span class="mandatory"></span></b></div> </div>
 
                         <div class="card-body card_bd_pd1 colr11">
 
@@ -1241,7 +1263,7 @@ input:read-only {
 
                        <div class="card mt-3 shadow">
 
-                       <div class="card-header p-0"> <div class="bg-head"><b>Awards/Achivments <span class="mandatory"></span></b></div> </div>
+                       <div class="card-header p-0"> <div class="bg-head"><b>Awards/Achievements <span class="mandatory"></span></b></div> </div>
 
                         <div class="card-body card_bd_pd1 colr12">
 
@@ -1258,7 +1280,7 @@ input:read-only {
 
                        <div class="card mt-3 shadow">
 
-                       <div class="card-header p-0"> <div class="bg-head"><b>Current role descriptions <span class="mandatory"></span></b></div> </div>
+                       <div class="card-header p-0"> <div class="bg-head"><b>Current Role Descriptions <span class="mandatory"></span></b></div> </div>
 
                         <div class="card-body card_bd_pd1 colr13">
 
@@ -1540,6 +1562,89 @@ $(".image-box").click(function(event) {
          })
      })
  </script>
+
+<script>
+ $('.add_Edu').on('click', function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var Edu_no = $('#Edu_no').val();
+        $.ajax({
+               type:'POST',
+               url:'{{ route('AddEdu'); }}',
+               data:{Edu_no : Edu_no},
+               dataType: 'JSON',
+               beforeSend: function()
+                {
+                    $("#overlay").fadeIn();
+                },
+               success:function(data) {
+                  $(".Edu_no").append(data.html);
+                  $('#Edu_no').val(data.return_numbers);
+               },
+                complete: function()
+                {
+                    $("#overlay").fadeOut();
+                }
+            });
+    });
+</script>
+
+<script>
+
+    function eduremove(no)
+    {
+        var edu_no = $('#Edu_no').val();
+
+        $.ajax({
+               type:'POST',
+               url:'{{ route('RemoveEdu'); }}',
+               data:{edu_no : edu_no},
+               dataType: 'JSON',
+               beforeSend: function()
+                {
+                    $("#overlay").fadeIn();
+                },
+               success:function(data) {
+                   $('.edu'+no).remove();
+                  $('#Edu_no').val(data.return_numbers);
+               },
+                complete: function()
+                {
+                    $("#overlay").fadeOut();
+                }
+            });
+    }
+
+</script>
+
+<script>
+      $(document).ready(function(){
+          $('#level').on('change',function(){
+              var level = $(this).val();
+              if(level == 1 || level == 2 || level == 3 || level == 4 || level == 5){
+                  $('#grade_div').show();
+                //   $('#grade_dup').val(1);
+              }else{
+                  $('#grade_div').hide();
+                  $('#grade').val('');
+              }
+          });
+      });
+
+      $(document).ready(function(){
+              var level = $('#level').val();
+              if(level == 1 || level == 2 || level == 3 || level == 4 || level == 5){
+                  $('#grade_div').show();
+                //   $('#grade_dup').val(1);
+              }else{
+                  $('#grade_div').hide();
+                  $('#grade').val('');
+              }
+      });
+  </script>
 
  <script>
 // validation

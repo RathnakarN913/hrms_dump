@@ -132,30 +132,42 @@ td input.form-control {
                       <div class="card bg-white mt-4">
                        <div class="card-body">
                         <div class="table-content">
-                            <div class="container mt-4 mb-4">
-                            <div class="row align-items-center">
-                            <div class="col-md-6 pl-0"><h4><b>District Sanctioned Post Entries </b></h4></div>
-                          </div>
-                        </div>
+                            <div class="container mt-4">
+                                <div class="row align-items-center">
+                                    <div class="col-md-5 pl-0">
+                                        <h4><b>District Sanctioned Post Entries for:  {{ $ind_dist_name }}</b></h4>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="">Select District</label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <form action="" method="post" id="dist_form" name="dist_form">
+                                                    @csrf
+                                                    <select name="district" id="district">
+                                                        <option value="">Select District</option>
+                                                            @foreach ($district as $dist)
+                                                                <option value="{{ $dist->distid }}" @if($dist->distid == $ind_dist) selected @endif>{{ $dist->distname }}</option>
+                                                            @endforeach
+                                                    </select>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-1"></div>
                             <div class="col-md-4">
-                                {{-- <label for="district">Select District</label> --}}
-                                <form action="" method="post" id="dist_form" name="dist_form">
-                                    @csrf
-                                    <select name="district" id="district">
-                                        <option value="">Select District</option>
-                                            @foreach ($district as $dist)
-                                                <option value="{{ $dist->distid }}" @if($dist->distid == $ind_dist) selected @endif>{{ $dist->distname }}</option>
-                                            @endforeach
-                                    </select>
-                                </form>
+                                <label for="district">Select District</label>
+
                             </div>
                             <div class="col">
-                                <h4><b>District : {{ $ind_dist_name }}</b></h4>
+                                <h4><b>District : </b></h4>
                             </div>
-                        </div>
+                        </div> --}}
 
                           <form name="frm" method="post" id="myform" action="{{ url('/districtinsert') }}">
                             @csrf

@@ -12,7 +12,7 @@ class AddEmployeeModel extends Model
 {
     protected $table ='hrms_employees';
     protected $primaryKey = 'employee_id';
-    
+
     //  protected $fillable = [
     //     // 'employee_id',
     //     'name',
@@ -92,6 +92,10 @@ class AddEmployeeModel extends Model
     {
         return $this->hasMany('App\Models\hrms\EmployeesnomineeModel', 'employee_id', 'employee_id');
     }
+    public function EducationDetails()
+    {
+        return $this->hasMany('App\Models\hrms\EmployeeEducationDetailsModel', 'employee_id', 'employee_id');
+    }
     public function EmployeeFamilyDetails()
     {
         return $this->hasMany('App\Models\hrms\EmployeeFamilyDetails', 'employee_id', 'employee_id');
@@ -99,26 +103,26 @@ class AddEmployeeModel extends Model
     public function DistrictModel(){
         return $this->hasMany(DistrictModel::class, 'distid', 'district');
     }
-    
+
     public function DesignationModel(){
         return $this->hasMany(DesignationModel::class, 'id', 'designation');
     }
     public function AddAttendanceModel(){
         return $this->hasMany(AddAttendanceModel::class,'employee_id','employee_id');
     }
-    
+
     public function GetEmpType()
     {
          return $this->belongsTo('App\Models\hrms\EmployeeType', 'employee_type');
     }
-    
+
     public function type() {
         return $this->belongsTo(EmployeeType::class, 'employee_type');
     }
-    
+
     public function scopeBycategory($query, $catid){
         return $query->where('employee_type', $catid);
     }
 
-    
+
 }

@@ -328,6 +328,16 @@ label {
                </div>
                @endif
 
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
 
 
                  <div class="mb-0 ml-4"><b>Add Employees Details</b></div>
@@ -414,7 +424,7 @@ label {
 
                                             <div class="row mt-2">
                                     <div class="col-md-4 mb-3">
-                                      <label>Name of the employee <span class="mandatory ">*</span></label>
+                                      <label>Name of the Employee <span class="mandatory ">*</span></label>
                                       <input type="text" class="form-control form-control-sm   ml-0" id="name-field" placeholder="Name" name="name" value="{{old('name')}}" >
                                       <span class="text-danger">{{$errors->first('name')}}</span>
                                     </div>
@@ -424,7 +434,7 @@ label {
                                       <span class="text-danger">{{$errors->first('surname')}}</span>
                                     </div>
                                     <div class="col-md-4">
-                                      <label>Date of birth <span class="mandatory">*</span></label>
+                                      <label>Date of Birth <span class="mandatory">*</span></label>
                                       <input type="date" class="form-control form-control-sm  ml-0" value="{{old('dob')}}" placeholder="" onchange="submitBday(this.value)" name="dob" min="1950-01-01" max="<?php echo date("Y-m-d") ?>" >
                                       <span class="text-danger">{{$errors->first('dob')}}</span>
                                     </div>
@@ -440,7 +450,7 @@ label {
                                       <span class="text-danger">{{$errors->first('gender')}}</span>
                                     </div>
                                      <div class="col-md-4 mb-3">
-                                      <label>Marital status <span class="mandatory">*</span></label>
+                                      <label>Marital Status <span class="mandatory">*</span></label>
                                       <select class="form-control-sm  select-input" name="marital_status" value="{{old('marital_status')}}" id="marital_status" onChange="GetMaritalStatusDtl();">
                                         <option value="">Select</option>
                                         @if($matrialstatus)
@@ -452,7 +462,7 @@ label {
                                       <span class="text-danger">{{$errors->first('marital_status')}}</span>
                                     </div>
                                     <div class="col-md-4">
-                                      <label class="MaritalHeading">Please select Marital status <span class="mandatory">*</span></label>
+                                      <label class="MaritalHeading">Please Select Marital Status <span class="mandatory">*</span></label>
                                       <input type="text" class="form-control form-control-sm   ml-0" placeholder="" value="{{old('if_select_single')}}"  name="if_select_single" id="if_select_single">
                                       <span class="text-danger">{{$errors->first('if_select_single')}}</span>
                                     </div>
@@ -495,12 +505,12 @@ label {
                                             <div class="row">
 
                                                 <div class="col-md-8 pt-3">
-                                                   <label>Present address <span class="mandatory">*</span></label>
+                                                   <label>Present Address <span class="mandatory">*</span></label>
                                                   <textarea class="textarea-form form-control" name="communication_address" id="communication_address" value="{{old('communication_address')}}" style="height: 64px;" name="communication_address">{{old('communication_address')}}</textarea>
                                                   <span class="text-danger">{{$errors->first('communication_address')}}</span>
                                                 </div>
                                                 <div class="col-md-4 pt-3">
-                                                  <label>Pin code <span class="mandatory">*</span></label>
+                                                  <label>Pin Code <span class="mandatory">*</span></label>
                                                   <input type="text" class="form-control form-control-sm  ml-0" maxlength="6" placeholder="" value="{{old('communication_address_pin_code')}}" id="communication_address_pin_code" name="communication_address_pin_code" oninput="this.value.replace(/[^0-9,]/g, "").replace(/(,.*?),(.*,)?/, "$1"); onkeydown="if(event.key==='.'){event.preventDefault();}">
                                                   <span class="text-danger">{{$errors->first('communication_address_pin_code')}}</span>
                                                 </div>
@@ -516,7 +526,7 @@ label {
                                                   <span class="text-danger">{{$errors->first('permenant_address')}}</span>
                                                 </div>
                                                 <div class="col-md-4">
-                                                  <label>Pin code <span class="mandatory">*</span></label>
+                                                  <label>Pin Code <span class="mandatory">*</span></label>
                                                   <input type="text" class="form-control form-control-sm mb-3  ml-0" maxlength="6" placeholder="" id="permenant_address_pin_code" value="{{old('permenant_address_pin_code')}}" name="permenant_address_pin_code" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                                                   <span class="text-danger">{{$errors->first('permenant_address_pin_code')}}</span>
                                                 </div>
@@ -528,18 +538,18 @@ label {
                                             <div class="row mt-3">
 
                                                 <div class="col-md-4">
-                                                  <label>Mobile number <span class="mandatory">*</span></label>
+                                                  <label>Mobile Number <span class="mandatory">*</span></label>
                                                  <input type="text" class="form-control form-control-sm  ml-0" maxlength="10" placeholder="" value="{{old('mobile_number')}}" name="mobile_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                                                  <span class="text-danger">{{$errors->first('mobile_number')}}</span>
                                                 </div>
                                                 <div class="col-md-4">
-                                                  <label>Alternative mobile number <span class="mandatory"></span></label>
+                                                  <label>Alternative Mobile Number <span class="mandatory"></span></label>
                                                   <input type="text" class="form-control form-control-sm  ml-0 " maxlength="10" placeholder=""  value="{{old('alternative_mobile_number')}}" name="alternative_mobile_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                                                   <span class="text-danger">{{$errors->first('alternative_mobile_number')}}</span>
                                                 </div>
 
                                                  <div class="col-md-4 mb-3">
-                                                  <label>Email id <span class="mandatory">*</span></label>
+                                                  <label>Email Id <span class="mandatory">*</span></label>
                                                   <input type="email" class="form-control form-control-sm   ml-0" placeholder="" value="{{old('email_id')}}" name="email_id">
                                                   <span class="text-danger">{{$errors->first('email_id')}}</span>
                                                 </div>
@@ -607,7 +617,7 @@ label {
                                             </div>
 
                                             <div class="col-md-4">
-                                              <label>Upload Native  District certificate  <span class="mandatory"></span></label>
+                                              <label>Upload Native  District Certificate  <span class="mandatory"></span></label>
                                               <input type="file" class="form-control form-control-sm ml-0 " placeholder="" value="{{old('district_certi')}}" name="district_certi">
                                               <span class="text-danger">{{$errors->first('district_certi')}}</span>
                                             </div>
@@ -625,45 +635,51 @@ label {
                                     <div class="card-body card_bd_pd1">
 
                                         <div class="row colr3 m-1 pt-3 pb-3">
-
-                                     <div class="col-md-4 mb-3">
-                                      <label>Aadhar Card number <span class="mandatory">*</span></label>
-                                      <input type="text" class="form-control form-control-sm ml-0" maxlength="12" placeholder="" value="{{old('adhaar_card_number')}}" name="adhaar_card_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
-                                      <span class="text-danger">{{$errors->first('adhaar_card_number')}}</span>
-                                    </div>
-                                     <div class="col-md-4">
-                                      <label>Upload Aadhar Card <span class="mandatory">*</span></label>
-                                      <input type="file" class="form-control form-control-sm  ml-0" placeholder="" value="{{old('adhaar_card')}}" name="adhaar_card">
-                                      <small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>
-                                      <span class="text-danger">{{$errors->first('adhaar_card')}}</span>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                      <label>Pan Card number <span class="mandatory">*</span></label>
-                                      <input type="text" class="form-control form-control-sm ml-0" id="pan_card_number" placeholder="" value="{{old('pan_card_number')}}" name="pan_card_number" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)">
-                                      <span class="text-danger">{{$errors->first('pan_card_number')}}</span>
-                                    </div>
-                                    <div class="col-md-4 mb-3 mt-3">
-                                      <label>Upload Pan Card <span class="mandatory">*</span></label>
-                                      <input type="file" class="form-control form-control-sm  ml-0" placeholder="" value="{{old('pan_card')}}" name="pan_card">
-                                      <small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>
-                                      <span class="text-danger">{{$errors->first('pan_card')}}</span>
-                                   </div>
-                                    <div class="col-md-4 mb-3 mt-3">
-                                          <label>Basic Pay <span class="mandatory">*</span></label>
-                                          <input type="text" class="form-control form-control-sm ml-0 " placeholder="" id="current_basic_salary" value="{{old('current_basic_salary')}}" name="current_basic_salary" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
-                                          <span class="text-danger">{{$errors->first('current_basic_salary')}}</span>
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label>Aadhar Card Number <span class="mandatory">*</span></label>
+                                                        <input type="text" class="form-control form-control-sm ml-0" maxlength="12" placeholder="" value="{{old('adhaar_card_number')}}" name="adhaar_card_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
+                                                        <span class="text-danger">{{$errors->first('adhaar_card_number')}}</span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label>Upload Aadhar Card <span class="mandatory">*</span></label>
+                                                        <input type="file" class="form-control form-control-sm  ml-0" placeholder="" value="{{old('adhaar_card')}}" name="adhaar_card">
+                                                        <small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>
+                                                        <span class="text-danger">{{$errors->first('adhaar_card')}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-4 mt-3">
+                                                    <label>Pan Card Number <span class="mandatory">*</span></label>
+                                                    <input type="text" class="form-control form-control-sm ml-0" id="pan_card_number" placeholder="" value="{{old('pan_card_number')}}" name="pan_card_number" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)">
+                                                    <span class="text-danger">{{$errors->first('pan_card_number')}}</span>
+                                                </div>
+                                                <div class="col-md-4 mb-3 mt-3">
+                                                    <label>Upload Pan Card <span class="mandatory">*</span></label>
+                                                    <input type="file" class="form-control form-control-sm  ml-0" placeholder="" value="{{old('pan_card')}}" name="pan_card">
+                                                    <small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>
+                                                    <span class="text-danger">{{$errors->first('pan_card')}}</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    <div class="col-md-4 mt-3">
-                                          <label>PF Number <span class="mandatory">*</span></label>
-                                          <input type="text" class="form-control form-control-sm ml-0 " placeholder="" value="{{old('pf_number')}}" id="pf_number" name="pf_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
-                                          <span class="text-danger">{{$errors->first('pf_number')}}</span>
-                                        </div>
-                                     <div class="col-md-4">
-                                          <label>ESI Number <span class="mandatory">*</span></label>
-                                          <input type="text" class="form-control form-control-sm ml-0 " id="esi_number" placeholder="" value="{{old('esi_number')}}" name="esi_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
-                                          <span class="text-danger">{{$errors->first('esi_number')}}</span>
-                                        </div>
+                                        <div class="col-md-4 mb-3 mt-3">
+                                            <label>Basic Pay <span class="mandatory">*</span></label>
+                                            <input type="text" class="form-control form-control-sm ml-0 " placeholder="" id="current_basic_salary" value="{{old('current_basic_salary')}}" name="current_basic_salary" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
+                                            <span class="text-danger">{{$errors->first('current_basic_salary')}}</span>
+                                            </div>
+                                        <div class="col-md-4 mt-3">
+                                            <label>PF Number <span class="mandatory">*</span></label>
+                                            <input type="text" class="form-control form-control-sm ml-0 " placeholder="" value="{{old('pf_number')}}" id="pf_number" name="pf_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
+                                            <span class="text-danger">{{$errors->first('pf_number')}}</span>
+                                            </div>
+                                        <div class="col-md-4 mt-3">
+                                            <label>ESI Number <span class="mandatory">*</span></label>
+                                            <input type="text" class="form-control form-control-sm ml-0 " id="esi_number" placeholder="" value="{{old('esi_number')}}" name="esi_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
+                                            <span class="text-danger">{{$errors->first('esi_number')}}</span>
+                                            </div>
                                   </div>
 
                                    </div>
@@ -690,7 +706,7 @@ label {
                                                 <span class="text-danger">{{$errors->first('degree')}}</span>
                                             </div>
                                             <div class="col-md-4">
-                                                <label>Year of passing <span class="mandatory">*</span></label>
+                                                <label>Year of Passing <span class="mandatory">*</span></label>
                                                 <select class="form-control-sm  select-input" name="year_of_passing[]">
                                                     <option value="">Select</option>
                                                     @if($years)
@@ -702,7 +718,7 @@ label {
                                                 <span class="text-danger">{{$errors->first('year_of_passing')}}</span>
                                             </div>
                                             <div class="col-md-4">
-                                                <label>University/college <span class="mandatory">*</span></label>
+                                                <label>University/College <span class="mandatory">*</span></label>
                                                 <input type="text" class="form-control form-control-sm ml-0" id="university_college" placeholder="" value="{{old('university_college')}}" name="university_college[]">
                                                 <span class="text-danger">{{$errors->first('university_college')}}</span>
                                             </div>
@@ -756,7 +772,7 @@ label {
 
                                      <div class="row colr5 m-1 pt-3">
                                   <div class="col-md-4 mb-3">
-                                      <label>Date of joining <span class="mandatory">*</span> <span style="font-size: 12px;">( First Joining date )</span></label>
+                                      <label>Date of Joining <span class="mandatory">*</span> <span style="font-size: 12px;">( First Joining date )</span></label>
                                         <input type="date" class="form-control form-control-sm ml-0" placeholder="" value="{{old('date_of_joining')}}" name="date_of_joining" onkeydown="return false">
                                         <span class="text-danger">{{$errors->first('date_of_joining')}}</span>
                                     </div>
@@ -911,12 +927,12 @@ label {
                                             <div class="col-md-8 ">
                                               <div class="row mt-2">
                                               <div class="col-md-6  ">
-                                                  <label>Start date <span class="mandatory"></span></label>
+                                                  <label>Start Date <span class="mandatory"></span></label>
                                                 <input type="date" name="start_date[]" class="form-control form-control-sm ml-0" value="{{old('start_date.0')}}" placeholder="Start date" onkeydown="return false">
                                                 <span class="text-danger">{{$errors->first('start_date.0')}}</span>
                                               </div>
                                               <div class="col-md-6 ">
-                                                  <label>End date <span class="mandatory"></span></label>
+                                                  <label>End Date <span class="mandatory"></span></label>
                                                 <input type="date" name="end_date[]" value="{{old('end_date.0')}}" max={{date('Y-m-d')}} class="form-control form-control-sm ml-0" placeholder="End date" onkeydown="return false">
                                                 <span class="text-danger">{{$errors->first('end_date.0')}}</span>
                                               </div>
@@ -970,13 +986,13 @@ label {
 
                                      <div class="row colr6 m-1 pt-3">
                                   <div class="col-md-4 mb-3">
-                                   <label>Account holder name <span class="mandatory">*</span></label>
+                                   <label>Account Holder Name <span class="mandatory">*</span></label>
                                    <input type="text" class="form-control form-control-sm ml-0" id="account_holder_name" placeholder="" value="{{old('account_holder_name')}}" name="account_holder_name">
                                    <span class="text-danger">{{$errors->first('account_holder_name')}}</span>
                                   </div>
 
                                     <div class="col-md-4">
-                                      <label>Bank name <span class="mandatory">*</span></label>
+                                      <label>Bank Name <span class="mandatory">*</span></label>
                                      <input type="text" class="form-control form-control-sm ml-0 " placeholder="" value="{{old('bank_name')}}" name="bank_name">
                                      <span class="text-danger">{{$errors->first('bank_name')}}</span>
                                     </div>
@@ -987,14 +1003,14 @@ label {
                                     <!--</div>-->
 
                                     <div class="col-md-4">
-                                      <label>Account number <span class="mandatory">*</span></label>
+                                      <label>Account Number <span class="mandatory">*</span></label>
                                       <input type="text" class="form-control form-control-sm  ml-0" placeholder="" value="{{old('account_number')}}" name="account_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                                       <span class="text-danger acnt_nmbr
                                       ">{{$errors->first('account_number')}}</span>
                                     </div>
 
                                     <div class="col-md-4 mb-3">
-                                      <label>IFSC code <span class="mandatory">*</span></label>
+                                      <label>IFSC Code <span class="mandatory">*</span></label>
                                       <input type="text" class="form-control form-control-sm ml-0" placeholder="" value="{{old('ifsc_code')}}" name="ifsc_code" >
                                       <span class="text-danger">{{$errors->first('ifsc_code')}}</span>
                                     </div>
@@ -1018,7 +1034,7 @@ label {
                                                 <span class="text-danger">{{$errors->first('relation_name.0')}}</span>
                                             </div>
                                             <div class="col-md-4">
-                                              <label>Relation gender <span class="mandatory">*</span></label>
+                                              <label>Relation Gender <span class="mandatory">*</span></label>
                                              <select class="form-control-sm   select-input" name="relation_gender[]">
                                                 <option value="">Select</option>
                                                 <option value="Male" @if('Male' == old('relation_gender.0')) selected @endif>Male</option>
@@ -1045,12 +1061,12 @@ label {
                                               <span class="text-danger">{{$errors->first('relation_dob.0')}}</span>
                                             </div>
                                             <div class="col-md-4">
-                                              <label>Relation occupation <span class="mandatory">*</span></label>
+                                              <label>Relation Occupation <span class="mandatory">*</span></label>
                                               <input type="text" class="form-control form-control-sm  ml-0" placeholder="" value="{{old('relation_occupation.0')}}" name="relation_occupation[]">
                                               <span class="text-danger">{{$errors->first('relation_occupation.0')}}</span>
                                             </div>
                                             <div class="col-md-4 mb-3">
-                                              <label>Family photo should be added <span class="mandatory">*</span></label>
+                                              <label>Family Photo should be added <span class="mandatory">*</span></label>
                                               <input type="file" class="form-control form-control-sm ml-0 " placeholder=""  name="family_photo">
                                                <small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>
                                                <span class="text-danger">{{$errors->first('family_photo')}}</span>
@@ -1086,7 +1102,7 @@ label {
                                             <div class="col-md-8 ">
                                               <div class="row">
                                               <div class="col-md-6  ">
-                                                  <label>Nominee name <span class="mandatory"></span></label>
+                                                  <label>Nominee Name <span class="mandatory"></span></label>
                                                      <input type="text" class="form-control form-control-sm " placeholder="" value="{{old('nominee_details.0')}}" name="nominee_details[]">
                                                      <span class="text-danger">{{$errors->first('nominee_details.0')}}</span>
                                               </div>
@@ -1106,7 +1122,7 @@ label {
                                             </div>
 
                                              <div class="col-md-4 ">
-                                            <label>Nominee gender <span class="mandatory"></span></label>
+                                            <label>Nominee Gender <span class="mandatory"></span></label>
                                              <select class="form-control-sm  select-input " name="nominee_gender[]">
                                                 <option value="">Select</option>
                                                 <option value="Male" @if('Male' == old('nominee_gender.0')) selected @endif>Male</option>
@@ -1146,7 +1162,7 @@ label {
 
                          <div class="card mt-3 shadow">
 
-                           <div class="card-header p-0"> <div class="bg-head"><b>Disciplinary cases/suspensions <span class="mandatory">*</span></b></div> </div>
+                           <div class="card-header p-0"> <div class="bg-head"><b>Disciplinary cases/Suspensions <span class="mandatory">*</span></b></div> </div>
 
                             <div class="card-body card_bd_pd1 colr9">
 
@@ -1182,7 +1198,7 @@ label {
 
                            <div class="card mt-3 shadow">
 
-                           <div class="card-header p-0"> <div class="bg-head"><b>Objective/inspirations <span class="mandatory"></span></b></div> </div>
+                           <div class="card-header p-0"> <div class="bg-head"><b>Objective/Inspirations <span class="mandatory"></span></b></div> </div>
 
                             <div class="card-body card_bd_pd1 colr11">
 
@@ -1200,7 +1216,7 @@ label {
 
                          <div class="card mt-3 shadow">
 
-                           <div class="card-header p-0"> <div class="bg-head"><b>Rewards/Achivments <span class="mandatory"></span></b></div> </div>
+                           <div class="card-header p-0"> <div class="bg-head"><b>Rewards/Achievements <span class="mandatory"></span></b></div> </div>
 
                             <div class="card-body card_bd_pd1 colr12">
 
@@ -1217,7 +1233,7 @@ label {
 
                            <div class="card mt-3 shadow">
 
-                           <div class="card-header p-0"> <div class="bg-head"><b>Current role description <span class="mandatory"></span></b></div> </div>
+                           <div class="card-header p-0"> <div class="bg-head"><b>Current Role Description <span class="mandatory"></span></b></div> </div>
 
                             <div class="card-body card_bd_pd1 colr13">
 
@@ -1517,29 +1533,29 @@ function checkulbpost(){
             });
     }
 
-    // function eduremove(no)
-    // {
-    //     var edu_no = $('#Edu_no')
+    function eduremove(no)
+    {
+        var edu_no = $('#Edu_no').val();
 
-    //     $.ajax({
-    //            type:'POST',
-    //            url:'{{ route('RemoveEdu'); }}',
-    //            data:{edu_no : edu_no},
-    //            dataType: 'JSON',
-    //            beforeSend: function()
-    //             {
-    //                 $("#overlay").fadeIn();
-    //             },
-    //            success:function(data) {
-    //                $('.edu'+no).remove();
-    //               $('#Edu_no').val(data.return_numbers);
-    //            },
-    //             complete: function()
-    //             {
-    //                 $("#overlay").fadeOut();
-    //             }
-    //         });
-    // }
+        $.ajax({
+               type:'POST',
+               url:'{{ route('RemoveEdu'); }}',
+               data:{edu_no : edu_no},
+               dataType: 'JSON',
+               beforeSend: function()
+                {
+                    $("#overlay").fadeIn();
+                },
+               success:function(data) {
+                   $('.edu'+no).remove();
+                  $('#Edu_no').val(data.return_numbers);
+               },
+                complete: function()
+                {
+                    $("#overlay").fadeOut();
+                }
+            });
+    }
 
 
 

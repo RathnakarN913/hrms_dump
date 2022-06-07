@@ -125,31 +125,29 @@ td input.form-control {
   <div class="card-body">
 
     <div class="bg-white">
-            <div class="row align-items-center mt-4 mb-4 ">
+            <div class="row align-items-center mt-4">
+                    <div class="col-md-4">
+                        <h4><b>ULB Sanctioned Post Entries for : {{ $ulb_name->ulbname }}</b></h4>
+                    </div>
                     <div class="col-md-6">
-                        <h4><b>ULB Sanctioned Post Entries </b></h4></div>
-                {{-- <div class="col-md-6">
-                    <input id="myInput" type="text" placeholder="Search.." class="form-control">
-                </div> --}}
+                        <form action="" method="post" id="ulb_form">
+                            @csrf
+                            <div class="row align-items-center mt-4 mb-4 ">
+                                <div class="col-md-2 mt-2">
+                                    <label for=""> Select ULB:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select name="ulb" id="ulb" >
+                                        <option value="">Select ULB</option>
+                                        @foreach ($ulblist as $ulb)
+                                            <option value="{{ $ulb->ulbid }}" @if($ulb->ulbid == $ind_ulb) selected @endif> {{ $ulb->ulbname }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
             </div>
-        <form action="" method="post" id="ulb_form">
-            @csrf
-            <div class="row align-items-center mt-4 mb-4 ">
-                <div class="col-md-2">
-                </div>
-                <div class="col-md-4">
-                    <select name="ulb" id="ulb" >
-                        <option value="">Select ULB</option>
-                        @foreach ($ulblist as $ulb)
-                            <option value="{{ $ulb->ulbid }}" @if($ulb->ulbid == $ind_ulb) selected @endif> {{ $ulb->ulbname }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <h4><b>ULB Name: {{ $ulb_name->ulbname }}</b></h4>
-                </div>
-            </div>
-        </form>
 
 
       <div class="table-content table table-responsive thead-scroll">
@@ -161,12 +159,15 @@ td input.form-control {
         <table class="table" border="1" id="example1" style="width:100%">
           <thead class="t-head" style="position: sticky;top: 0;">
             <tr class="table-primary text-center">
-              <th>S.NO</th>
-              <th>ULB Name</th>
-              @foreach($emp_type as $type)
-                <th>{{$type->employee_type_desc}}</th>
-              @endforeach
-             <th>Total</th>
+              <th rowspan="2">S.NO</th>
+              <th rowspan="2">Designation</th>
+                <th colspan="3">Employee Type</th>
+             <th rowspan="2">Total</th>
+            </tr>
+            <tr class="table-primary text-center">
+                @foreach($emp_type as $type)
+                    <th>{{$type->employee_type_desc}}</th>
+                @endforeach
             </tr>
           </thead>
           <tbody class="text-center" id="search_content">
@@ -188,7 +189,7 @@ td input.form-control {
               @endforeach
            </tbody>
            <tfoot>
-               <tr class="total-bg">
+               <tr class="total-bg text-center  ">
                   <td colspan="2" class="sticky-col first-col">Total</td>
                        @foreach($emp_type as $type)
                          <td >{{ $post_count->where('employee_type',$type->employee_type_id)->sum('post_sanctioned') }}</td>
@@ -315,7 +316,7 @@ td input.form-control {
               "bPaginate": false,
               dom: 'Bfrtip',
               buttons: [
-                    
+
                 ],
               footerCallback: function (row, data, start, end, display) {
               var api = this.api();
