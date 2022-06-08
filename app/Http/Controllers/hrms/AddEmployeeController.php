@@ -1172,7 +1172,7 @@ class AddEmployeeController extends Controller
                         //  'objective_aspirations'=>'required',
                         //  'contributions_awards'=>'required',
                         //  'current_role_description'=>'required',
-                        //  'discplinary_cases_suspensions'=>'required',
+                         'discplinary_cases_suspensions'=>'required',
 
                          "current_designation.*"    => "required",
                         //  "current_designation.*"  => "required|string|distinct|min:1",

@@ -324,7 +324,7 @@ return;
         $result = $userChk->checkUser();
         if(Session::get('user_type')=='AO')
         {
-            $data['designations'] = Hrms_DesignationsModel::with('DesignationgroupModel')->orderby('description','asc')->groupby('group_id')->get();
+            $data['designations'] = Hrms_DesignationsModel::with('DesignationgroupModel')->orderby('sort_order','asc')->groupby('group_id')->get();
             // dd($data['designations']);
 
             $data['designations1'] = Hrms_DesignationsModel::all();
@@ -451,7 +451,7 @@ return;
         $result = $userChk->checkUser();
         if(Session::get('user_type')=='AO')
         {
-            $data['designations'] = Hrms_DesignationsModel::with('Hrms_Sanctioned_PostsModel')->where('designation_level',1)->orderby('description','asc')->get();
+            $data['designations'] = Hrms_DesignationsModel::with('Hrms_Sanctioned_PostsModel')->where('designation_level',1)->orderby('sort_order','asc')->get();
 
             foreach($data['designations'] as $des){
                 $data['allot'][$des->id] = DB::table('hrms_employees_current_infos')->where('current_designation',$des->id)->count();
@@ -476,7 +476,7 @@ return;
         if(Session::get('user_type')=='AO')
         {
              $data['district'] = DistricstsModel::orderby('distname','asc')->get();
-             $data['designation'] = Hrms_DesignationsModel::where('designation_level',2)->orderby('description','asc')->get();
+             $data['designation'] = Hrms_DesignationsModel::where('designation_level',2)->orderby('sort_order','asc')->get();
 
             //  dd($data['designation']);
 

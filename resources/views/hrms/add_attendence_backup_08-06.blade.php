@@ -273,26 +273,11 @@ tr:nth-child(even) {
                                   <td>Employee Id</td>
                                   <td>Designation</td>
                                   {{-- <td>No. of Working Days</td> --}}
-                                  <td>Leaves Taken <br> in {{ date('F', mktime(0, 0, 0, date('m'), 10)); }}</td>
-                                  <td>Balance <br> Leaves</td>
+                                  <td>No. of Days Attended</td>
+                                  <td>Balance Leaves</td>
+                                  <td>Leaves Taken in {{ date('F', mktime(0, 0, 0, date('m'), 10)); }}</td>
                                   <td>LOP</td>
-                                  <td>Public Holidays <br> in {{ date('F', mktime(0, 0, 0, date('m'), 10)); }}</td>
-                                  <td>Total Leaves <br><br> <small>(5 + 7 + 8)</small></td>
-                                  <td>No. of Days Attended <br><br> <small>  {{ Carbon\Carbon::now()->daysInMonth}} days - (9 + (sun + 2nd sat)) </small></td>
-                                  <td>Payment Days <br><br> <small>(  {{ Carbon\Carbon::now()->daysInMonth}} days - 7 ) </small></td>
-                                </tr>
-                                <tr class="table-primary">
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>8</td>
-                                    <td>9</td>
-                                    <td>10</td>
-                                    <td>11</td>
+                                  <td>Remarks of PD</td>
                                 </tr>
                                 </thead>
                                 @php $i = 1; @endphp
@@ -302,18 +287,16 @@ tr:nth-child(even) {
                                     <tr >
                                       <td style="vertical-align:middle !important;">{{$i}}</td>
                                       <!--<td><input type="hidden" value="{{$val->district}}"  class="form-control" name="dist[]">{{$val->district}}</td>-->
-                                      {{-- <input type="hidden" value="{{$val->employee_type}}"  class="form-control" name="employee_type1[]"> --}}
-                                      <td style="vertical-align:middle !important;">{{$val->name}}</td>
-                                      <td style="vertical-align:middle !important;">{{$val->employee_id}}</td>
-                                      <td style="vertical-align:middle !important;">@php echo App\Http\Controllers\hrms\AddEmployeeController::GetdesignationName($val->GetCurrentStatus[0]->current_designation);@endphp</td>
+                                      <input type="hidden" value="{{$val->employee_type}}"  class="form-control" name="employee_type1[]">
+                                      <td style="vertical-align:middle !important;"><input type="hidden" value="{{$val->employee_id}}"  class="form-control" name="employee[]">{{$val->name}}</td>
+                                      <td style="vertical-align:middle !important;"><input type="hidden" value="{{$val->employee_id}}"  class="form-control" name="employee_id[]">{{$val->employee_id}}</td>
+                                      <td style="vertical-align:middle !important;"><input type="hidden" value="{{$val->GetCurrentStatus[0]->current_designation}}"  class="form-control" name="designation[]">@php echo App\Http\Controllers\hrms\AddEmployeeController::GetdesignationName($val->GetCurrentStatus[0]->current_designation);@endphp</td>
                                       {{-- <td style="vertical-align:middle !important;"><input type="text" value="{{Carbon\Carbon::now()->daysInMonth}}" id="no_of_days{{$i}}" class="form-control no_of_days" name="no_of_days[]" readonly></td> --}}
-                                      <td style="vertical-align:middle !important;">{{ $leave[$val->employee_id]['total_avl'] }}</td>
-                                      <td style="vertical-align:middle !important;">{{ $leave[$val->employee_id]['total_opg'] }}</td>
+                                      <td style="vertical-align:middle !important;"><input type="number" class="form-control attended" id="attended{{$i}}" name="attended[]" value="{{ Carbon\Carbon::now()->daysInMonth - $leave[$val->employee_id]['lop'] - $sun_count - $leave[$val->employee_id]['total_avl']}}" onchange=fun1(this.value,{{$i}})></td>
+                                      <td style="vertical-align:middle !important;"><input type="number" class="form-control" name="avl_leave[]" value="{{ $leave[$val->employee_id]['total_opg'] }}"></td>
+                                      <td style="vertical-align:middle !important;"><input type="text" class="form-control" id="cum_leave{{$i}}" name="comm_leave[]" value="{{ $leave[$val->employee_id]['total_avl'] }}"></td>
                                       <td style="vertical-align:middle !important;">{{ $leave[$val->employee_id]['lop'] }}</td>
-                                      <td>{{ $holidays }}</td>
-                                      <td>{{ $leave[$val->employee_id]['total_avl'] + $leave[$val->employee_id]['lop'] + $holidays }}</td>
-                                      <td style="vertical-align:middle !important;">{{ Carbon\Carbon::now()->daysInMonth - $leave[$val->employee_id]['lop'] - $sun_count - $leave[$val->employee_id]['total_avl'] - $holidays}}</td>
-                                      <td style="vertical-align:middle !important;">{{ Carbon\Carbon::now()->daysInMonth - $leave[$val->employee_id]['lop'] }}</td>
+                                      <td style="vertical-align:middle !important;"><input type="text" class="form-control" name="remarks[]" value="{{ $previousData[$val->employee_id]['remarks']}}"></td>
                                       @php $i++; @endphp
                                     </tr>
                                <input type="hidden" name="month" value="{{ date('m') }}">

@@ -1196,7 +1196,7 @@ label {
                            </div>
 
 
-                           <div class="card mt-3 shadow">
+                           {{-- <div class="card mt-3 shadow">
 
                            <div class="card-header p-0"> <div class="bg-head"><b>Objective/Inspirations <span class="mandatory"></span></b></div> </div>
 
@@ -1210,7 +1210,7 @@ label {
 
                             </div>
 
-                           </div>
+                           </div> --}}
 
 
 

@@ -1208,7 +1208,7 @@ input:read-only {
 
                        <div class="card mt-3 shadow">
 
-                       <div class="card-header p-0"> <div class="bg-head"><b>Disciplinary Cases/Suspensions</b></div> </div>
+                       <div class="card-header p-0"> <div class="bg-head"><b>Disciplinary Cases/Suspensions <span class="mandatory">*</span></b></div> </div>
 
                         <div class="card-body card_bd_pd1 colr9">
 
@@ -1244,7 +1244,7 @@ input:read-only {
 
 
 
-                       <div class="card mt-3 shadow">
+                      <!--- <div class="card mt-3 shadow">
 
                        <div class="card-header p-0"> <div class="bg-head"><b>Objective/Inspirations <span class="mandatory"></span></b></div> </div>
 
@@ -1258,7 +1258,7 @@ input:read-only {
 
                         </div>
 
-                       </div>
+                       </div> -->
 
 
                        <div class="card mt-3 shadow">
@@ -1298,7 +1298,7 @@ input:read-only {
 
 
                        @if($employeesDTL[0]->remarks != null)
-                       @if(session()->get('user_type') != 'AO'))
+                       @if(session()->get('user_type') != 'AO')
                         <div class="card mt-3 shadow">
 
                        <div class="card-header p-0"> <div class="bg-head"><b>Remarks by AO <span class="mandatory"></span> </b></div> </div>
