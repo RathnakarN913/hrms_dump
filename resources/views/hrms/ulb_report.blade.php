@@ -232,7 +232,7 @@ padding: 25px;
                 };
 
                 // Total over this page
-                for(let i=2;i<17;i++){
+                for(let i=2;i<14;i++){
                     pageTotal = api
                     .column(i, { page: 'current' })
                     .data()
