@@ -511,7 +511,7 @@ label {
                                                 </div>
                                                 <div class="col-md-4 pt-3">
                                                   <label>Pin Code <span class="mandatory">*</span></label>
-                                                  <input type="text" class="form-control form-control-sm  ml-0" maxlength="6" placeholder="" value="{{old('communication_address_pin_code')}}" id="communication_address_pin_code" name="communication_address_pin_code" oninput="this.value.replace(/[^0-9,]/g, "").replace(/(,.*?),(.*,)?/, "$1"); onkeydown="if(event.key==='.'){event.preventDefault();}">
+                                                  <input type="text" class="form-control form-control-sm  ml-0" maxlength="6" placeholder="" value="{{old('communication_address_pin_code')}}" id="communication_address_pin_code" name="communication_address_pin_code" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                                                   <span class="text-danger">{{$errors->first('communication_address_pin_code')}}</span>
                                                 </div>
 
