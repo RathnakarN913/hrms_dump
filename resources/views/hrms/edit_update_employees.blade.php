@@ -314,8 +314,8 @@ input:read-only {
 </style>
 
 <script>
-    $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
+    // $(function () {
+//   $('[data-toggle="tooltip"]').tooltip()
 // })
 //         $.ajaxSetup({
 //             headers: {
@@ -354,7 +354,7 @@ input:read-only {
               @if($errors->any())
                    <div class="error alert alert-danger">
                      <?php echo "<pre>".implode(",\n",$errors->all(':message'))."</pre>"; ?>
-                    </div>
+                    </div>surname
                 @endif
 
                 <div class="mb-0 ml-4"><b>Edit Employees Details</b></div>
@@ -1647,7 +1647,7 @@ $(".image-box").click(function(event) {
   </script>
 
  <script>
-// validation
+
     $(function() {
         $("form[name='add']").validate({
             rules: {
@@ -1674,8 +1674,9 @@ $(".image-box").click(function(event) {
                 },
                 // district: "required",
                 // ulbid: "required",
-                mandal: "required",
-                state: "required",
+                native_district:"required",
+                // mandal: "required",
+                // state: "required",
                 mobile_number: {
                     required: true,
                     minlength:10,
@@ -1705,7 +1706,7 @@ $(".image-box").click(function(event) {
                 // adhaar_card: "required",
                 pan_card_number: "required",
                 // pan_card: "required",
-                "degree[]": {required:true}",
+                "degree[]": { required:true },
                 "year_of_passing[]": {required:true},
                 "university_college[]": {required:true},
                 // certificates: "required",

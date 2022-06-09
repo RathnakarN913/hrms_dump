@@ -38,6 +38,7 @@ use App\Models\hrms\EmployeeType;
 use App\Models\hrms\SanctionedPosts;
 use App\Models\hrms\EmployeeFamilyDetails;
 use App\Models\hrms\EmployeeEducationDetailsModel;
+use App\Models\hrms\TechniacalDetailsModel;
 
 use Session;
 use DB;
@@ -74,9 +75,10 @@ class AddEmployeeController extends Controller
        $discplines = DiscplineModel::all();
        $currentstatus = CurrentStatusModel::all();
        $employeetypes = EmployeeType::all();
+       $techniacal = TechniacalDetailsModel::all();
        //   dd($dutytypes);
       // dd(Session::all());
-       return view('hrms/add-employee', compact("ulblist","relations", "designations", "designationsALL", "districts", "religions", "casts", "matrialstatus", "educations", "years", "grades", "currentlevels", "dutytypes", "discplines", "currentstatus", "employeetypes"));
+       return view('hrms/add-employee', compact("ulblist","relations", "designations", "designationsALL", "districts", "religions", "casts", "matrialstatus", "educations", "years", "grades", "currentlevels", "dutytypes", "discplines", "currentstatus", "employeetypes","techniacal"));
     }
     public static function GetdesignationName($designation_id)
     {
@@ -431,6 +433,9 @@ class AddEmployeeController extends Controller
         $university_college = $request->university_college;
         $discpline = $request->discpline;
 
+        $tech_type = htmlspecialchars($request->tech_type);
+        $tech_desc = htmlspecialchars($request->tech_desc);
+
         $date_of_joining = htmlspecialchars($request->date_of_joining);
         $retirement_date = htmlspecialchars($request->retirement_date);
 
@@ -543,6 +548,9 @@ class AddEmployeeController extends Controller
         $AddEmployeeModel->degree = $degree[0];
         $AddEmployeeModel->year_of_passing = $year_of_passing[0];
         $AddEmployeeModel->university_college = $university_college[0];
+
+        $AddEmployeeModel->tech_type = $tech_type;
+        $AddEmployeeModel->tech_desc = $tech_desc;
 
          $AddEmployeeModel->emp_remarks = $emp_remarks;
         // certificates
@@ -1150,7 +1158,7 @@ class AddEmployeeController extends Controller
                          'designation'=>'required',
                          'location'=>'required',
                         //  'doj'=>'required|mimes:jpeg,bmp,jpg,png,pdf',
-                         'current_grade'=>'required',
+                         'current_grade'=>'required_if:current_level,1,2,3,4,5',
                          'current_level'=>'required',
                          'current_basic_salary'=>'required',
                          'pf_number'=>'required',
