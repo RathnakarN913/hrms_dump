@@ -1648,232 +1648,232 @@ $(".image-box").click(function(event) {
 
  <script>
 // validation
-    // $(function() {
-    //     $("form[name='add']").validate({
-    //         rules: {
-    //             name: "required",
-    //             surname: "required",
-    //             dob: "required",
-    //             dob: "required",
-    //             co: "required",
-    //             co_name: "required",
-    //             gender: "required",
-    //             employee_type: "required",
-    //             joining_designation: "required",
-    //             communication_address: "required",
-    //             communication_address_pin_code: {
-    //                 required: true,
-    //                 minlength:6,
-    //                 maxlength:6
-    //             },
-    //             permenant_address: "required",
-    //             permenant_address_pin_code: {
-    //                 required: true,
-    //                 minlength:6,
-    //                 maxlength:6
-    //             },
-    //             // district: "required",
-    //             // ulbid: "required",
-    //             mandal: "required",
-    //             state: "required",
-    //             mobile_number: {
-    //                 required: true,
-    //                 minlength:10,
-    //                 maxlength:10
-    //             },
-    //             // alternative_mobile_number: {
-    //             //     required: true,
-    //             //     minlength:10,
-    //             //     maxlength:10
-    //             // },
-    //             email_id: {
-    //                 required: true,
-    //                 email: true
-    //             },
+    $(function() {
+        $("form[name='add']").validate({
+            rules: {
+                name: "required",
+                surname: "required",
+                dob: "required",
+                dob: "required",
+                co: "required",
+                co_name: "required",
+                gender: "required",
+                employee_type: "required",
+                joining_designation: "required",
+                communication_address: "required",
+                communication_address_pin_code: {
+                    required: true,
+                    minlength:6,
+                    maxlength:6
+                },
+                permenant_address: "required",
+                permenant_address_pin_code: {
+                    required: true,
+                    minlength:6,
+                    maxlength:6
+                },
+                // district: "required",
+                // ulbid: "required",
+                mandal: "required",
+                state: "required",
+                mobile_number: {
+                    required: true,
+                    minlength:10,
+                    maxlength:10
+                },
+                // alternative_mobile_number: {
+                //     required: true,
+                //     minlength:10,
+                //     maxlength:10
+                // },
+                email_id: {
+                    required: true,
+                    email: true
+                },
 
-    //             religion: "required",
-    //             caste: "required",
-    //             marital_status: "required",
-    //             if_select_single: "required",
-    //             nationality: "required",
+                religion: "required",
+                caste: "required",
+                marital_status: "required",
+                if_select_single: "required",
+                nationality: "required",
 
-    //             adhaar_card_number: {
-    //                 required: true,
-    //                 minlength:12,
-    //                 maxlength:12
-    //             },
-    //             // adhaar_card: "required",
-    //             pan_card_number: "required",
-    //             // pan_card: "required",
-    //             degree: "required",
-    //             year_of_passing: "required",
-    //             university_college: "required",
-    //             // certificates: "required",
-    //             discpline: "required",
-    //             date_of_joining: "required",
-    //             designation: "required",
-    //             location: "required",
-    //             // doj: "required",
-    //             current_grade: "required",
-    //             current_level: "required",
+                adhaar_card_number: {
+                    required: true,
+                    minlength:12,
+                    maxlength:12
+                },
+                // adhaar_card: "required",
+                pan_card_number: "required",
+                // pan_card: "required",
+                "degree[]": {required:true}",
+                "year_of_passing[]": {required:true},
+                "university_college[]": {required:true},
+                // certificates: "required",
+                "discpline[]": {required:true},
+                date_of_joining: "required",
+                designation: "required",
+                location: "required",
+                // doj: "required",
+                current_grade: "required",
+                current_level: "required",
 
-    //             // current_designation: "required",
-    //             'current_designation[]': {
-    //                 required: true
-    //             },
-    //             'current_status[]': {
-    //                 required: true
-    //             },
-    //             'current_location[]': {
-    //                 required: true
-    //             },
-    //             'duty_type[]': {
-    //                 required: true
-    //             },
-
-
-    //             'start_date[]': {
-    //                 required: true
-    //             },
-    //             'end_date[]': {
-    //                 required: true
-    //             },
-    //             'disgnation[]': {
-    //                 required: true
-    //             },
-    //             'work_experience_location[]': {
-    //                 required: true
-    //             },
-
-    //             current_basic_salary: "required",
-    //             pf_number: "required",
-    //             esi_number: "required",
-
-    //             account_holder_name: "required",
-    //             bank_name: "required",
-    //             account_number: "required",
-    //             ifsc_code: "required",
-
-    //             relation_name: "required",
-    //             relation_gender: "required",
-    //             relation_type: "required",
-    //             relation_dob: "required",
-    //             relation_occupation: "required",
-    //             // family_photo: "required",
-
-    //             nominee_details: "required",
-    //             nominee_relation: "required",
-    //             nominee_gender: "required",
-    //             nominee_dob: "required",
-
-    //             // objective_aspirations: "required",
-    //             // contributions_awards: "required",
-    //             // current_role_description: "required",
-    //             // discplinary_cases_suspensions: "required",
-
-    //             // photo: "required",
-
-    //         },
-    //         messages: {
-    //             name: "Please Enter Name",
-    //             surname: "Please Enter surname",
-    //             dob: "Please Select Valid DOB",
-    //             co: "Mandatory Field",
-    //             co_name: "Mandatory Field",
-    //             gender: "Mandatory Field",
-    //             employee_type: "Mandatory Field",
-    //             joining_designation: "Mandatory Field",
-    //             communication_address: "Mandatory Field",
-    //             communication_address_pin_code: "Please Enter 6 Digit valid Pin code",
-    //             permenant_address: "Mandatory Field",
-    //             permenant_address_pin_code: "Please Enter 6 Digit valid Pin code",
-    //             // district: "Mandatory Field",
-    //             // ulbid: "Mandatory Field",
-    //             mandal: "Mandatory Field",
-    //             state: "Mandatory Field",
-
-    //             mobile_number: {
-    //                 required: "Please Enter Mobile Number",
-    //                 minlength: "Please Enter 10 digit valid Mobile Number",
-    //                 maxlength: "Please Enter 10 digit valid Mobile Number",
-    //             },
-    //             alternative_mobile_number: {
-    //                 required: "Please Enter Alternative Mobile Number",
-    //                 minlength: "Please Enter 10 digit valid Alternative Mobile Number",
-    //                 maxlength: "Please Enter 10 digit valid Alternative Mobile Number",
-    //             },
-    //             email_id: "Please enter a valid email address",
-    //             religion: "Mandatory Field",
-    //             caste: "Mandatory Field",
-    //             marital_status: "Mandatory Field",
-    //             if_select_single: "Mandatory Field",
-    //             nationality: "Mandatory Field",
-
-    //             adhaar_card_number: {
-    //                 required: "Please Enter Adhaar Card Number",
-    //                 minlength: "Please Enter 12 digit valid Adhaar Card Number",
-    //                 maxlength: "Please Enter 12 digit valid Adhaar Card Number",
-    //             },
-    //             adhaar_card: "Mandatory Field",
-    //             pan_card_number: "Mandatory Field",
-    //             pan_card: "Mandatory Field",
-    //             degree: "Mandatory Field",
-    //             year_of_passing: "Mandatory Field",
-    //             university_college: "Mandatory Field",
-    //             certificates: "Mandatory Field",
-    //             discpline: "Mandatory Field",
-    //             date_of_joining: "Mandatory Field",
-    //             designation: "Mandatory Field",
-    //             location: "Mandatory Field",
-    //             doj: "Mandatory Field",
-    //             current_grade: "Mandatory Field",
-    //             current_level: "Mandatory Field",
+                // current_designation: "required",
+                'current_designation[]': {
+                    required: true
+                },
+                'current_status[]': {
+                    required: true
+                },
+                'current_location[]': {
+                    required: true
+                },
+                'duty_type[]': {
+                    required: true
+                },
 
 
-    //             "current_designation[]": "Please select category",
-    //             "current_status[]": "Please select category",
-    //             "current_location[]": "Please select category",
-    //             "duty_type[]": "Please select category",
+                'start_date[]': {
+                    required: true
+                },
+                'end_date[]': {
+                    required: true
+                },
+                'disgnation[]': {
+                    required: true
+                },
+                'work_experience_location[]': {
+                    required: true
+                },
 
-    //             "start_date[]": "Mandatory Field",
-    //             "end_date[]": "Mandatory Field",
-    //             "disgnation[]": "Mandatory Field",
-    //             "work_experience_location[]": "Mandatory Field",
+                current_basic_salary: "required",
+                pf_number: "required",
+                esi_number: "required",
+
+                account_holder_name: "required",
+                bank_name: "required",
+                account_number: "required",
+                ifsc_code: "required",
+
+                "relation_name[]": {required:true},
+                "relation_gender[]": {required:true},
+                "relation_type[]": {required:true},
+                "relation_dob[]": {required:true},
+                "relation_occupation[]": {required:true},
+                // family_photo: "required",
+
+                // nominee_details: "required",
+                // nominee_relation: "required",
+                // nominee_gender: "required",
+                // nominee_dob: "required",
+
+                // objective_aspirations: "required",
+                // contributions_awards: "required",
+                // current_role_description: "required",
+                discplinary_cases_suspensions: "required",
+
+                // photo: "required",
+
+            },
+            messages: {
+                name: "Please Enter Name",
+                surname: "Please Enter surname",
+                dob: "Please Select Valid DOB",
+                co: "Mandatory Field",
+                co_name: "Mandatory Field",
+                gender: "Mandatory Field",
+                employee_type: "Mandatory Field",
+                joining_designation: "Mandatory Field",
+                communication_address: "Mandatory Field",
+                communication_address_pin_code: "Please Enter 6 Digit valid Pin code",
+                permenant_address: "Mandatory Field",
+                permenant_address_pin_code: "Please Enter 6 Digit valid Pin code",
+                // district: "Mandatory Field",
+                // ulbid: "Mandatory Field",
+                mandal: "Mandatory Field",
+                state: "Mandatory Field",
+
+                mobile_number: {
+                    required: "Please Enter Mobile Number",
+                    minlength: "Please Enter 10 digit valid Mobile Number",
+                    maxlength: "Please Enter 10 digit valid Mobile Number",
+                },
+                alternative_mobile_number: {
+                    required: "Please Enter Alternative Mobile Number",
+                    minlength: "Please Enter 10 digit valid Alternative Mobile Number",
+                    maxlength: "Please Enter 10 digit valid Alternative Mobile Number",
+                },
+                email_id: "Please enter a valid email address",
+                religion: "Mandatory Field",
+                caste: "Mandatory Field",
+                marital_status: "Mandatory Field",
+                if_select_single: "Mandatory Field",
+                nationality: "Mandatory Field",
+
+                adhaar_card_number: {
+                    required: "Please Enter Adhaar Card Number",
+                    minlength: "Please Enter 12 digit valid Adhaar Card Number",
+                    maxlength: "Please Enter 12 digit valid Adhaar Card Number",
+                },
+                adhaar_card: "Mandatory Field",
+                pan_card_number: "Mandatory Field",
+                pan_card: "Mandatory Field",
+                degree: "Mandatory Field",
+                year_of_passing: "Mandatory Field",
+                university_college: "Mandatory Field",
+                certificates: "Mandatory Field",
+                discpline: "Mandatory Field",
+                date_of_joining: "Mandatory Field",
+                designation: "Mandatory Field",
+                location: "Mandatory Field",
+                doj: "Mandatory Field",
+                current_grade: "Mandatory Field",
+                current_level: "Mandatory Field",
 
 
-    //             current_basic_salary: "Mandatory Field",
-    //             pf_number: "Mandatory Field",
-    //             esi_number: "Mandatory Field",
+                "current_designation[]": "Please select category",
+                "current_status[]": "Please select category",
+                "current_location[]": "Please select category",
+                "duty_type[]": "Please select category",
 
-    //             account_holder_name: "Mandatory Field",
-    //             bank_name: "Mandatory Field",
-    //             account_number: "Mandatory Field",
-    //             ifsc_code: "Mandatory Field",
+                "start_date[]": "Mandatory Field",
+                "end_date[]": "Mandatory Field",
+                "disgnation[]": "Mandatory Field",
+                "work_experience_location[]": "Mandatory Field",
 
-    //             relation_name: "Mandatory Field",
-    //             relation_gender: "Mandatory Field",
-    //             relation_type: "Mandatory Field",
-    //             relation_dob: "Mandatory Field",
-    //             relation_occupation: "Mandatory Field",
-    //             family_photo: "Mandatory Field",
 
-    //             nominee_details: "Mandatory Field",
-    //             nominee_relation: "Mandatory Field",
-    //             nominee_gender: "Mandatory Field",
-    //             nominee_dob: "Mandatory Field",
+                current_basic_salary: "Mandatory Field",
+                pf_number: "Mandatory Field",
+                esi_number: "Mandatory Field",
 
-    //             objective_aspirations: "Mandatory Field",
-    //             contributions_awards: "Mandatory Field",
-    //             current_role_description: "Mandatory Field",
-    //             discplinary_cases_suspensions: "Mandatory Field",
+                account_holder_name: "Mandatory Field",
+                bank_name: "Mandatory Field",
+                account_number: "Mandatory Field",
+                ifsc_code: "Mandatory Field",
 
-    //             // photo: "Mandatory Field",
-    //         },
-    //         submitHandler: function(form) {
-    //           form.submit();
-    //         }
-    //     });
-    // });
+                relation_name: "Mandatory Field",
+                relation_gender: "Mandatory Field",
+                relation_type: "Mandatory Field",
+                relation_dob: "Mandatory Field",
+                relation_occupation: "Mandatory Field",
+                family_photo: "Mandatory Field",
+
+                nominee_details: "Mandatory Field",
+                nominee_relation: "Mandatory Field",
+                nominee_gender: "Mandatory Field",
+                nominee_dob: "Mandatory Field",
+
+                objective_aspirations: "Mandatory Field",
+                contributions_awards: "Mandatory Field",
+                current_role_description: "Mandatory Field",
+                discplinary_cases_suspensions: "Mandatory Field",
+
+                // photo: "Mandatory Field",
+            },
+            submitHandler: function(form) {
+              form.submit();
+            }
+        });
+    });
 
 
     $('#permenant_address_same_as_above').on('change', function() {

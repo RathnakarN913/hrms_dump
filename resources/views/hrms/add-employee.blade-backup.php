@@ -4,7 +4,7 @@
 {
     color: red;
     font-size:13px;
-        
+
 }
        .table th, .jsgrid .jsgrid-table th, .table td, .jsgrid .jsgrid-table td {
     padding: 10px 3px;
@@ -31,9 +31,9 @@
 }
 svg > g:last-child > g:last-child {
     pointer-events: none !important
-    
+
 }
-div.google-visualization-tooltip { 
+div.google-visualization-tooltip {
     pointer-events: none !important
     }
     .export-btn {
@@ -215,17 +215,17 @@ label {
       <div class="main-panel">
         <div class="content-wrapper">
                <main class="page-content">
-              
+
                @if($message = Session::get('success'))
                <div class="alert alert-success  alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert">×</button>   
+                <button type="button" class="close" data-dismiss="alert">×</button>
                    <strong>{{ $message }}</strong>
                </div>
                @endif
-               
-               
+
+
                @if($errors->any())
-                   <div class="error"> 
+                   <div class="error">
                      {{ implode('', $errors->all(':message')) }}
                     </div>
                 @endif
@@ -235,17 +235,17 @@ label {
                   <div class="bg-head"><b>Personal Information</b></div>
                   <!--<div class="some-class"></div>-->
                   <label for="firstname" generated="true" class="some-class"></label>
-                  <div class="user-profile-bg"> 
+                  <div class="user-profile-bg">
                     <form name="add" method="post" action="{{ route('CreateAddEmployee') }}" enctype="multipart/form-data">
                     <div class="row">
-                        
+
                     <div class="col-md-9 order-sm-first order-last">
                           @csrf
                           <div class="row">
                             <div class="col-md-4 mb-3">
                               <label>Name <span class="mandatory">*</span></label>
                               <input type="text" class="form-control form-control-sm " id="name-field" placeholder="Name" name="name" required >
-                              
+
                             </div>
                             <div class="col-md-4">
                               <label>Surname <span class="mandatory">*</span></label>
@@ -268,7 +268,7 @@ label {
                                 @endif
                               </select>
                              </div>
-                              <div class="col-md-8" style=""> 
+                              <div class="col-md-8" style="">
                               <label>Enter Name<span class="mandatory">*</span></label>
                               <input type="text" class="form-control form-control-sm " id="co-name-field" placeholder="Enter name here" name="co_name">
                              </div>
@@ -283,7 +283,7 @@ label {
                                 <option value="Transgender">Transgender</option>
                               </select>
                             </div>
-                            
+
                             <div class="col-md-4">
                               <label> Employee ID <span class="mandatory">*</span></label>
                               <select class="form-control-sm  select-input" name="employee_type">
@@ -295,7 +295,7 @@ label {
                                 @endif
                               </select>
                             </div>
-                            
+
                             <div class="col-md-4">
                               <label>Joining Designation <span class="mandatory">*</span></label>
                                <select class="form-control-sm  select-input" name="joining_designation">
@@ -315,7 +315,7 @@ label {
                               <label>Pin code <span class="mandatory">*</span></label>
                               <input type="text" class="form-control form-control-sm " maxlength="6" placeholder="" id="communication_address_pin_code" name="communication_address_pin_code" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                             </div>
-                            
+
                           <div class="mb-3 mt-3 ml-3">
                             <input type="checkbox" id="permenant_address_same_as_above" name="permenant_address_same_as_above" value="1" > Please select Permanent address same as above
                           </div>
@@ -346,8 +346,8 @@ label {
                                 <option value="">Select Ulb</option>
                               </select>
                             </div>
-                            
-                            
+
+
                             <div class="col-md-4">
                               <label>Mandal <span class="mandatory">*</span></label>
                               <input type="text" class="form-control form-control-sm  " placeholder="" id="mandal-field" name="mandal">
@@ -422,7 +422,7 @@ label {
                               <input type="file" class="form-control form-control-sm  " placeholder="" name="adhaar_card">
                               <small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>
                             </div>
-                           
+
                             <div class="col-md-4">
                               <label>Pan Card number <span class="mandatory">*</span></label>
                               <input type="text" class="form-control form-control-sm" id="pan_card_number" placeholder="" name="pan_card_number" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)">
@@ -505,8 +505,8 @@ label {
                                <small style="font-size:12px;"><i> <b>Note:</b> Upload files PDF, JPG, PNG only</i></small>
                             </div>
                           </div>
-                          
-                          
+
+
                         <div class="row">
                           <div class="col-md-4 mb-3">
                               <label>Current Grade <span class="mandatory">*</span></label>
@@ -540,9 +540,9 @@ label {
                               </select>
                             </div>
                           </div>
-                          
-                          
-                       <div class="row  ml-1" style="background-color: #e2eeef;">  
+
+
+                       <div class="row  ml-1" style="background-color: #e2eeef;">
                           <span id="designationerrors"></span>
                               <div class="col-md-11 pt-2" style="border-right: 1px #aedde1  solid;">
                                 <div class="row">
@@ -557,7 +557,7 @@ label {
                                         @endif
                                       </select>
                                     </div>
-                                    
+
                                     <div class="col-md-4">
                                       <label>Current Status <span class="mandatory">*</span></label>
                                       <select class="form-control-sm   select-input" name="current_status[]">
@@ -569,13 +569,13 @@ label {
                                         @endif
                                       </select>
                                     </div>
-                                    
-                                    
+
+
                                     <div class="col-md-4">
                                       <label>Current Location <span class="mandatory">*</span></label>
                                       <input type="text" class="form-control form-control-sm" id="current_location" placeholder="" name="current_location[]">
                                     </div>
-                                    
+
                                     <div class="col-md-4 mb-3">
                                       <label>Duty type <span class="mandatory">*</span></label>
                                       <select class="form-control-sm   select-input" name="duty_type[]">
@@ -587,25 +587,25 @@ label {
                                         @endif
                                       </select>
                                     </div>
-                              </div>  
+                              </div>
                           </div>
-                          
+
                            <div class="col-md-1 p-0 d-flex align-items-center justify-content-center">
                               <span class="btn-plus add-new"><i class="fa fa-plus"></i></span>
                               <!--<span class="btn-minus" style="margin-top: 28px; display: inherit;"><i class="bi bi-dash"></i></span>-->
                            </div>
                            <input name="current_designation_no" id="current_designation_no" type="hidden" value="0">
                         </div>
-                        
+
                         <div class="current_designation">
-                            
+
                         </div>
-                        
-                        
-                        
-                        
+
+
+
+
                           <p class="mt-3 mb-3"><b>Work Experience</b></p>
-                          
+
                             <div class="row b-3 ml-1" style="background-color: #e2eeef;">
                                 <div class="col-md-11 pb-3 pt-2" style="border-right: 1px #aedde1  solid;">
                                    <div class="row">
@@ -621,7 +621,7 @@ label {
                                       </div>
                                     </div>
                                     </div>
-                                    
+
                                      <div class="col-md-4 ">
                                       <label>Designation <span class="mandatory">*</span></label>
                                       <select class="form-control-sm  select-input" name="disgnation[]">
@@ -633,12 +633,12 @@ label {
                                         @endif
                                       </select>
                                     </div>
-                                    
+
                                      <div class="col-md-4">
                                           <label>Location <span class="mandatory">*</span></label>
                                           <input type="text" class="form-control form-control-sm" id="work_experience_location" placeholder="" name="work_experience_location[]">
                                          </div>
-                                       </div> 
+                                       </div>
                                 </div>
                                 <div class="col-md-1 p-0 d-flex align-items-center justify-content-center" >
                                       <span class="btn-plus add-new1"><i class="fa fa-plus"></i></span>
@@ -646,40 +646,40 @@ label {
                                 </div>
                                 <input name="work_experience_no" id="work_experience_no" type="hidden" value="0">
                             </div>
-                            
+
                             <div class="work_experience">
-                                
+
                             </div>
-                            
+
                           <div class="row mt-3">
-                               
+
                                 <div class="col-md-4 mb-3">
                                   <label>Current Basic salary <span class="mandatory">*</span></label>
                                   <input type="text" class="form-control form-control-sm  " placeholder="" name="current_basic_salary" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
                                 </div>
-                                
+
                                 <div class="col-md-4">
                                   <label>PF Number <span class="mandatory">*</span></label>
                                   <input type="text" class="form-control form-control-sm  " placeholder="" name="pf_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                                 </div>
-                                
+
                                 <div class="col-md-4">
                                   <label>ESI Number <span class="mandatory">*</span></label>
                                   <input type="text" class="form-control form-control-sm  " placeholder="" name="esi_number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onkeydown="if(event.key==='.'){event.preventDefault();}">
                                 </div>
-                                    
+
                           </div>
                           <div class="row">
                           </div>
-                        
+
                     <div class="mb-3 bg-head"><b>Bank Details</b></div>
-                    
+
                       <div class="row">
                           <div class="col-md-4 mb-3">
                            <label>Account holder name <span class="mandatory">*</span></label>
                            <input type="text" class="form-control form-control-sm " id="account_holder_name" placeholder="" name="account_holder_name">
                           </div>
-                   
+
                             <div class="col-md-4">
                               <label>Bank name <span class="mandatory">*</span></label>
                              <input type="text" class="form-control form-control-sm  " placeholder="" name="bank_name">
@@ -773,12 +773,12 @@ label {
                           <textarea class="w-100 textarea-h" name="current_role_description"></textarea>
                           <div class="mt-3 mb-3 bg-head"><b>Disciplinary cases/suspensions <span class="mandatory"></span></b></div>
                           <textarea class="w-100 textarea-h" name="discplinary_cases_suspensions"></textarea>
-                          
+
                        <div class="text-center mt-2 mb-2">
                          <button class="btn btn-md btn-submit" name="submit" value="submit">Submit</button>
                        </div>
 
-                      
+
                     </div>
                     <div class="col-md-3 ">
                       <!--<div class="user-prof">-->
@@ -797,23 +797,23 @@ label {
                             	</div>
                             	<center>
                             	<div class="image_upload"><small>Please Click here to Upload Photo </small><span class="mandatory"> *</span></div>
-                            </center>	
+                            </center>
                             </div>
                         </div>
-                      
+
                     </div>
                   </div>
                   </div>
 
-                
-                 
+
+
 
                   </div>
                 </div>
             </form>
 
       </main>
-           
+
 
 
 
@@ -853,11 +853,11 @@ $(".image-box").click(function(event) {
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="assets/plugins/easyPieChart/jquery.easypiechart.js"></script>
- 
+
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
 
- <script>  
-// validation 
+ <script>
+// validation
 
 // jQuery.validator.addMethod("dob", function(value, element) {
 //     // $('#dob-field-error').remove();
@@ -868,8 +868,8 @@ $(".image-box").click(function(event) {
 //         //     $('input[name=dob]').val('');
 //         //     console.log('less than 18');
 //         //     $('input[name=dob]').after('<label id="dob-field-error" class="error" for="dob-field">Age should not be less than 18 years!</label>')
-            
-//         // } 
+
+//         // }
 // //   return this.optional(element) || /^http:\/\/mycorporatedomain.com/.test(value);
 // }, "Age should not be less than 18 years!");
 
@@ -902,7 +902,7 @@ $(".image-box").click(function(event) {
                 // ulbid: "required",
                 mandal: "required",
                 state: "required",
-                
+
                 mobile_number: {
                     required: true,
                     minlength:10,
@@ -917,13 +917,13 @@ $(".image-box").click(function(event) {
                     required: true,
                     email: true
                 },
-            
+
                 religion: "required",
                 caste: "required",
                 marital_status: "required",
                 if_select_single: "required",
                 nationality: "required",
-                
+
                 adhaar_card_number: {
                     required: true,
                     minlength:12,
@@ -943,7 +943,7 @@ $(".image-box").click(function(event) {
                 doj: "required",
                 current_grade: "required",
                 current_level: "required",
-                
+
                 // current_designation: "required",
                 'current_designation[]': {
                     required: true
@@ -957,8 +957,8 @@ $(".image-box").click(function(event) {
                 'duty_type[]': {
                     required: true
                 },
-                
-                
+
+
                 'start_date[]': {
                     required: true
                 },
@@ -971,35 +971,35 @@ $(".image-box").click(function(event) {
                 'work_experience_location[]': {
                     required: true
                 },
-                
+
                 current_basic_salary: "required",
                 pf_number: "required",
                 esi_number: "required",
-                
+
                 account_holder_name: "required",
                 bank_name: "required",
                 account_number: "required",
                 ifsc_code: "required",
-                
+
                 relation_name: "required",
                 relation_gender: "required",
                 relation_type: "required",
                 relation_dob: "required",
                 relation_occupation: "required",
                 family_photo: "required",
-                
+
                 nominee_details: "required",
                 nominee_relation: "required",
                 nominee_gender: "required",
                 nominee_dob: "required",
-                
+
                 // objective_aspirations: "required",
                 // contributions_awards: "required",
                 // current_role_description: "required",
                 // discplinary_cases_suspensions: "required",
-                
+
                 photo: "required",
-                
+
             },
             messages: {
                 name: "Please Enter Name",
@@ -1018,7 +1018,7 @@ $(".image-box").click(function(event) {
                 // ulbid: "Mandatory Field",
                 mandal: "Mandatory Field",
                 state: "Mandatory Field",
-                
+
                 mobile_number: {
                     required: "Please Enter Mobile Number",
                     minlength: "Please Enter 10 digit valid Mobile Number",
@@ -1036,13 +1036,13 @@ $(".image-box").click(function(event) {
                 if_select_single: "Mandatory Field",
                 nationality: "Mandatory Field",
                 adhaar_card_number: "Mandatory Field",
-                
+
                 adhaar_card_number: {
                     required: "Please Enter Adhaar Card Number",
                     minlength: "Please Enter 12 digit valid Adhaar Card Number",
                     maxlength: "Please Enter 12 digit valid Adhaar Card Number",
                 },
-                
+
                 adhaar_card: "Mandatory Field",
                 pan_card_number: "Mandatory Field",
                 pan_card: "Mandatory Field",
@@ -1057,48 +1057,48 @@ $(".image-box").click(function(event) {
                 doj: "Mandatory Field",
                 current_grade: "Mandatory Field",
                 current_level: "Mandatory Field",
-                
-                
+
+
                 "current_designation[]": "Please select category",
                 "current_status[]": "Please select category",
                 "current_location[]": "Please select category",
                 "duty_type[]": "Please select category",
-                
+
                 "start_date[]": "Mandatory Field",
                 "end_date[]": "Mandatory Field",
                 "disgnation[]": "Mandatory Field",
                 "work_experience_location[]": "Mandatory Field",
-                
-                
+
+
                 current_basic_salary: "Mandatory Field",
                 pf_number: "Mandatory Field",
                 esi_number: "Mandatory Field",
-                
+
                 account_holder_name: "Mandatory Field",
                 bank_name: "Mandatory Field",
                 account_number: "Mandatory Field",
                 ifsc_code: "Mandatory Field",
-                
+
                 relation_name: "Mandatory Field",
                 relation_gender: "Mandatory Field",
                 relation_type: "Mandatory Field",
                 relation_dob: "Mandatory Field",
                 relation_occupation: "Mandatory Field",
                 family_photo: "Mandatory Field",
-                
+
                 nominee_details: "Mandatory Field",
                 nominee_relation: "Mandatory Field",
                 nominee_gender: "Mandatory Field",
                 nominee_dob: "Mandatory Field",
-                
+
                 objective_aspirations: "Mandatory Field",
                 contributions_awards: "Mandatory Field",
                 current_role_description: "Mandatory Field",
                 discplinary_cases_suspensions: "Mandatory Field",
-                
+
                 photo: "Mandatory Field",
             },
-           
+
             submitHandler: function(form) {
                 if($('#photo').val())
                 {
@@ -1109,7 +1109,7 @@ $(".image-box").click(function(event) {
                    alert("Please Select Photo");
                    $('.image_upload').text("Please Select Photo");
                 }
-               
+
             }
         });
     });
@@ -1131,9 +1131,9 @@ $(".image-box").click(function(event) {
             $('#permenant_address_pin_code').val("");
         }
     });
-    
+
     // add new
-    
+
     $('.add-new').on('click', function() {
         // alert(1);
         $.ajaxSetup({
@@ -1142,7 +1142,7 @@ $(".image-box").click(function(event) {
             }
         });
         var current_designation_no = $('#current_designation_no').val();
-        
+
         var district = $('#district').val();
         var ulbid = $('#ulbid_list').val();
         $.ajax({
@@ -1150,16 +1150,16 @@ $(".image-box").click(function(event) {
                url:'{{ route('AddCurrentDesignation'); }}',
                data:{current_designation_no : current_designation_no, district: district, ulbid:ulbid},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
                   $(".current_designation").append(data.html);
                   $('#current_designation_no').val(data.return_numbers);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
@@ -1169,30 +1169,30 @@ $(".image-box").click(function(event) {
     function remove(no)
     {
         //  $('.render'+no).css('display', 'none');
-         
+
         //  $('.current_location'+no).val('');
-         
+
          var current_designation_no = $('#current_designation_no').val();
          $.ajax({
                type:'POST',
                url:'{{ route('RemoveCurrentDesignation'); }}',
                data:{current_designation_no : current_designation_no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
-                   $('.render'+no).remove(); 
+                   $('.render'+no).remove();
                 //   $('#current_designation_no').val(data.return_numbers);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
     }
-    
+
     $('.add-new1').on('click', function() {
         // alert(1);
         $.ajaxSetup({
@@ -1206,22 +1206,22 @@ $(".image-box").click(function(event) {
                url:'{{ route('AddWorkExperience'); }}',
                data:{work_experience_no : work_experience_no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
                   $(".work_experience").append(data.html);
                   $('#work_experience_no').val(data.return_numbers);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
     });
-    
-    
+
+
     function work_experience_remove(no)
     {
          var work_experience_no = $('#work_experience_no').val();
@@ -1230,20 +1230,20 @@ $(".image-box").click(function(event) {
                url:'{{ route('RemoveWorkExperience'); }}',
                data:{work_experience_no : work_experience_no},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
-                   $('.render-work-exp'+no).remove(); 
+                   $('.render-work-exp'+no).remove();
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
     }
-    
+
     function GetUlbs()
     {
         $.ajaxSetup({
@@ -1251,7 +1251,7 @@ $(".image-box").click(function(event) {
                 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
             }
         });
-        
+
         var district = $('#district').val();
         $('#ulbid_list').empty();
         $('#ulbid_list').html('<option value="">Select Ulb </option>');
@@ -1260,8 +1260,8 @@ $(".image-box").click(function(event) {
                url:'{{ route('GetUlbs'); }}',
                data:{district : district},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
@@ -1271,22 +1271,22 @@ $(".image-box").click(function(event) {
                     });
                 GetCurrentDesignation(district);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
     }
-    
+
     function GetCurrentDesignationByUlb()
     {
         var district = $('#district').val();
-        
+
         GetCurrentDesignation(district);
     }
-    
+
     function validateDesignationAvaibility(e) {
-        
+
         var designation = e;
         var district = $('select[name=district]').val();
         var ulbid = $('select[name=ulbid]').val();
@@ -1296,14 +1296,14 @@ $(".image-box").click(function(event) {
                 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
             }
         });
-        
+
         $.ajax({
                type:'POST',
                url:'{{ route('validateSelectedDesignationAvaibility'); }}',
                data:{designation: designation, district : district, ulbid: ulbid },
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {},
@@ -1318,10 +1318,10 @@ $(".image-box").click(function(event) {
                 complete: function()  {   $("#overlay").fadeOut(); }
             });
     }
-    
+
     function GetCurrentDesignation(district)
     {
-        
+
         jQuery('.current_designation div').html('');
 
         $.ajaxSetup({
@@ -1337,8 +1337,8 @@ $(".image-box").click(function(event) {
                url:'{{ route('GetCurrentDesignationS'); }}',
                data:{district : district, ulbid: ulbid },
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
@@ -1347,13 +1347,13 @@ $(".image-box").click(function(event) {
                         $('#current_designations').append('<option value="'+ value.id +'">'+ value.description +'</option>');
                     });
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
     }
-    
+
     function GetMaritalStatusDtl()
     {
         $.ajaxSetup({
@@ -1370,16 +1370,16 @@ $(".image-box").click(function(event) {
                url:'{{ route('GetMaritalStatus'); }}',
                data:{matrialstatusid : matrialstatusid},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
                  $("#if_select_single").prop("readonly", false);
                  $('.MaritalHeading').text(data.status_name);
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
@@ -1529,8 +1529,8 @@ $(".image-box").click(function(event) {
                url:'{{ route('GetDisciplineLists'); }}',
                data:{nameofthedegree : NameoftheDegree.value},
                dataType: 'JSON',
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(data) {
@@ -1538,8 +1538,8 @@ $(".image-box").click(function(event) {
                         $('#discpline').append('<option value="'+ value.id +'">'+ value.discpline +'</option>');
                     });
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             });
