@@ -321,7 +321,7 @@ label {
 
                <main class="page-content">
 
-               @if($message = Session::get('success'))
+               @if($message = Session::get('success')) 
                <div class="alert alert-success  alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                    <strong>{{ $message }}</strong>
