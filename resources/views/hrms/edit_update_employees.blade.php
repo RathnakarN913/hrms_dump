@@ -1764,22 +1764,22 @@ $(".image-box").click(function(event) {
                 },
 
 
-                'start_date[]': {
-                    required: true
-                },
-                'end_date[]': {
-                    required: true
-                },
-                'disgnation[]': {
-                    required: true
-                },
-                'work_experience_location[]': {
-                    required: true
-                },
+                // 'start_date[]': {
+                //     required: true
+                // },
+                // 'end_date[]': {
+                //     required: true
+                // },
+                // 'disgnation[]': {
+                //     required: true
+                // },
+                // 'work_experience_location[]': {
+                //     required: true
+                // },
 
                 current_basic_salary: "required",
                 pf_number: "required",
-                esi_number: "required",
+                // esi_number: "required",
 
                 account_holder_name: "required",
                 bank_name: "required",
