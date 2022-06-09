@@ -322,7 +322,7 @@ return;
     {
         $userChk = new Helpers();
         $result = $userChk->checkUser();
-        if(Session::get('user_type')=='AO')
+        if(Session::get('user_type')=='AO' || Session::get('user_type')=='AD')
         {
             $data['designations'] = Hrms_DesignationsModel::with('DesignationgroupModel')->orderby('sort_order','asc')->groupby('group_id')->get();
             // dd($data['designations']);
@@ -449,7 +449,7 @@ return;
 
         $userChk = new Helpers();
         $result = $userChk->checkUser();
-        if(Session::get('user_type')=='AO')
+        if(Session::get('user_type')=='AO' || Session::get('user_type')=='AD')
         {
             $data['designations'] = Hrms_DesignationsModel::with('Hrms_Sanctioned_PostsModel')->where('designation_level',1)->orderby('sort_order','asc')->get();
 
@@ -473,7 +473,7 @@ return;
 
         $userChk = new Helpers();
         $result = $userChk->checkUser();
-        if(Session::get('user_type')=='AO')
+        if(Session::get('user_type')=='AO' || Session::get('user_type')=='AD')
         {
              $data['district'] = DistricstsModel::orderby('distname','asc')->get();
              $data['designation'] = Hrms_DesignationsModel::where('designation_level',2)->orderby('sort_order','asc')->get();
@@ -521,7 +521,7 @@ return;
     {
         $userChk = new Helpers();
         $result = $userChk->checkUser();
-        if(Session::get('user_type')=='AO')
+        if(Session::get('user_type')=='AO' || Session::get('user_type')=='AD')
         {
             $data['ulblist'] = UlbmstModel::with('DistrictModel')->orderby('ulbname','asc')->get();
             $data['designation'] = Hrms_DesignationsModel::where('designation_level',3)->orderby('sort_order','ASC')->get();

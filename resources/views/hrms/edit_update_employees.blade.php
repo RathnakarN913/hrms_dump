@@ -694,6 +694,37 @@ input:read-only {
                        </div>
 
 
+
+                       <div class="card shadow mt-3">
+                        <div class="card-header p-0"> <div class="bg-head"><b>Technical Details (if any)</b></div> </div>
+
+                        <div class="card-body card_bd_pd1">
+
+                        <div class="row colr4 m-1 pt-3">
+                            <div class="col-md-4 mb-3">
+                                <label>Technical Cource <span class="mandatory"></span></label>
+                                <select class="form-control-sm select-input" name="tech_type" id='tech_type'>
+                                    <option value="">Select</option>
+                                    @if($techniacal)
+                                        @foreach($techniacal as $key=> $val)
+                                        <option value="{{ $val->technical_id }}" @if($val->technical_id == $employeesDTL[0]->tech_type ) selected @endif>{{ $val->description }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                <span class="text-danger">{{$errors->first('tech_type')}}</span>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label>Cource Level/description<span class="mandatory"></span></label>
+                                <input type="text" class="form-control" name="tech_desc" value="{{ $employeesDTL[0]->tech_desc }}" id='tech_desc'>
+                                <span class="text-danger">{{$errors->first('tech_desc')}}</span>
+                            </div>
+                        </div>
+
+                        </div>
+                    </div>
+
+
                        <div class="card mt-3 shadow">
 
                        <div class="card-header p-0"> <div class="bg-head"><b>Professional Information</b></div> </div>

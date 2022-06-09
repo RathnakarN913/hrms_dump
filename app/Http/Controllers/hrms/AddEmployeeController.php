@@ -1071,6 +1071,7 @@ class AddEmployeeController extends Controller
        $dutytypes = DutyTypeModel::all();
        $currentstatus = CurrentStatusModel::all();
        $employeetypes = EmployeeType::all();
+       $techniacal = TechniacalDetailsModel::all();
 
        $employeesDTL = AddEmployeeModel::with('GetCurrentStatus', 'GetWorkExperience','EmployeesnomineeModel','EmployeeFamilyDetails','EducationDetails')->where('employee_id',$request->emp_id)->get();
 // dd($employeesDTL);
@@ -1104,7 +1105,7 @@ class AddEmployeeController extends Controller
     //       return view('hrms/gov_edit_update_employees', compact("employeesDTL", "relations", "designations", "designationsALL", "districts", "religions", "casts", "matrialstatus", "educations", "years", "grades", "currentlevels", "dutytypes", "discplines", "currentstatus", "GetDistwiseUlbs", "GetMaritalStatusInfo", "employeetypes"));
     //   }
 
-       return view('hrms/edit_update_employees', compact("employeesDTL", "relations", "designations", "designationsALL", "districts", "religions", "casts", "matrialstatus", "educations", "years", "grades", "currentlevels", "dutytypes", "discplines", "currentstatus", "GetDistwiseUlbs", "GetMaritalStatusInfo", "employeetypes"));
+       return view('hrms/edit_update_employees', compact("employeesDTL", "relations", "designations", "designationsALL", "districts", "religions", "casts", "matrialstatus", "educations", "years", "grades", "currentlevels", "dutytypes", "discplines", "currentstatus", "GetDistwiseUlbs", "GetMaritalStatusInfo", "employeetypes",'techniacal'));
     }
 
     public function UpdateEmployee(Request $request)
