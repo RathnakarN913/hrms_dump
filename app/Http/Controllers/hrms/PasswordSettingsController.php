@@ -9,7 +9,7 @@ use DB;
 class PasswordSettingsController extends Controller
 {
     public function index(){
-        $data['users'] = DB::table('users')->join('districtmst','users.dist_id','=','districtmst.distid')->where('user_type','PD')->get();
+        $data['users'] = DB::table('users')->join('Districtmst','users.dist_id','=','Districtmst.distid')->where('user_type','PD')->get();
         return view('hrms.passwordSettings',$data);
     }
     public function update_password(Request $request)
