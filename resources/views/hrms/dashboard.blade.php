@@ -45,26 +45,26 @@
     color: #53777A;
     z-index: 2;
 }
-.left-half-clipper { 
+.left-half-clipper {
    /* a round circle */
    border-radius: 50%;
    width: 5em;
    height: 5em;
    position: absolute; /* needed for clipping */
-   clip: rect(0, 5em, 5em, 2.5em); /* clips the whole left half*/ 
+   clip: rect(0, 5em, 5em, 2.5em); /* clips the whole left half*/
 }
 /* when p>50, don't clip left half*/
 .progress-circle.over50 .left-half-clipper {
    clip: rect(auto,auto,auto,auto);
-    
-   
-  
+
+
+
 }
- 
+
 .value-bar {
    /*This is an overlayed square, that is made round with the border radius,
    then it is cut to display only the left half, then rotated clockwise
-   to escape the outer clipping path.*/ 
+   to escape the outer clipping path.*/
    position: absolute; /*needed for clipping*/
    clip: rect(0, 2.5em, 5em, 0);
    width: 5em;
@@ -73,7 +73,7 @@
    border: 0.45em solid #590c74; /*The border is 0.35 but making it larger removes visual artifacts */
    /*background-color: #4D642D;*/ /* for debug */
    box-sizing: border-box;
-  
+
 }
 /* Progress bar filling the whole right half for values above 50% */
 .progress-circle.over50 .first50-bar {
@@ -249,7 +249,7 @@
 
 .layout-builder.show .layout-builder-toggle.hdn {
     display: flex;
-	
+
 }
 
 .layout-builder .layout-builder-toggle {
@@ -611,7 +611,7 @@
         height: 100%;
         margin-bottom: 15px;
     }
-    
+
     .card .card-body, .page-header .card-body {
         padding: 20px;
     }
@@ -631,16 +631,16 @@
             <div class=" ">
                 <div class="col-12 mt-3">
                     <h4 style="font-size: 1.125rem;"><b>Dashboard</b></h4>
-                    
+
                 </div>
             </div>
         </div>
     </div>
-  
+
     <div class=" ">
             <div class="col-12">
                 <div class=" row justify-content-start d-flex">
-                    
+
                     @if(session()->get('user_type') == 'AO')
 
                         <div class="col-md-4 text-center ">
@@ -718,7 +718,7 @@
                         </div>
                         <hr>
                         @elseif(session()->get('user_type') == 'PD')
-                        
+
                           <div class="col-md-4 text-center ">
                             <div class="card mb-0">
                                 <div class="card-body">
@@ -756,16 +756,16 @@
                             </div>
                         </div>
                         @else
-                        
-                        
-                        
+
+
+
                         @endif
 
 
                     </div>
             </div>
     </div>
-    
+
     <br>
     <!--<div class="row justify-content-center d-flex">-->
     <!--    <div class="col-1">-->
@@ -781,9 +781,9 @@
     <!--        <button class="btn btn-primary btn-sm" type="button">HR Policy</button>-->
     <!--    </div>-->
     <!--</div>-->
-    
-    
-    
+
+
+
     <!--tabs-->
     @if(session()->get('user_type') == 'AO')
         <div class="m-4">
@@ -801,7 +801,7 @@
                 <a href="#hr" class="nav-link" data-bs-toggle="tab">HR</a>
             </li>
         </ul>
-        
+
         <div class="tab-content" style="overflow:hidden;">
             <div class="tab-pane fade show active" id="all">
                 <div class="row">
@@ -853,18 +853,18 @@
         </div>
     </div>
 @endif
-        
+
     <!--end tabs-->
-    
+
 
 
     </div>
     @include('headers.footer')
 
         </div>
-    
+
       <script language = "JavaScript">
-      
+
          function drawChart() {
             // Define the chart to be drawn.
             var data = new google.visualization.DataTable();
@@ -874,27 +874,27 @@
               ['Sactioned', {{$san}}],
               ['Vacant', {{$san - $occu}}],
               ['Occupied', {{$occu}}],
-               
+
             ]);
-            
+
             // Set chart options
             var options = {
               'title':'HRMS Statistics - Sanctioned Vs Vacant Vs Occupied',
               'width':700,
               'height':400
             };
-            
-            
+
+
             // Instantiate and draw the chart.
             var chart4 = new google.visualization.ColumnChart(document.getElementById('container2'));
-            chart4.draw(data, options); 
-            
-            
+            chart4.draw(data, options);
+
+
             var chart = new google.visualization.PieChart(document.getElementById('container'));
             chart.draw(data, options);
-            
+
          }
-          google.charts.setOnLoadCallback(drawChart); 
+          google.charts.setOnLoadCallback(drawChart);
             // chart 2
         function drawChart1() {
             var data1 = new google.visualization.DataTable();
@@ -904,20 +904,20 @@
               ['Sactioned', {{$gov_san}}],
               ['Vacant', {{$gov_san - $gov_occu}}],
               ['Occupied', {{$gov_occu}}],
-               
+
             ]);
-            
+
             var options1 = {
               'title':'HRMS Statistics - Sanctioned Vs Vacant Vs Occupied',
               'width':700,
               'height':400,
-                    
-             
+
+
             };
-            
+
             var chart5 = new google.visualization.ColumnChart(document.getElementById('container4'));
             chart5.draw(data1, options1);
-            
+
             var chart1 = new google.visualization.PieChart(document.getElementById('container3'));
             chart1.draw(data1, options1);
         }
@@ -931,18 +931,18 @@
               ['Sactioned', {{$out_san}}],
               ['Vacant', {{$out_san - $out_occu}}],
               ['Occupied', {{$out_occu}}],
-               
+
             ]);
-            
+
             var options2 = {
               'title':'HRMS Statistics - Sanctioned Vs Vacant Vs Occupied',
               'width':700,
               'height':400
             };
-            
+
             var chart6 = new google.visualization.ColumnChart(document.getElementById('container6'));
             chart6.draw(data2, options2);
-            
+
             var chart2 = new google.visualization.PieChart(document.getElementById('container5'));
             chart2.draw(data2, options2);
         }
@@ -956,24 +956,24 @@
               ['Sactioned', {{$hr_san}}],
               ['Vacant', {{$hr_san - $hr_occu}}],
               ['Occupied', {{$hr_occu}}],
-               
+
             ]);
-            
+
             var options3 = {
               'title':'HRMS Statistics - Sanctioned Vs Vacant Vs Occupied',
               'width':700,
               'height':400
             };
-            
+
             var chart3 = new google.visualization.PieChart(document.getElementById('container7'));
             chart3.draw(data3, options3);
-            
+
             var chart7 = new google.visualization.ColumnChart(document.getElementById('container8'));
             chart7.draw(data3, options3);
          }
          google.charts.setOnLoadCallback(drawChart3);
       </script>
-      
+
             </div>
         </div>
     </div>

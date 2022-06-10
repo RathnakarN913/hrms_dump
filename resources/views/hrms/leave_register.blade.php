@@ -29,9 +29,9 @@
 }
 svg > g:last-child > g:last-child {
     pointer-events: none !important
-    
+
 }
-div.google-visualization-tooltip { 
+div.google-visualization-tooltip {
     pointer-events: none !important
     }
     .export-btn {
@@ -213,22 +213,22 @@ td input.form-control {
    width: 100px;
   min-width: 100px;
   max-width: 100px;
-  left: 130px; 
+  left: 130px;
 }
 .sub-col{
    width: 40px;
   min-width: 40px;
   max-width: 40px;
-  left: 130px; 
+  left: 130px;
 }
 .sub-col1{
    width: 80px;
   min-width: 80px;
   max-width: 80px;
-  left: 170px; 
+  left: 170px;
 }
 
-</style>     
+</style>
 
 <script>
     $(function () {
@@ -239,60 +239,60 @@ td input.form-control {
       <div class="main-panel">
         <div class="content-wrapper">
             <main class="page-content">
-                
+
                    @if($message = Session::get('success'))
                    <div class="alert alert-success  alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert">×</button>   
+                    <button type="button" class="close" data-dismiss="alert">×</button>
                        <strong>{{ $message }}</strong>
                    </div>
                    @endif
-                   
+
                    @if($message = Session::get('error'))
                        <div class="alert alert-danger  alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">×</button>   
+                            <button type="button" class="close" data-dismiss="alert">×</button>
                             <strong>{{ $message }}</strong>
                        </div>
                    @endif
                    @if($errors->any())
-                    <div class="error"> 
+                    <div class="error">
                      {{ implode('', $errors->all(':message')) }}
                     </div>
                    @endif
-                   
+
                    <div class="card">
-                       
-  <div class="card-body">  
-  
+
+  <div class="card-body">
+
     <div class="bg-white">
             <div class="row align-items-center mt-4 mb-4 ">
-                
+
                     <div class="col-md-6">
                         <h4 style="padding-left:15px;"><b>Leave Managment</b></h4>
                      </div>
-                     
+
                     <div class="col-md-6">
                         <input id="myInput" type="text" placeholder="Search.." class="form-control">
                     </div>
-                
+
             </div>
-            
-            @php 
-              
+
+            @php
+
                   $i=1; $cnt = 0; $cnt1 = 0; $cnt2 = 0; $cnt3 = 0; $gtot = 0; $month = date('m'); $year = date('Y'); $gtot_att = 0;$lop=0;
                   $no_of_days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-                  
-              $monthName = date('F', mktime(0, 0, 0, date('m'), 10)); 
+
+              $monthName = date('F', mktime(0, 0, 0, date('m'), 10));
               @endphp
-        
+
     <form id="myform" method="post" action="{{url('save_leave_request')}}" enctype="multipart/form-data">
     @csrf
             <div class="d-flex p-3 " style="background-color:#BEEBE9;">
                 <input type="hidden" id="district" value="{{$district}}">
                 <img src="{{url('assets/images/Parliament_icon.png')}}" height='26'>
                <h5 class="mt-2 ml-2"><b>District : {{$distname}}  </b></h5>
-               
+
                <h5 class="mt-2 ml-5"><b>Month: {{$monthName}}</b></h5>
-               
+
                <!--<lable for="month" class="ml-5 mt-2">Month: $monthName = date('F', mktime(0, 0, 0, $monthNum, 10));</lable>-->
                <!--@php $month = date('m'); @endphp;-->
                <!--<select class="form-select ml-3" name="month" style="width:20%;" disabled>-->
@@ -310,17 +310,17 @@ td input.form-control {
                <!--    <option value="11" @if($month == 11) selected @endif>November</option>-->
                <!--    <option value="12" @if($month == 12) selected @endif>December</option>-->
                <!--</select>-->
-                
+
                <h5 class="mt-2 ml-5"><b>No of Working Days : {{$no_of_days}}</b></h5>
-               
+
             </div>
-            
-            
-            
-            
+
+
+
+
       <div class="  table-responsive thead-scroll">
-          
-        
+
+
         <table class="table" border="1" style="font-size:13px;" id="example">
           <thead class="t-head" style="position: sticky;top: 0;">
             <tr class="table-primary text-center">
@@ -338,16 +338,16 @@ td input.form-control {
             <tr>
                 <th style="padding: 10px; position: sticky;top: 0; font-size: 12px !important;" class="sticky-col sub-col">Id</th>
               <th style="width: 20%; position: sticky;top: 0; font-size: 12px !important;" class="sticky-col sub-col1">Name </th>
-              
+
               @foreach($leave as $le)
               <th style="width: 20%; position: sticky;top: 0; font-size: 12px !important;" title="Opening Balence">OPG</th>
               <th style="width: 20%; position: sticky;top: 0; font-size: 12px !important;"  title="Availed Leaves">AVLD </th>
               @endforeach
-              
+
             </tr>
           </thead>
           <tbody class="text-center" id="search_content">
-              
+
               @foreach($employee as $emp)
               @php
                 $tot =  0;
@@ -359,21 +359,21 @@ td input.form-control {
                             <td class="input-group-sm sticky-col sub-col1" >
                                 {{$emp->name}} <br> {{$emp->surname}}
                             </td>
-                            
+
                             @foreach($leave as $le)
-                                @php 
-                                
+                                @php
+
                                     $col = $le->leave_code.'opg';
                                     $coll = $le->leave_code.'avld';
-                                    
+
                                     $cnt = $leave_count->where('employee_id',$emp->employee_id)->sum($col);
                                     $cnt1 = $leave_count->where('employee_id',$emp->employee_id)->sum($coll);
                                     $lop = $leave_count->where('employee_id',$emp->employee_id)->sum('lop');
-                                    
+
                                     $tot = $tot + $cnt1;
-                                    
+
                                 @endphp
-                                
+
                                 <td class="input-group-sm">
                                     <input type="" name="{{$le->leave_code}}opg[]" class="form-control" value="{{$cnt}}"  @if(session()->get('user_type') != 'AO') @if(count($leave_count->where('employee_id',$emp->employee_id)) > 0) readonly @endif @endif      @if($ao_status) @if(session()->get('user_type') == 'AO') @if($le->leave_code == 'AL' || $le->leave_code == 'ML' || $le->leave_code == 'PL') @else readonly @endif @else readonly @endif @endif>
                                 </td>
@@ -399,23 +399,23 @@ td input.form-control {
                     </tr>
                     @php $gtot_att = $gtot_att + $tot_att; @endphp
                 @endforeach
-              
+
               <tr class="table-primary text-center">
                   <td colspan="4" class="sticky-col first-col">Total</td>
-                  
+
                     @foreach($leave as $le)
-                    
-                        @php 
+
+                        @php
                             $col = $le->leave_code.'opg';
                             $coll = $le->leave_code.'avld';
-                            
+
                             $cnt2 = $leave_count->sum($col);
                             $cnt3 = $leave_count->sum($coll);
-                            
+
                             $gtot = $gtot + $cnt3;
-                            
+
                         @endphp
-                    
+
                         <td class="input-group-sm">
                             {{$cnt2}}
                             <!--<input type="text" class="form-control" value="" readonly>-->
@@ -425,67 +425,67 @@ td input.form-control {
                             <!--<input type="text" class="form-control" value="" readonly>-->
                         </td>
                     @endforeach
-                    
+
                     <td class="input-group-sm">
                         {{$gtot}}
                         <!--<input type="text" class="form-control" value="" readonly>-->
                     </td>
-                    
+
                     <td class="input-group-sm">
                         {{$leave_count->sum('lop')}}
                         <!--<input type="text" class="form-control" value="" readonly>-->
                     </td>
-                    
+
                     <td>{{$gtot_att}}</td>
-                    
+
                     <td></td>
               </tr>
-           
+
            </tbody>
 
-        </table>      
-                        
+        </table>
+
       </div>
       <br>
-      
+
       @if(!$ao_status)
       <div class="row">
          <div class="col-md-10">
              <div class="row d-flex justify-content-center">
-                 
+
                   <div class="col-md-2">
                       <button class="btn btn-submit btn-sm" type="submit" name="save" style="border-radius: 15px !important;width: 80%;margin-top: 0px;line-height: 20px;">Save</button>
                   </div>
-                  
+
                   <div class="col-md-2">
                       <button  class="btn btn-secondary btn-sm" type="button" style="color:white; background-color:#327c95; border:1px solid#327c95" id="genarate_otp">Generate OTP</button>
                   </div>
-                  
-                   
-                    
-                  
+
+
+
+
             </div>
         </div>
       </div>
-      
-      
-      
+
+
+
       @endif
-      
-      
+
+
       @if(session()->get('user_type') == 'AO')
       @if($ao_status != 2)
-      
+
         <div class="row">
-            
+
             <div class="col-md-1">
                 <button class="btn btn-success" type="submit" id="approve_btn">Approve</button>
             </div>
-            
+
             <!--<div class="col-md-1">-->
             <!--    <button class="btn btn-danger" type="button" id="reject_btn">Reject</button>-->
             <!--</div>-->
-            
+
             <!--<div class="col-md-4">-->
             <!--    <div class="form-group">-->
             <!--        <label for="remarks">Remarks</label>-->
@@ -493,37 +493,37 @@ td input.form-control {
             <!--      </div>-->
             <!--</div>-->
         </div>
-        
+
       @endif
       @endif
-      
+
         <!--  <div class="col-md-7 mt-4 text-start">-->
         <!--    <div class=" d-flex align-items-center justify-content-around">-->
         <!--      <div>-->
         <!--      </div>-->
         <!--      <div>-->
-              
-          
+
+
         <!--  </div>-->
-          
-           
+
+
         <!--  <div style="display:block;">-->
-              
+
         <!--            <div>-->
         <!--          </div>-->
         <!-- </div>-->
         <!--</div>-->
-        
+
         <!--</div>-->
-    
+
     </form>
     </div>
-    
-  </div>  
+
+  </div>
 </div>
 
 
-      
+
       <!-- The Modal -->
 <div class="modal fade" id="myModal">
   <div class="modal-dialog">
@@ -537,37 +537,37 @@ td input.form-control {
 
       <!-- Modal body -->
       <div class="modal-body">
-       
+
        <div>
-            <div id="otp_div"></div> 
+            <div id="otp_div"></div>
        </div>
-       
+
        <div class="text-center text-black-50">
-           We have sent the code verification <br> to your mobile number 
+           We have sent the code verification <br> to your mobile number
        </div>
-       
+
        <div class="text-center text-black mt-2">
            Enter OTP here
        </div>
-       
+
        <div class="myotp text-center" style="width:250px; margin:auto;">
-            
-         <input type="text" class="form-control"  placeholder="Enter Your OTP" id="otp_field"> 
-         
-         <div class="text-center mt-2" style="margin-left: 15px;">   
-             <button class="btn btn-success btn-sm btn-block" type="button" id="verify_btn" style="border-radius: 3px;">Verify</button> 
-         </div> 
+
+         <input type="text" class="form-control"  placeholder="Enter Your OTP" id="otp_field">
+
+         <div class="text-center mt-2" style="margin-left: 15px;">
+             <button class="btn btn-success btn-sm btn-block" type="button" id="verify_btn" style="border-radius: 3px;">Verify</button>
+         </div>
        </div>
-       
+
        <div>
-           
+
        </div>
-       
+
       </div>
 
       <!-- Modal footer -->
-      <div class="modal-footer d-flex"> 
-         
+      <div class="modal-footer d-flex">
+
         <div id="fwd_div" style="display:none">
             <button type ="button" class="btn btn-danger btn-sm"  id="ao_fwd_btn"> Forward to HO</button>
         </div>
@@ -576,11 +576,11 @@ td input.form-control {
     </div>
   </div>
 </div>
-                   
+
             </main>
-           
+
  <div class="row">
-           
+
 </div>
 
 
@@ -598,8 +598,8 @@ td input.form-control {
                type:'GET',
                url:'genarate_otp',
                data:{},
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(result) {
@@ -607,15 +607,15 @@ td input.form-control {
                 //   $('#verify_btn').show();
                    $('#otp_field').val(result);
                    $('#genarate_otp').html('Re Genarate OTP');
-                   
+
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                     var myModal = new bootstrap.Modal(document.getElementById('myModal'))
                     myModal.show();
                 }
-            })     
+            })
         });
     });
 </script>
@@ -634,8 +634,8 @@ td input.form-control {
                type:'POST',
                url:'verify_otp',
                data:{otp:otp,_token:_token},
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(result) {
@@ -652,21 +652,21 @@ td input.form-control {
                         alert('Otp Required');
                     }
                 },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                     //setTimeout(modal_close,1800);
                 }
-            })     
+            })
         });
     });
-    
+
     function modal_close(){
        // alert();
       // $('#myModal').modal('hide');
    //    var myModal = new bootstrap.Modal(document.getElementById('myModal'));
   //     mymodal.close();
-    } 
+    }
 </script>
 
 <script>
@@ -676,8 +676,8 @@ td input.form-control {
                 type:'GET',
                url:'forward_ao',
                data:{},
-               beforeSend: function() 
-                { 
+               beforeSend: function()
+                {
                     $("#overlay").fadeIn();
                 },
                success:function(result) {
@@ -685,12 +685,12 @@ td input.form-control {
                       alert('Forwarded to AO');
                       location.reload();
                    }else{
-                       alert('Problem in Forwarding to AO'); 
+                       alert('Problem in Forwarding to AO');
                    }
-                   
+
                },
-                complete: function() 
-                { 
+                complete: function()
+                {
                     $("#overlay").fadeOut();
                 }
             })
@@ -703,7 +703,7 @@ td input.form-control {
 <!--        $('#approve_btn').on('click',function(){-->
 <!--            var district = $('#district').val();-->
 <!--            var _token = '<?php echo csrf_token(); ?>';-->
-            
+
 <!--            $.ajax({-->
 <!--               url:'<?php echo url('ao_approve') ?>',-->
 <!--               type:'POST',-->
@@ -744,12 +744,12 @@ td input.form-control {
          var workingdays = parseInt($("#no_of_days" + i).val());
          var attendeddays = parseInt(attendeddays);
          //alert(attendeddays);
-        
-         
+
+
          var commultiveleaver = workingdays - attendeddays;
-         
+
          $("#cum_leave" + i).val(commultiveleaver);
-         
+
          if(attendeddays <= workingdays)
          {
          var commultiveleaver = workingdays - attendeddays;
@@ -760,11 +760,11 @@ td input.form-control {
              alert('no of attended days should be less than or equal to working days');
              $("#attended" + i).val('');
              $("#cum_leave" + i).val('');
-            
+
          }
-         
-         
-         
+
+
+
      }
  </script>
  <script>

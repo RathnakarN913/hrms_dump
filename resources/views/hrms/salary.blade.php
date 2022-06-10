@@ -42,14 +42,64 @@ padding: 25px;
             <div class=" ">
                 <div class="table-content" id="table_div">
                     <div class="card mb-3">
-                        <div class="card-header bg-white"> <b> HR Salary Report </b> </div>
+                        <div class="card-header bg-white"> <b> HR Salary Report for the Month - {{ date('F', mktime(0, 0, 0, date('m'), 10)); }} </b> </div>
                         <div class="card-body">
                             <div class="thead-scroll">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead class="t-head">
+                                        <tr class="table-primary text-center">
+                                            <th>SNO</th>
+                                            <th>Employee Name</th>
+                                            <th>Pay Days</th>
+                                            <th>Basic Pay</th>
+                                            <th>HRA <br><br> (24%)</th>
+                                            <th>EPF Employer Share <br><br> max up to 15000/- <br><br>(13%) </th>
+                                            <th>ESI  Employer <br><br> Share <br><br>(3.25%)</th>
+                                            <th>FTA as per <br><br> eligibility
+                                            </th>
+                                            <th>Total <br><br> (gross salry)
+                                            </th>
+                                            <th>EPF Employer Share <br><br> max up to 15000/- <br><br> (13%)
+                                            </th>
+                                            <th>EPF Employee Share <br><br> max up to 15000/- <br><br> (12%)
+                                            </th>
+                                            <th>ESI Employer <br><br> Share (3.25%)
+                                            </th>
+                                            <th>ESI Gross pay <br><br> less than 21000/- <br><br> (0.75%)
+                                            </th>
+                                            <th>Profession Tax
+                                            </th>
+                                            <th>AGIS
+                                            </th>
+                                            <th>Total Deductions
+                                            </th>
+                                            <th>Net Payable
+                                            </th>
+                                        </tr>
                                     </thead>
                                     <tbody class="text-center" id="search_content">
-                                        @php $i = 1; $tot_allot = 0; @endphp
+                                        @php $i = 1; @endphp
+                                        @foreach ($employee as $emp)
+                                            <tr>
+                                                <td>{{ $i++ }}</td>
+                                                <td>{{ $emp->name }}</td>
+                                                <td>{{ round($salary[$emp->employee_id]['pay_days'],1) }}</td>
+                                                <td>{{ round($salary[$emp->employee_id]['basic_pay'],1) }}</td>
+                                                <td>{{ round($salary[$emp->employee_id]['hra'],1) }}</td>
+                                                <td>{{ round($salary[$emp->employee_id]['add_epf'],1) }}</td>
+                                                <td>{{ round($salary[$emp->employee_id]['add_esi'],1) }}</td>
+                                                <td>{{ round($salary[$emp->employee_id]['fta'],1) }}</td>
+                                                <td>{{ round($salary[$emp->employee_id]['gross_salary'],1) }}</td>
+                                                <td>{{ round($salary[$emp->employee_id]['ded_epf'],1) }}</td>
+                                                <td>{{ round($salary[$emp->employee_id]['ded_epf1'],1) }}</td>
+                                                <td>{{ round($salary[$emp->employee_id]['ded_esi'],1) }}</td>
+                                                <td>{{ round($salary[$emp->employee_id]['ded_esi1'],1) }}</td>
+                                                <td>{{ round($salary[$emp->employee_id]['pt'],1) }}</td>
+                                                <td>{{ round($salary[$emp->employee_id]['agis'],1) }}</td>
+                                                <td>{{ round($salary[$emp->employee_id]['total_ded'],1) }}</td>
+                                                <td>{{ round($salary[$emp->employee_id]['net_pay'],1) }}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                     <tfoot>
                                     </tfoot>

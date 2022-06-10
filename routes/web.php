@@ -19,6 +19,7 @@ use App\Http\Controllers\hrms\FmAttendanceViewController;
 use App\Http\Controllers\hrms\ViewAttendenceController;
 use App\Models\hrms\SanctionedPosts;
 use App\Http\Controllers\hrms\SalaryController;
+use App\Http\Controllers\hrms\PasswordSettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -197,6 +198,9 @@ Route::get('rcs', function() {
 
 // Salary Routes
 Route::any('salary_genaration',[SalaryController::class,'index']);
+Route::any('password_settings',[PasswordSettingsController::class,'index']);
+
+
 
 // Route::get('create_logins',[LoginController::class,'create_logins']);
 
