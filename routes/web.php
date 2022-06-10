@@ -198,7 +198,9 @@ Route::get('rcs', function() {
 
 // Salary Routes
 Route::any('salary_genaration',[SalaryController::class,'index']);
+Route::any('save_salary',[SalaryController::class,'storeSalary']);
 Route::any('password_settings',[PasswordSettingsController::class,'index']);
+Route::any('update_password',[PasswordSettingsController::class,'update_password']);
 
 
 

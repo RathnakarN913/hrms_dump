@@ -40,6 +40,22 @@ padding: 25px;
 
         <main class="page-content">
             <div class=" ">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if (session()->has('error'))
+                    <div class="alert alert-danger">{{ session()->get('error') }}</div>
+                @endif
+                @if (session()->has('success'))
+                    <div class="alert alert-success">{{ session()->get('success') }}</div>
+                @endif
                 <div class="table-content" id="table_div">
                     <div class="card mb-3">
                         <div class="card-header bg-white"> <b> <h3> User Details </h3></b> </div>
@@ -63,7 +79,7 @@ padding: 25px;
                                                 <td>{{ $item->user_name }}</td>
                                                 <td>{{ $item->distname }}</td>
                                                 <td>{{ $item->dtcpMobile }}</td>
-                                                <td><button class="btn btn-warning btn-sm" onclick="reset_password({{ $item->dist_id }})">Reset Password</button></td>
+                                                <td><button class="btn btn-warning btn-sm" onclick="reset_password({{ $item->id }})">Reset Password</button></td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -75,6 +91,103 @@ padding: 25px;
                     </div>
                 </div>
             </div>
+
+
+              <!-- The Modal -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header p-3">
+                            <h4 class="modal-title ">Verify OTP </h4>
+                            <button class="btn-close" data-bs-dismiss="modal" style="border:0px;"> <i class="fa fa-times"></i> </button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div>
+                                <div id="otp_div"></div>
+                            </div>
+                            <div class="text-center text-black-50">
+                                We have sent the code verification <br> to your mobile number
+                            </div>
+                            <div class="text-center text-black mt-2">
+                                Enter OTP here
+                            </div>
+                            <div class="myotp text-center" style="width:250px; margin:auto;">
+                                <input type="text" class="form-control"  placeholder="Enter Your OTP" id="otp_field">
+                                <input type="hidden" name="user_id" id="user_id" value="">
+                                <div class="text-center mt-2" style="margin-left: 15px;">
+                                    <button class="btn btn-success btn-sm btn-block" type="button" id="verify_btn" style="border-radius: 3px;">Verify</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer d-flex">
+
+                        {{-- <div id="fwd_div" style="display:none">
+
+                            <button type ="button" class="btn btn-danger btn-sm"  id="ao_fwd_btn"> Forward to HO</button>
+                        </div> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- modal end --}}
+
+            {{-- password model --}}
+
+             <!-- The Modal -->
+             <div class="modal fade" id="passModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header p-3">
+                            <h4 class="modal-title ">Reset Password</h4>
+                            <button class="btn-close" data-bs-dismiss="modal" style="border:0px;"> <i class="fa fa-times"></i> </button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <form action="update_password" onsubmit="return validatePass()" method="post">
+                            @csrf
+                            <div class="modal-body">
+                                <div>
+                                    <div id="error_div"></div>
+                                    <input type="hidden" name="userid" id="userid">
+                                </div>
+                                <div class="text-center text-black mt-2">
+                                    Password
+                                </div>
+                                <div class="text-center" style="width:250px; margin:auto;">
+                                    <input type="password" class="form-control" name="password" placeholder="Enter Password" id="password" autocomplete="off" required>
+                                </div>
+
+                                <div class="text-center text-black mt-2">
+                                    Confirm Password
+                                </div>
+                                <div class="text-center" style="width:250px; margin:auto;">
+                                    <input type="password" class="form-control" name="confirm_password"  placeholder="Enter Confirm Password" id="confirm_password" autocomplete="off" required>
+                                    <div class="text-center mt-2" style="margin-left: 15px;">
+                                        <button class="btn btn-success btn-sm btn-block" type="submit" style="border-radius: 3px;">Update Password</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer d-flex">
+                            {{-- <div id="fwd_div" style="display:none">
+                                <button type ="button" class="btn btn-danger btn-sm"  id="ao_fwd_btn"> Forward to HO</button>
+                            </div> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </main>
 
        <!--end page main-->
@@ -99,7 +212,35 @@ padding: 25px;
 </script>
 
 <script>
+    function validatePass(){
+        var pass = $('#password').val();
+        var con_pass = $('#confirm_password').val();
+        const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+        const regex = /\d/;
+        if(pass == ''){
+            $('#error_div').html('<p class="alert alert-danger">Please Enter Password..!</p>');
+            return false;
+        }else if(pass != con_pass){
+            $('#error_div').html('<p class="alert alert-danger">Password and confirm password not matched..!</p>');
+            return false;
+         }else if(pass.length < 8){
+            $('#error_div').html('<p class="alert alert-danger">Password should have minimum 8 charecters</p>');
+            return false;
+         }else if(!specialChars.test(pass)){
+            $('#error_div').html('<p class="alert alert-danger">Password should Contain 1 special charecters</p>');
+            return false;
+         }else if(!regex.test(pass)){
+            $('#error_div').html('<p class="alert alert-danger">Password should Contain 1 digit</p>');
+            return false;
+         }else{
+            return true;
+         }
+    }
+</script>
+
+<script>
     function reset_password(id){
+        $('#otp_div').hide();
             $.ajax({
                type:'GET',
                url:'genarate_otp',
@@ -109,7 +250,8 @@ padding: 25px;
                     $("#overlay").fadeIn();
                 },
                success:function(result) {
-                   $('#genarate_otp').html('Re Genarate OTP');
+                   $('#otp_field').val(result);
+                   $('#user_id').val(id);
 
                },
                 complete: function()
@@ -120,6 +262,58 @@ padding: 25px;
                 }
             })
         }
+</script>
+
+
+<script>
+    $(document).ready(function(){
+        $('#verify_btn').on('click',function(){
+            $('#otp_div').show();
+            var userid = $('#user_id').val();
+            var _token = '<?php echo csrf_token() ?>';
+            var otp = $('#otp_field').val();
+            if(otp == ''){
+                $('#otp_div').html('<p class="alert alert-danger">OTP Field Required</p>');
+                return false;
+            }
+            $.ajax({
+               type:'POST',
+               url:'verify_otp',
+               data:{otp:otp,_token:_token},
+               beforeSend: function()
+                {
+                    $("#overlay").fadeIn();
+                },
+               success:function(result) {
+                   if(result == 1){
+                       $('#fwd_div').show();
+                       $('#otp_div').html('<div class="alert alert-success"> <i class="fa-solid fa-check"></i> OTP Verified</div>');
+                       $('#userid').val(userid);
+                        setTimeout(modal_close,1000);
+                   }else{
+                       $('#otp_div').html('<p class="alert alert-danger"><i class="fa-solid fa-xmark"></i>OTP Verifiaction Failed</p>');
+                   }
+               },
+               error: function(jqXHR, textStatus, errorThrown) {
+                    if (jqXHR.status == 422) {
+                        alert('Otp Required');
+                    }
+                },
+                complete: function()
+                {
+                    $("#overlay").fadeOut();
+                    //setTimeout(modal_close,1000);
+                }
+            })
+        });
+    });
+
+    function modal_close(){
+        $('#myModal').modal('hide');
+        var myModal = new bootstrap.Modal(document.getElementById('passModal'))
+        myModal.show();
+
+    }
 </script>
 
   <!-- Bootstrap bundle JS -->

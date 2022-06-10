@@ -12,4 +12,31 @@ class PasswordSettingsController extends Controller
         $data['users'] = DB::table('users')->join('districtmst','users.dist_id','=','districtmst.distid')->where('user_type','PD')->get();
         return view('hrms.passwordSettings',$data);
     }
+    public function update_password(Request $request)
+    {
+        $this->validate($request,[
+            'password'=>'required',
+            'confirm_password' => 'required',
+        ]);
+
+        $user_id = $request->userid;
+        $password = $request->password;
+        $con_password = $request->confirm_password;
+
+
+        if($password != $con_password){
+            return back()->with('error','password and confirm password not matched');
+        }elseif(strlen($password) < 8){
+            return back()->with('error','Password should have minimum 8 charecters ');
+        }elseif(!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $password)){
+            return back()->with('error','Password should Contain 1 special charecters');
+        }elseif(!preg_match('/[0-9]/', $password)){
+            return back()->with('error','Password should Contain 1 digit');
+        }else{
+            $en_pw = sha1(md5($password));
+            DB::table('users')->where('id',$user_id)->update(['user_pwd'=>$en_pw,'show_pwd'=>$password]);
+            return back()->with('success','password updated succesfully..!');
+        }
+
+    }
 }

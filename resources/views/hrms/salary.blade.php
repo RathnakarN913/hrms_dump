@@ -41,70 +41,95 @@ padding: 25px;
         <main class="page-content">
             <div class=" ">
                 <div class="table-content" id="table_div">
+                    @if (session()->has('success'))
+                        <div class="alert alert-success">{{ session()->get('success') }}</div>
+                    @endif
                     <div class="card mb-3">
                         <div class="card-header bg-white"> <b> HR Salary Report for the Month - {{ date('F', mktime(0, 0, 0, date('m'), 10)); }} </b> </div>
                         <div class="card-body">
-                            <div class="thead-scroll">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead class="t-head">
-                                        <tr class="table-primary text-center">
-                                            <th>SNO</th>
-                                            <th>Employee Name</th>
-                                            <th>Pay Days</th>
-                                            <th>Basic Pay</th>
-                                            <th>HRA <br><br> (24%)</th>
-                                            <th>EPF Employer Share <br><br> max up to 15000/- <br><br>(13%) </th>
-                                            <th>ESI  Employer <br><br> Share <br><br>(3.25%)</th>
-                                            <th>FTA as per <br><br> eligibility
-                                            </th>
-                                            <th>Total <br><br> (gross salry)
-                                            </th>
-                                            <th>EPF Employer Share <br><br> max up to 15000/- <br><br> (13%)
-                                            </th>
-                                            <th>EPF Employee Share <br><br> max up to 15000/- <br><br> (12%)
-                                            </th>
-                                            <th>ESI Employer <br><br> Share (3.25%)
-                                            </th>
-                                            <th>ESI Gross pay <br><br> less than 21000/- <br><br> (0.75%)
-                                            </th>
-                                            <th>Profession Tax
-                                            </th>
-                                            <th>AGIS
-                                            </th>
-                                            <th>Total Deductions
-                                            </th>
-                                            <th>Net Payable
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="text-center" id="search_content">
-                                        @php $i = 1; @endphp
-                                        @foreach ($employee as $emp)
-                                            <tr>
-                                                <td>{{ $i++ }}</td>
-                                                <td>{{ $emp->name }}</td>
-                                                <td>{{ round($salary[$emp->employee_id]['pay_days'],1) }}</td>
-                                                <td>{{ round($salary[$emp->employee_id]['basic_pay'],1) }}</td>
-                                                <td>{{ round($salary[$emp->employee_id]['hra'],1) }}</td>
-                                                <td>{{ round($salary[$emp->employee_id]['add_epf'],1) }}</td>
-                                                <td>{{ round($salary[$emp->employee_id]['add_esi'],1) }}</td>
-                                                <td>{{ round($salary[$emp->employee_id]['fta'],1) }}</td>
-                                                <td>{{ round($salary[$emp->employee_id]['gross_salary'],1) }}</td>
-                                                <td>{{ round($salary[$emp->employee_id]['ded_epf'],1) }}</td>
-                                                <td>{{ round($salary[$emp->employee_id]['ded_epf1'],1) }}</td>
-                                                <td>{{ round($salary[$emp->employee_id]['ded_esi'],1) }}</td>
-                                                <td>{{ round($salary[$emp->employee_id]['ded_esi1'],1) }}</td>
-                                                <td>{{ round($salary[$emp->employee_id]['pt'],1) }}</td>
-                                                <td>{{ round($salary[$emp->employee_id]['agis'],1) }}</td>
-                                                <td>{{ round($salary[$emp->employee_id]['total_ded'],1) }}</td>
-                                                <td>{{ round($salary[$emp->employee_id]['net_pay'],1) }}</td>
+                            <form method="post" action="save_salary">
+                                @csrf
+                                <input type="hidden" name="month" id="" value="{{ date('m') }}">
+                                <input type="hidden" name="year" id="" value="{{ date('Y') }}">
+                                <input type="hidden" name="employee_type" id="" value="1">
+                                <div class="thead-scroll">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead class="t-head">
+                                            <tr class="table-primary text-center">
+                                                <td colspan="4">FLAT</td>
+                                                <td>24%</td>
+                                                <td>13%</td>
+                                                <td>3.25%</td>
+                                                <td colspan="2">FLAT</td>
+                                                <td>13%</td>
+                                                <td>12%</td>
+                                                <td>3.25%</td>
+                                                <td>0.75%</td>
+                                                <td colspan="4">FLAT</td>
+
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                    <tfoot>
-                                    </tfoot>
-                                </table>
-                            </div>
+                                            <tr class="table-primary text-center">
+                                                <th rowspan="2">SNO</th>
+                                                <th rowspan="2">Employee Name</th>
+                                                <th rowspan="2">Pay Days</th>
+                                                <th colspan="6">Total Earnings</th>
+                                                <th colspan="7">Total Deductions</th>
+                                                <th>Net Payable</th>
+                                            </tr>
+                                            <tr class="table-primary text-center">
+                                                <th>Basic Pay</th>
+                                                <th>HRA</th>
+                                                <th>EPF<br><br> <small>(max 15000/-)</small> </th>
+                                                <th>ESI</th>
+                                                <th>FTA</th>
+                                                <th>Gross Salary</th>
+                                                <th>EPF <br><br><small> (max 15000/-)</small></th>
+                                                <th>EPF  <br><br> <small> max 15000/- </small></th>
+                                                <th>ESI</th>
+                                                <th>ESI</th>
+                                                <th>Professional <br><br> Tax</th>
+                                                <th>AGIS</th>
+                                                <th>Total</th>
+                                                <th>Pay</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-center" id="search_content">
+                                            @php $i = 1; @endphp
+                                            @foreach ($employee as $emp)
+                                            <input type="hidden" name="dist[]" id="" value="{{ $emp->district }}">
+                                            <input type="hidden" name="ulb[]" id="" value="{{ $emp->ulbid }}">
+                                                <tr>
+                                                    <td>{{ $i++ }}</td>
+                                                    <td><input type="hidden" name="employee_id[]" id="" value="{{ $emp->employee_id }}"> {{ $emp->name }}</td>
+                                                    <td><input type="hidden" name="pay_days[]" id="" value="{{ $salary[$emp->employee_id]['pay_days'] }}"> {{ $salary[$emp->employee_id]['pay_days'] }}</td>
+                                                    <td><input type="hidden" name="basic_pay[]" id="" value="{{ round($salary[$emp->employee_id]['basic_pay'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['basic_pay'],1)) }}</td>
+                                                    <td><input type="hidden" name="hra[]" id="" value="{{ round($salary[$emp->employee_id]['hra'],1) }}">{{ number_format(round($salary[$emp->employee_id]['hra'],1)) }}</td>
+                                                    <td><input type="hidden" name="epf[]" id="" value="{{ round($salary[$emp->employee_id]['add_epf'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['add_epf'],1)) }}</td>
+                                                    <td><input type="hidden" name="eesi[]" id="" value="{{ round($salary[$emp->employee_id]['add_esi'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['add_esi'],1)) }}</td>
+                                                    <td><input type="hidden" name="fta[]" id="" value="{{ round($salary[$emp->employee_id]['fta'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['fta'],1)) }}</td>
+                                                    <td><input type="hidden" name="gross_salary[]" id="" value="{{ round($salary[$emp->employee_id]['gross_salary'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['gross_salary'],1)) }}</td>
+                                                    <td><input type="hidden" name="depf[]" id="" value="{{ round($salary[$emp->employee_id]['ded_epf'],1) }}">{{ number_format(round($salary[$emp->employee_id]['ded_epf'],1)) }}</td>
+                                                    <td><input type="hidden" name="depf1[]" id="" value="{{ round($salary[$emp->employee_id]['ded_epf1'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['ded_epf1'],1)) }}</td>
+                                                    <td><input type="hidden" name="desi[]" id="" value="{{ round($salary[$emp->employee_id]['ded_esi'],1) }}">{{ number_format(round($salary[$emp->employee_id]['ded_esi'],1)) }}</td>
+                                                    <td><input type="hidden" name="desi1[]" id="" value="{{ round($salary[$emp->employee_id]['ded_esi1'],1) }}">{{ number_format(round($salary[$emp->employee_id]['ded_esi1'],1)) }}</td>
+                                                    <td><input type="hidden" name="pt[]" id="" value="{{ round($salary[$emp->employee_id]['pt'],1) }}">{{ number_format(round($salary[$emp->employee_id]['pt'],1)) }}</td>
+                                                    <td><input type="hidden" name="agis[]" id="" value="{{ round($salary[$emp->employee_id]['agis'],1) }}">{{ number_format(round($salary[$emp->employee_id]['agis'],1)) }}</td>
+                                                    <td><input type="hidden" name="tot_ded[]" id="" value="{{ round($salary[$emp->employee_id]['total_ded'],1) }}">{{ number_format(round($salary[$emp->employee_id]['total_ded'],1)) }}</td>
+                                                    <td><input type="hidden" name="net_pay[]" id="" value="{{ round($salary[$emp->employee_id]['net_pay'],1) }}">{{ number_format(round($salary[$emp->employee_id]['net_pay'],1)) }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                        <tfoot>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <center>
+
+                                    @if ($flag )
+                                        <button class="btn btn-success mt-3" type="submit">Save</button>
+                                    @endif
+                                </center>
+                            </form>
                         </div>
                     </div>
                 </div>
