@@ -289,7 +289,11 @@ td input.form-control {
             <div class="d-flex p-3 " style="background-color:#BEEBE9;">
                 <input type="hidden" id="district" value="{{$district}}">
                 <img src="{{url('assets/images/Parliament_icon.png')}}" height='26'>
-               <h5 class="mt-2 ml-2"><b>District : {{$distname}}  </b></h5>
+                @if (session()->get('user_type') == 'AO')
+                    <h5 class="mt-2 ml-2"><b>Head Office </b></h5>
+                @else
+                    <h5 class="mt-2 ml-2"><b>District : {{$distname}}  </b></h5>
+                @endif
 
                <h5 class="mt-2 ml-5"><b>Month: {{$monthName}}</b></h5>
 
@@ -352,6 +356,7 @@ td input.form-control {
               @php
                 $tot =  0;
               @endphp
+              <input type="hidden" name="employee_type[]" id="" value="{{ $emp->employee_type }}">
                 <tr class="pad-tdd">
                     <td class="sticky-col first-col">{{$i++}}</td>
                     <td style="font-size: 12px !important;" class="sticky-col second-col"><input type="hidden" name="ulb[]" value="{{$emp->ulbid}}" >{{$emp->ulbname}}</td>
@@ -457,12 +462,13 @@ td input.form-control {
                       <button class="btn btn-submit btn-sm" type="submit" name="save" style="border-radius: 15px !important;width: 80%;margin-top: 0px;line-height: 20px;">Save</button>
                   </div>
 
-                  <div class="col-md-2">
-                      <button  class="btn btn-secondary btn-sm" type="button" style="color:white; background-color:#327c95; border:1px solid#327c95" id="genarate_otp">Generate OTP</button>
-                  </div>
+                  @if(session()->get('user_type') != 'AO')
 
+                    <div class="col-md-2">
+                        <button  class="btn btn-secondary btn-sm" type="button" style="color:white; background-color:#327c95; border:1px solid#327c95" id="genarate_otp">Generate OTP</button>
+                    </div>
 
-
+                  @endif
 
             </div>
         </div>
@@ -475,11 +481,12 @@ td input.form-control {
 
       @if(session()->get('user_type') == 'AO')
       @if($ao_status != 2)
+      @if (Request::segment(1) == 'leave_check_ao')
 
         <div class="row">
 
             <div class="col-md-1">
-                <button class="btn btn-success" type="submit" id="approve_btn">Approve</button>
+                <button class="btn btn-success" type="submit" id="approve_btn" name="approve" value="approve">Approve</button>
             </div>
 
             <!--<div class="col-md-1">-->
@@ -494,6 +501,7 @@ td input.form-control {
             <!--</div>-->
         </div>
 
+      @endif
       @endif
       @endif
 

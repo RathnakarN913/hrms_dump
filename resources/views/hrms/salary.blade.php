@@ -56,7 +56,7 @@ padding: 25px;
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead class="t-head">
                                             <tr class="table-primary text-center">
-                                                <td colspan="4">FLAT</td>
+                                                <td colspan="4"></td>
                                                 <td>24%</td>
                                                 <td>13%</td>
                                                 <td>3.25%</td>
@@ -102,20 +102,20 @@ padding: 25px;
                                                     <td>{{ $i++ }}</td>
                                                     <td><input type="hidden" name="employee_id[]" id="" value="{{ $emp->employee_id }}"> {{ $emp->name }}</td>
                                                     <td><input type="hidden" name="pay_days[]" id="" value="{{ $salary[$emp->employee_id]['pay_days'] }}"> {{ $salary[$emp->employee_id]['pay_days'] }}</td>
-                                                    <td><input type="hidden" name="basic_pay[]" id="" value="{{ round($salary[$emp->employee_id]['basic_pay'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['basic_pay'],1)) }}</td>
-                                                    <td><input type="hidden" name="hra[]" id="" value="{{ round($salary[$emp->employee_id]['hra'],1) }}">{{ number_format(round($salary[$emp->employee_id]['hra'],1)) }}</td>
-                                                    <td><input type="hidden" name="epf[]" id="" value="{{ round($salary[$emp->employee_id]['add_epf'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['add_epf'],1)) }}</td>
-                                                    <td><input type="hidden" name="eesi[]" id="" value="{{ round($salary[$emp->employee_id]['add_esi'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['add_esi'],1)) }}</td>
-                                                    <td><input type="hidden" name="fta[]" id="" value="{{ round($salary[$emp->employee_id]['fta'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['fta'],1)) }}</td>
-                                                    <td><input type="hidden" name="gross_salary[]" id="" value="{{ round($salary[$emp->employee_id]['gross_salary'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['gross_salary'],1)) }}</td>
-                                                    <td><input type="hidden" name="depf[]" id="" value="{{ round($salary[$emp->employee_id]['ded_epf'],1) }}">{{ number_format(round($salary[$emp->employee_id]['ded_epf'],1)) }}</td>
-                                                    <td><input type="hidden" name="depf1[]" id="" value="{{ round($salary[$emp->employee_id]['ded_epf1'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['ded_epf1'],1)) }}</td>
-                                                    <td><input type="hidden" name="desi[]" id="" value="{{ round($salary[$emp->employee_id]['ded_esi'],1) }}">{{ number_format(round($salary[$emp->employee_id]['ded_esi'],1)) }}</td>
-                                                    <td><input type="hidden" name="desi1[]" id="" value="{{ round($salary[$emp->employee_id]['ded_esi1'],1) }}">{{ number_format(round($salary[$emp->employee_id]['ded_esi1'],1)) }}</td>
-                                                    <td><input type="hidden" name="pt[]" id="" value="{{ round($salary[$emp->employee_id]['pt'],1) }}">{{ number_format(round($salary[$emp->employee_id]['pt'],1)) }}</td>
-                                                    <td><input type="hidden" name="agis[]" id="" value="{{ round($salary[$emp->employee_id]['agis'],1) }}">{{ number_format(round($salary[$emp->employee_id]['agis'],1)) }}</td>
-                                                    <td><input type="hidden" name="tot_ded[]" id="" value="{{ round($salary[$emp->employee_id]['total_ded'],1) }}">{{ number_format(round($salary[$emp->employee_id]['total_ded'],1)) }}</td>
-                                                    <td><input type="hidden" name="net_pay[]" id="" value="{{ round($salary[$emp->employee_id]['net_pay'],1) }}">{{ number_format(round($salary[$emp->employee_id]['net_pay'],1)) }}</td>
+                                                    <td class="text-right"><input type="hidden" name="basic_pay[]" id="" value="{{ round($salary[$emp->employee_id]['basic_pay'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['basic_pay'],1)) }}</td>
+                                                    <td class="text-right"><input type="hidden" name="hra[]" id="" value="{{ round($salary[$emp->employee_id]['hra'],1) }}">{{ number_format(round($salary[$emp->employee_id]['hra'],1)) }}</td>
+                                                    <td class="text-right"><input type="hidden" name="epf[]" id="" value="{{ round($salary[$emp->employee_id]['add_epf'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['add_epf'],1)) }}</td>
+                                                    <td class="text-right"><input type="hidden" name="eesi[]" id="" value="{{ round($salary[$emp->employee_id]['add_esi'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['add_esi'],1)) }}</td>
+                                                    <td class="text-right"><input type="hidden" name="fta[]" id="" value="{{ round($salary[$emp->employee_id]['fta'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['fta'],1)) }}</td>
+                                                    <td class="text-right"><input type="hidden" name="gross_salary[]" id="" value="{{ round($salary[$emp->employee_id]['gross_salary'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['gross_salary'],1)) }}</td>
+                                                    <td class="text-right"><input type="hidden" name="depf[]" id="" value="{{ round($salary[$emp->employee_id]['ded_epf'],1) }}">{{ number_format(round($salary[$emp->employee_id]['ded_epf'],1)) }}</td>
+                                                    <td class="text-right"><input type="hidden" name="depf1[]" id="" value="{{ round($salary[$emp->employee_id]['ded_epf1'],1) }}"> {{ number_format(round($salary[$emp->employee_id]['ded_epf1'],1)) }}</td>
+                                                    <td class="text-right"><input type="hidden" name="desi[]" id="" value="{{ round($salary[$emp->employee_id]['ded_esi'],1) }}">{{ number_format(round($salary[$emp->employee_id]['ded_esi'],1)) }}</td>
+                                                    <td class="text-right"><input type="hidden" name="desi1[]" id="" value="{{ round($salary[$emp->employee_id]['ded_esi1'],1) }}">{{ number_format(round($salary[$emp->employee_id]['ded_esi1'],1)) }}</td>
+                                                    <td class="text-right"><input type="hidden" name="pt[]" id="" value="{{ round($salary[$emp->employee_id]['pt'],1) }}">{{ number_format(round($salary[$emp->employee_id]['pt'],1)) }}</td>
+                                                    <td class="text-right"><input type="hidden" name="agis[]" id="" value="{{ round($salary[$emp->employee_id]['agis'],1) }}">{{ number_format(round($salary[$emp->employee_id]['agis'],1)) }}</td>
+                                                    <td class="text-right"><input type="hidden" name="tot_ded[]" id="" value="{{ round($salary[$emp->employee_id]['total_ded'],1) }}">{{ number_format(round($salary[$emp->employee_id]['total_ded'],1)) }}</td>
+                                                    <td class="text-right"><input type="hidden" name="net_pay[]" id="" value="{{ round($salary[$emp->employee_id]['net_pay'],1) }}">{{ number_format(round($salary[$emp->employee_id]['net_pay'],1)) }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

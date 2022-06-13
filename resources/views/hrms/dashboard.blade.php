@@ -17,7 +17,7 @@
    padding: 0;
    width: 5em;
    height: 5em;
-   background-color: #c1c1c1; 
+   background-color: #c1c1c1;
    border-radius: 50%;
    line-height: 5em;
 }
@@ -614,6 +614,13 @@
 
     .card .card-body, .page-header .card-body {
         padding: 20px;
+    }
+
+    #myTab a.nav-link {
+        text-align: center;
+    }
+    #myTab li.nav-item {
+        width: 142px;
     }
 
 </style>

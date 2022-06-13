@@ -88,7 +88,15 @@ class AttendenceController extends Controller
                 $data['sun_count'] = $sun_count + 1;
 
                 $district = session()->get('distid');
-             $data['emp_data'] = AddEmployeeModel::with('GetCurrentStatus')->where('district',$district)->get();
+
+
+                if(session()->get('distid') != 0){
+                    $data['emp_data'] = AddEmployeeModel::with('GetCurrentStatus')->where('district',$district)->get();
+                }else{
+                    $data['emp_data'] = AddEmployeeModel::with('GetCurrentStatus')->where('employee_type',1)->get();
+                }
+
+                // dd($data['emp_data']);
 
              $next_month = date('m') + 1;
              $avl_leave = DB::table('hrms_employee_leave_details')->where('month',$next_month)->get();
@@ -201,28 +209,49 @@ class AttendenceController extends Controller
     public function leave_register(){
         // dd(session()->all());
 
-        $district = session()->get('distid');
-        $data['district'] = $district;
-        $data['distname'] = DistricstsModel::where('distid',$district)->value('distname');
-        $data['employee'] = DB::table('hrms_employees')->leftjoin('ulbmst','hrms_employees.ulbid','=','ulbmst.ulbid')
-                ->join('Districtmst','Districtmst.distid','=','hrms_employees.district')
-                ->where('district',$district)->get();
-        $data['leave_count'] = DB::table('hrms_employee_leave_details')->where('district',$district)->where('month',date('m'))->where('year',date('Y'))->get();
+        if(session()->get('distid') != '0'){
+
+            $district = session()->get('distid');
+            $data['district'] = $district;
+            $data['distname'] = DistricstsModel::where('distid',$district)->value('distname');
+            $data['employee'] = DB::table('hrms_employees')->leftjoin('ulbmst','hrms_employees.ulbid','=','ulbmst.ulbid')
+                    ->join('Districtmst','Districtmst.distid','=','hrms_employees.district')
+                    ->where('district',$district)->get();
+            $data['leave_count'] = DB::table('hrms_employee_leave_details')->where('district',$district)->where('month',date('m'))->where('year',date('Y'))->get();
 
 
-        foreach($data['leave_count'] as $le){
-            $data['image'][$le->employee_id] = $le->performance;
+            foreach($data['leave_count'] as $le){
+                $data['image'][$le->employee_id] = $le->performance;
+            }
+            $data['ao_status'] = $data['leave_count'][0]->ao_status;
+            $data['leave'] = LeaveTypeMstModel::all();
+
+        }else{
+
+            $data['employee'] = DB::table('hrms_employees')
+                    ->where('employee_type',1)->get();
+            $data['leave_count'] = DB::table('hrms_employee_leave_details')->where('employee_type',1)->where('month',date('m'))->where('year',date('Y'))->get();
+
+
+            foreach($data['leave_count'] as $le){
+                $data['image'][$le->employee_id] = $le->performance;
+            }
+            $data['ao_status'] = $data['leave_count'][0]->ao_status;
+            $data['leave'] = LeaveTypeMstModel::all();
+
         }
-        $data['ao_status'] = $data['leave_count'][0]->ao_status;
-        $data['leave'] = LeaveTypeMstModel::all();
+
+
         return view('hrms.leave_register',$data);
     }
     public function save_leave_request(Request $request){
         // $this->validate($request,['month'=>'required']);
+        // dd($request->all());
 
         $district = session()->get('distid');
         $ulb = $request->ulb;
         $employee = $request->employee;
+        $employee_type = $request->employee_type;
         $month = date('m');
         $year = date('Y');
         $ALopg =  $request->ALopg;
@@ -251,52 +280,59 @@ class AttendenceController extends Controller
             $new_month = 1;
         }
 
-        if(session()->get('user_type') == 'AO'){
-            for($i=0;$i<count($employee);$i++){
-            if($ALopg[$i] == ''){ $ALopg[$i] = 0; }
-            if($ALavld[$i] == ''){ $ALavld[$i] = 0; }
+        // if(session()->get('user_type') == 'AO'){
+            if($request->approve == 'approve'){
+                for($i=0;$i<count($employee);$i++){
+                    if($ALopg[$i] == ''){ $ALopg[$i] = 0; }
+                    if($ALavld[$i] == ''){ $ALavld[$i] = 0; }
 
-            if($MLopg[$i] == ''){ $MLopg[$i] = 0; }
-            if($MLavld[$i] == ''){ $MLavld[$i] = 0; }
-            if($PLopg[$i] == ''){ $PLopg[$i] = 0; }
-            if($PLavld[$i] == ''){ $PLavld[$i] = 0; }
+                    if($MLopg[$i] == ''){ $MLopg[$i] = 0; }
+                    if($MLavld[$i] == ''){ $MLavld[$i] = 0; }
+                    if($PLopg[$i] == ''){ $PLopg[$i] = 0; }
+                    if($PLavld[$i] == ''){ $PLavld[$i] = 0; }
 
-            if($lop[$i] == ''){ $lop[$i] = 0; }
+                    if($lop[$i] == ''){ $lop[$i] = 0; }
 
 
-            // $dup = DB::table('hrms_employee_leave_details')->where('month',$month)->where('employee_id',$employee[$i])->first();
+                    // $dup = DB::table('hrms_employee_leave_details')->where('month',$month)->where('employee_id',$employee[$i])->first();
 
-            // $photo = $performance[$i];
-            // if($dup){
-            //     $photoFileName = $dup->performance;
-            // }else{
-            //     $photoFileName = '';
-            // }
-            // if($photo){
-            //     $photoFileName = time().'_performance'.'.'.$photo->getClientOriginalExtension();
-            //     $photo->move(public_path('./assets/hrms/performance'), $photoFileName);
-            // }
+                    // $photo = $performance[$i];
+                    // if($dup){
+                    //     $photoFileName = $dup->performance;
+                    // }else{
+                    //     $photoFileName = '';
+                    // }
+                    // if($photo){
+                    //     $photoFileName = time().'_performance'.'.'.$photo->getClientOriginalExtension();
+                    //     $photo->move(public_path('./assets/hrms/performance'), $photoFileName);
+                    // }
 
-            $data = array(
-                'ALopg' => $ALopg[$i],
-                'ALavld' => $ALavld[$i],
-                'MLopg' => $MLopg[$i],
-                'MLavld' => $MLavld[$i],
-                'PLopg' => $PLopg[$i],
-                'PLavld' => $PLavld[$i],
-                'lop' => $lop[$i],
-                'ao_status' => 2,
-                // 'performance' => $photoFileName,
+                    $data = array(
+                        'ALopg' => $ALopg[$i],
+                        'ALavld' => $ALavld[$i],
+                        'MLopg' => $MLopg[$i],
+                        'MLavld' => $MLavld[$i],
+                        'PLopg' => $PLopg[$i],
+                        'PLavld' => $PLavld[$i],
+                        'lop' => $lop[$i],
+                        'ao_status' => 2,
+                        // 'performance' => $photoFileName,
 
-            );
+                    );
 
-                DB::table('hrms_employee_leave_details')->where('month',$month)->where('year',$year)->where('employee_id',$employee[$i])->update($data);
-        }
-        $monthName = date('F', mktime(0, 0, 0, $month, 10));
-        $msg = 'Attendence Register for the month of '.$monthName.' is ready to be send to FM';
-            return back()->with('success',$msg);
+                        DB::table('hrms_employee_leave_details')->where('month',$month)->where('year',$year)->where('employee_id',$employee[$i])->update($data);
+                }
+                $monthName = date('F', mktime(0, 0, 0, $month, 10));
+                $msg = 'Attendence Register for the month of '.$monthName.' is ready to be send to FM';
+                    return back()->with('success',$msg);
+            }
 
-        }else{
+            else{
+                if(session()->get('user_type') == 'AO'){
+                    $ao_status = 2;
+                }else{
+                    $ao_status = 0;
+                }
             for($i=0;$i<count($employee);$i++){
                 if($ALopg[$i] == ''){ $ALopg[$i] = 0; }
                 if($ALavld[$i] == ''){ $ALavld[$i] = 0; }
@@ -332,6 +368,7 @@ class AttendenceController extends Controller
 
                 $data = array(
                     'employee_id' => $employee[$i],
+                    'employee_type' => $employee_type[$i],
                     'district' => $district,
                     'ulbid' => $ulb[$i],
                     'month' => $month,
@@ -354,13 +391,14 @@ class AttendenceController extends Controller
                     'SDLavld' => $SDLavld[$i],
                     'lop' => $lop[$i],
                     'performance' => $photoFileName,
-
+                    'ao_status' => $ao_status,
                 );
 
 
 
                 $data1 = array(
                     'employee_id' => $employee[$i],
+                    'employee_type' => $employee_type[$i],
                     'district' => $district,
                     'ulbid' => $ulb[$i],
                     'month' => $new_month,
@@ -530,7 +568,7 @@ class AttendenceController extends Controller
     public function ao_approve(Request $request){
         $district = $request->district;
         $remarks = $request->remarks;
-        dd($remarks);
+        // dd($remarks);
         $result = DB::table('hrms_employee_leave_details')->where('district',$district)->where('month',date('m'))->where('year',date('Y'))->update(['ao_status'=>2,'ao_remarks'=>$remarks]);
 
         if($result){
