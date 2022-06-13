@@ -163,6 +163,8 @@ Route::any('/validate-selected-designation-avaibility', [AddEmployeeController::
 Route::any('/validate-selected-designation-avaibility2', [AddEmployeeController::class,'ValidateDesignationAvaibility2'])->name('validateSelectedDesignationAvaibility2');
 
 
+
+
 // Add Employee
 // ADD ATTENDENCE
 Route::any('add-attendance', [AttendenceController::class,'attendence']);

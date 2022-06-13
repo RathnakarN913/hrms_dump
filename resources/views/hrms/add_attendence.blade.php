@@ -281,6 +281,9 @@ tr:nth-child(even) {
                                   <td>No. of Days Attended <br><br> <small>  {{ Carbon\Carbon::now()->daysInMonth}} days - (9 + (sun + 2nd sat)) </small></td>
                                   <td>Payment Days <br><br> <small>(  {{ Carbon\Carbon::now()->daysInMonth}} days - 7 ) </small></td>
                                 </tr>
+
+
+                                
                                 <tr class="table-primary">
                                     <td>1</td>
                                     <td>2</td>
